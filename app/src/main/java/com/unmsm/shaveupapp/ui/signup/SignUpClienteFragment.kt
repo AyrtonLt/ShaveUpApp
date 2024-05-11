@@ -57,48 +57,43 @@ class SignUpClienteFragment : Fragment() {
 
                 val email = binding.tietEmail.text.toString()
                 val password = binding.tietPassword.text.toString()
-                val nombre = binding.tietFirstName.text.toString()
-                val apellido = binding.tietLastName.text.toString()
+                val firstName = binding.tietFirstName.text.toString()
+                val lastName = binding.tietLastName.text.toString()
 
-                auth.createUserWithEmailAndPassword(email, password)
-                    .addOnCompleteListener {
-                        if (it.isSuccessful) {
-                            val userId = SignUpBarberoFragment.auth.currentUser!!.uid
-                            val usuario = mutableMapOf<String, Any>()
+                auth.createUserWithEmailAndPassword(email, password).addOnCompleteListener {
+                    if (it.isSuccessful) {
+                        val userId = auth.currentUser!!.uid
+                        val usuario = mutableMapOf<String, Any>()
 
-                            usuario["userType"] = "2"
-                            usuario["user_id"] = userId.toString()
-                            usuario["email"] = email
-                            usuario["password"] = password
-                            usuario["nombre"] = nombre
-                            usuario["apellido"] = apellido
+                        usuario["userType"] = "1"
+                        usuario["user_id"] = userId.toString()
+                        usuario["email"] = email
+                        usuario["password"] = password
+                        usuario["nombre"] = firstName
+                        usuario["apellido"] = lastName
 
-                            FirebaseFirestore.getInstance().collection("usuario").document(userId)
-                                .set(usuario)
-                                .addOnSuccessListener {
-                                    Toast.makeText(
-                                        requireContext(),
-                                        "Usuario creado",
-                                        Toast.LENGTH_SHORT
-                                    ).show()
-                                    val intent =
-                                        Intent(requireContext(), MenuClienteActivity::class.java)
-                                    startActivity(intent)
-                                }.addOnFailureListener {
-                                    Toast.makeText(
-                                        requireContext(),
-                                        "Ocurrió un error :(",
-                                        Toast.LENGTH_SHORT
-                                    ).show()
+                        FirebaseFirestore.getInstance().collection("usuario").document(userId)
+                            .set(usuario).addOnSuccessListener {
+                                Toast.makeText(
+                                    requireContext(),
+                                    "Usuario creado",
+                                    Toast.LENGTH_SHORT
+                                ).show()
+                                val intent =
+                                    Intent(requireContext(), MenuBarberoActivity::class.java)
+                                startActivity(intent)
+                            }.addOnFailureListener {
+                                Toast.makeText(
+                                    requireContext(),
+                                    "Ocurrió un error :(",
+                                    Toast.LENGTH_SHORT
+                                ).show()
 
-                                }
-                        }
+                            }
+
                     }
+                }
 
-                MaterialAlertDialogBuilder(requireContext()).setTitle("Bien")
-                    .setMessage("Usuario registrado con éxito").show()
-                val intent = Intent(requireContext(), MenuClienteActivity::class.java)
-                startActivity(intent)
             } else {
                 MaterialAlertDialogBuilder(requireContext()).setTitle("Error")
                     .setMessage("Existen errores").show()
