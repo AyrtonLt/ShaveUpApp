@@ -3,17 +3,21 @@
     <item
         android:id="@+id/menuBarberoProfileFragment"
         android:enabled="true"
+        android:icon="@drawable/iconuser"
         android:title="Tú" />
     <item
         android:id="@+id/menuBarberoCitasFragment"
         android:enabled="true"
+        android:icon="@drawable/iconcita"
         android:title="Citas" />
     <item
         android:id="@+id/menuBarberoOpinionesFragment"
         android:enabled="true"
+        android:icon="@drawable/iconstar"
         android:title="Opiniones" />
     <item
         android:id="@+id/menuBarberoConfigFragment"
         android:enabled="true"
+        android:icon="@drawable/iconconfig"
         android:title="Config" />
 </menu>

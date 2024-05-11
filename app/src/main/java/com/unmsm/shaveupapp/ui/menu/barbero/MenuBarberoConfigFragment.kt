@@ -24,10 +24,6 @@ class MenuBarberoConfigFragment : Fragment() {
             findNavController().navigate(R.id.action_menuBarberoConfigFragment_to_configInfoFragment2)
         }
 
-        binding.btnChangePassword.setOnClickListener {
-            findNavController().navigate(R.id.action_menuBarberoConfigFragment_to_configPasswordFragment2)
-        }
-
         return binding.root
     }
 

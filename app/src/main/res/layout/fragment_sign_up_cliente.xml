@@ -7,13 +7,26 @@
     tools:context=".ui.signup.SignUpClienteFragment">
 
     <TextView
-        android:id="@+id/tvLogo"
+        android:id="@+id/tvUsuario"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Información de Inicio de sesión"
+        android:layout_marginTop="50dp"
+        android:text="Usuario Cliente"
+        android:textSize="20dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tvLogo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="Información de Inicio de sesión"
+        android:textSize="20dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvUsuario" />
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/tilEmail"
@@ -57,7 +70,9 @@
         android:id="@+id/tvLogo2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
         android:text="Información de Inicio de sesión"
+        android:textSize="20dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tilPassword" />
@@ -98,16 +113,18 @@
 
     <Button
         android:id="@+id/btnChooseImage"
-        android:text="Elegir foto de perfil"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="Elegir foto de perfil"
         app:layout_constraintStart_toStartOf="@+id/tilLastName"
-        app:layout_constraintTop_toBottomOf="@+id/tilLastName"/>
+        app:layout_constraintTop_toBottomOf="@+id/tilLastName" />
 
     <Button
         android:id="@+id/btnCreateUser"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
         android:text="Registrar"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

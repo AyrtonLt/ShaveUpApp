@@ -24,9 +24,6 @@ class MenuClienteConfigFragment : Fragment() {
             findNavController().navigate(R.id.action_menuClienteConfigFragment_to_configInfoFragment)
         }
 
-        binding.btnChangePassword.setOnClickListener {
-            findNavController().navigate(R.id.action_menuClienteConfigFragment_to_configPasswordFragment)
-        }
 
         return binding.root
     }

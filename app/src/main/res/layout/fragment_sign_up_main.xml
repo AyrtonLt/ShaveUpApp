@@ -10,25 +10,42 @@
         android:id="@+id/tvTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Holas"
+        android:layout_marginTop="20dp"
+        android:text="Creación de usuario"
+        android:textSize="20dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <Button
-        android:id="@+id/btnChooseCliente"
+    <TextView
+        android:id="@+id/tvSubTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Cliente"
+        android:layout_marginTop="10dp"
+        android:text="Qué tipo de usuario eres?"
+        android:textSize="20dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tvTitle" />
 
     <Button
+        android:layout_marginTop="20dp"
+        android:id="@+id/btnChooseCliente"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Cliente"
+        android:textSize="20dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvSubTitle" />
+
+    <Button
+        android:layout_marginTop="20dp"
         android:id="@+id/btnChooseBarbero"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Barbero"
+        android:textSize="20dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btnChooseCliente" />

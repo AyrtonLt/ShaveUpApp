@@ -7,12 +7,19 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.FirebaseFirestore
 import com.unmsm.shaveupapp.R
 import com.unmsm.shaveupapp.databinding.FragmentSignUpBarberoBinding
 import com.unmsm.shaveupapp.ui.menu.barbero.MenuBarberoActivity
 
 class SignUpBarberoFragment : Fragment() {
+
+    companion object {
+        lateinit var auth: FirebaseAuth
+    }
 
     private var _binding: FragmentSignUpBarberoBinding? = null
     private val binding get() = _binding!!
@@ -22,6 +29,8 @@ class SignUpBarberoFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentSignUpBarberoBinding.inflate(layoutInflater, container, false)
+
+        auth = FirebaseAuth.getInstance()
 
         emailFocusListener()
         passwordFocusListener()
@@ -37,18 +46,58 @@ class SignUpBarberoFragment : Fragment() {
             val validTelephone = binding.tilTelefono.error == null
 
             if (validEmail && validPassword && validFirstName && validLastName && validTelephone) {
-                MaterialAlertDialogBuilder(requireContext()).setTitle("Bien")
-                    .setMessage("Usuario registrado con éxito").show()
 
-                val intent = Intent(requireContext(), MenuBarberoActivity::class.java)
-                startActivity(intent)
-            } else {
-                MaterialAlertDialogBuilder(requireContext()).setTitle("Error")
-                    .setMessage("Existen errores").show()
+                val email = binding.tietEmail.text.toString()
+                val password = binding.tietPassword.text.toString()
+                val nombre = binding.tietFirstName.text.toString()
+                val apellido = binding.tietLastName.text.toString()
+                val apodo = binding.tietNickName.text.toString()
+                val telefono = binding.tietTelefono.text.toString()
+                val nameBarberia = binding.tietNameBarberia.text.toString()
+                val location = binding.tietDireccion.text.toString()
+                val district = binding.actvDistrito.text.toString()
+
+                auth.createUserWithEmailAndPassword(email, password).addOnCompleteListener {
+                    if (it.isSuccessful) {
+                        val userId = auth.currentUser!!.uid
+                        val usuario = mutableMapOf<String, Any>()
+
+                        usuario["userType"] = "1"
+                        usuario["user_id"] = userId.toString()
+                        usuario["email"] = email
+                        usuario["password"] = password
+                        usuario["nombre"] = nombre
+                        usuario["apellido"] = apellido
+                        usuario["apodo"] = apodo
+                        usuario["telefono"] = telefono
+                        usuario["barberiaNombre"] = nameBarberia
+                        usuario["direccion"] = location
+                        usuario["distrito"] = district
+
+
+                        FirebaseFirestore.getInstance().collection("usuario").document(userId)
+                            .set(usuario)
+                            .addOnSuccessListener {
+                                Toast.makeText(
+                                    requireContext(),
+                                    "Usuario creado",
+                                    Toast.LENGTH_SHORT
+                                ).show()
+                                val intent =
+                                    Intent(requireContext(), MenuBarberoActivity::class.java)
+                                startActivity(intent)
+                            }.addOnFailureListener {
+                                Toast.makeText(
+                                    requireContext(),
+                                    "Ocurrió un error :(",
+                                    Toast.LENGTH_SHORT
+                                ).show()
+
+                            }
+                    }
+                }
             }
-
         }
-
         return binding.root
     }
 

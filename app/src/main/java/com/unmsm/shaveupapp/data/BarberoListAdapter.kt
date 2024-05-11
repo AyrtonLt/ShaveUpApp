@@ -6,8 +6,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.unmsm.shaveupapp.databinding.ListbarberosItemBinding
 
-
-class BarberoListAdapter(private val barberos: List<Barbero>) :
+class BarberoListAdapter(private val barberos: ArrayList<Barbero>) :
     RecyclerView.Adapter<BarberoListAdapter.ViewHolder>() {
 
     class ViewHolder(private val binding: ListbarberosItemBinding) :

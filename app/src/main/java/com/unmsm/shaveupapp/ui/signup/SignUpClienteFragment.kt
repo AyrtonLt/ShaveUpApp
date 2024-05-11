@@ -7,13 +7,20 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.FirebaseFirestore
 import com.unmsm.shaveupapp.R
 import com.unmsm.shaveupapp.databinding.FragmentSignUpClienteBinding
 import com.unmsm.shaveupapp.ui.menu.barbero.MenuBarberoActivity
 import com.unmsm.shaveupapp.ui.menu.cliente.MenuClienteActivity
 
 class SignUpClienteFragment : Fragment() {
+
+    companion object {
+        lateinit var auth: FirebaseAuth
+    }
 
     private var _binding: FragmentSignUpClienteBinding? = null
     private val binding get() = _binding!!
@@ -23,6 +30,8 @@ class SignUpClienteFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentSignUpClienteBinding.inflate(layoutInflater, container, false)
+
+        auth = FirebaseAuth.getInstance()
 
         emailFocusListener()
         passwordFocusListener()
@@ -45,6 +54,47 @@ class SignUpClienteFragment : Fragment() {
             val validLastName = binding.tilLastName.error == null
 
             if (validEmail && validPassword && validFirstName && validLastName) {
+
+                val email = binding.tietEmail.text.toString()
+                val password = binding.tietPassword.text.toString()
+                val nombre = binding.tietFirstName.text.toString()
+                val apellido = binding.tietLastName.text.toString()
+
+                auth.createUserWithEmailAndPassword(email, password)
+                    .addOnCompleteListener {
+                        if (it.isSuccessful) {
+                            val userId = SignUpBarberoFragment.auth.currentUser!!.uid
+                            val usuario = mutableMapOf<String, Any>()
+
+                            usuario["userType"] = "2"
+                            usuario["user_id"] = userId.toString()
+                            usuario["email"] = email
+                            usuario["password"] = password
+                            usuario["nombre"] = nombre
+                            usuario["apellido"] = apellido
+
+                            FirebaseFirestore.getInstance().collection("usuario").document(userId)
+                                .set(usuario)
+                                .addOnSuccessListener {
+                                    Toast.makeText(
+                                        requireContext(),
+                                        "Usuario creado",
+                                        Toast.LENGTH_SHORT
+                                    ).show()
+                                    val intent =
+                                        Intent(requireContext(), MenuClienteActivity::class.java)
+                                    startActivity(intent)
+                                }.addOnFailureListener {
+                                    Toast.makeText(
+                                        requireContext(),
+                                        "Ocurrió un error :(",
+                                        Toast.LENGTH_SHORT
+                                    ).show()
+
+                                }
+                        }
+                    }
+
                 MaterialAlertDialogBuilder(requireContext()).setTitle("Bien")
                     .setMessage("Usuario registrado con éxito").show()
                 val intent = Intent(requireContext(), MenuClienteActivity::class.java)
