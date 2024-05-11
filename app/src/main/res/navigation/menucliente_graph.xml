@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/menucliente_graph"
+    app:startDestination="@id/menuClienteBusquedaFragment">
+
+    <fragment
+        android:id="@+id/menuClienteBusquedaFragment"
+        android:name="com.unmsm.shaveupapp.ui.menu.cliente.MenuClienteBusquedaFragment"
+        android:label="fragment_menu_cliente_busqueda"
+        tools:layout="@layout/fragment_menu_cliente_busqueda" />
+    <fragment
+        android:id="@+id/menuClienteCitasFragment"
+        android:name="com.unmsm.shaveupapp.ui.menu.cliente.MenuClienteCitasFragment"
+        android:label="fragment_menu_cliente_citas"
+        tools:layout="@layout/fragment_menu_cliente_citas" />
+    <fragment
+        android:id="@+id/menuClienteConfigFragment"
+        android:name="com.unmsm.shaveupapp.ui.menu.cliente.MenuClienteConfigFragment"
+        android:label="fragment_menu_cliente_config"
+        tools:layout="@layout/fragment_menu_cliente_config" >
+        <action
+            android:id="@+id/action_menuClienteConfigFragment_to_configInfoFragment"
+            app:destination="@id/configInfoFragment" />
+        <action
+            android:id="@+id/action_menuClienteConfigFragment_to_configPasswordFragment"
+            app:destination="@id/configPasswordFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/menuClienteProfileFragment"
+        android:name="com.unmsm.shaveupapp.ui.menu.cliente.MenuClienteProfileFragment"
+        android:label="fragment_menu_cliente_profile"
+        tools:layout="@layout/fragment_menu_cliente_profile" />
+    <fragment
+        android:id="@+id/configInfoFragment"
+        android:name="com.unmsm.shaveupapp.ui.menu.cliente.config.ConfigInfoFragment"
+        android:label="fragment_config_info"
+        tools:layout="@layout/fragment_config_info" />
+    <fragment
+        android:id="@+id/configPasswordFragment"
+        android:name="com.unmsm.shaveupapp.ui.menu.cliente.config.ConfigPasswordFragment"
+        android:label="fragment_config_password"
+        tools:layout="@layout/fragment_config_password" />
+</navigation>

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/signup_graph"
+    app:startDestination="@id/signUpMainFragment">
+
+    <fragment
+        android:id="@+id/signUpBarberoFragment"
+        android:name="com.unmsm.shaveupapp.ui.signup.SignUpBarberoFragment"
+        android:label="fragment_sign_up_barbero"
+        tools:layout="@layout/fragment_sign_up_barbero" />
+    <fragment
+        android:id="@+id/signUpClienteFragment"
+        android:name="com.unmsm.shaveupapp.ui.signup.SignUpClienteFragment"
+        android:label="fragment_sign_up_cliente"
+        tools:layout="@layout/fragment_sign_up_cliente" />
+    <fragment
+        android:id="@+id/signUpMainFragment"
+        android:name="com.unmsm.shaveupapp.ui.signup.SignUpMainFragment"
+        android:label="fragment_sign_up_main"
+        tools:layout="@layout/fragment_sign_up_main" >
+        <action
+            android:id="@+id/action_signUpMainFragment_to_signUpBarberoFragment"
+            app:destination="@id/signUpBarberoFragment" />
+        <action
+            android:id="@+id/action_signUpMainFragment_to_signUpClienteFragment"
+            app:destination="@id/signUpClienteFragment" />
+    </fragment>
+</navigation>

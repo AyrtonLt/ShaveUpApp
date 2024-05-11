@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/menuClienteProfileFragment"
+        android:enabled="true"
+        android:title="Tú" />
+    <item
+        android:id="@+id/menuClienteBusquedaFragment"
+        android:enabled="true"
+        android:title="Búsqueda" />
+    <item
+        android:id="@+id/menuClienteCitasFragment"
+        android:enabled="true"
+        android:title="Citas" />
+    <item
+        android:id="@+id/menuClienteConfigFragment"
+        android:enabled="true"
+        android:title="Config" />
+</menu>

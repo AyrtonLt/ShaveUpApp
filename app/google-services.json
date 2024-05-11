@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "98239136814",
+    "project_id": "shaveup-db",
+    "storage_bucket": "shaveup-db.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:98239136814:android:9b2a866fcc2b3c23e28bbf",
+        "android_client_info": {
+          "package_name": "com.unmsm.shaveupapp"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBNrTLg4rZXCTb0hHD8qFnK3VHS73_WDu4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:98239136814:android:bc7dd8dfcf2291cbe28bbf",
+        "android_client_info": {
+          "package_name": "com.unmsm.shaveuppapp"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBNrTLg4rZXCTb0hHD8qFnK3VHS73_WDu4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
