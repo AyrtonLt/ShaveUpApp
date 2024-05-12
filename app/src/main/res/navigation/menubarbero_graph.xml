@@ -31,7 +31,11 @@
         android:id="@+id/menuBarberoProfileFragment"
         android:name="com.unmsm.shaveupapp.ui.menu.barbero.MenuBarberoProfileFragment"
         android:label="fragment_menu_barbero_profile"
-        tools:layout="@layout/fragment_menu_barbero_profile" />
+        tools:layout="@layout/fragment_menu_barbero_profile" >
+        <action
+            android:id="@+id/action_menuBarberoProfileFragment_to_createServicioFragment"
+            app:destination="@id/createServicioFragment" />
+    </fragment>
     <fragment
         android:id="@+id/configInfoFragment2"
         android:name="com.unmsm.shaveupapp.ui.menu.barbero.config.ConfigInfoFragment"
@@ -42,4 +46,9 @@
         android:name="com.unmsm.shaveupapp.ui.menu.barbero.config.ConfigPasswordFragment"
         android:label="fragment_config_password2"
         tools:layout="@layout/fragment_config_password2" />
+    <fragment
+        android:id="@+id/createServicioFragment"
+        android:name="com.unmsm.shaveupapp.ui.menu.barbero.createServicio.CreateServicioFragment"
+        android:label="fragment_create_servicio"
+        tools:layout="@layout/fragment_create_servicio" />
 </navigation>

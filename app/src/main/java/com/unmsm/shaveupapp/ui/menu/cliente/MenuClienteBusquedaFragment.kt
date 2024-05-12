@@ -1,23 +1,25 @@
 package com.unmsm.shaveupapp.ui.menu.cliente
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
-import com.unmsm.shaveupapp.data.Barbero
-import com.unmsm.shaveupapp.data.BarberoListAdapter
+import com.unmsm.shaveupapp.adapter.BarberoItem
+import com.unmsm.shaveupapp.adapter.BarberoItemAdapter
+import com.unmsm.shaveupapp.adapter.BarberoItemProvider
 import com.unmsm.shaveupapp.databinding.FragmentMenuClienteBusquedaBinding
 
 class MenuClienteBusquedaFragment : Fragment() {
 
     private var _binding: FragmentMenuClienteBusquedaBinding? = null
     private val binding get() = _binding!!
-    private lateinit var barberoList: ArrayList<Barbero>
     private var db = Firebase.firestore
 
     override fun onCreateView(
@@ -26,24 +28,39 @@ class MenuClienteBusquedaFragment : Fragment() {
     ): View {
         _binding = FragmentMenuClienteBusquedaBinding.inflate(layoutInflater, container, false)
 
-        //getBarbero()
-
-        //binding.rvBarberoList.adapter = BarberoListAdapter(barberoList)
+        getBarbero()
 
         return binding.root
     }
 
     private fun getBarbero() {
         db = FirebaseFirestore.getInstance()
-        db.collection("usuario").get().addOnSuccessListener {
-            if (!it.isEmpty) {
-                for (data in it.documents) {
-                    val barbero: Barbero? = data.toObject(Barbero::class.java)
-                    if (barbero != null) {
-                        barberoList.add(barbero)
+        db.collection("usuario").get().addOnSuccessListener { result ->
+            // Crear una lista para almacenar objetos Barbero
+            val barberos = mutableListOf<BarberoItem>()
+
+            // Verificar si la colección no está vacía
+            if (!result.isEmpty) {
+                // Iterar sobre los documentos obtenidos
+                for (document in result.documents) {
+                    // Chequear si userType es "2"
+                    if (document.getString("userType") == "1") {
+                        // Crear un nuevo objeto Barbero con los datos del documento
+                        val barbero = BarberoItem(
+                            userId = document.getString("user_id") ?: "",
+                            urlPhoto = document.getString("user_id") ?: "",
+                            barberiaName = document.getString("barberiaNombre") ?: "",
+                            barberoFullName = document.getString("apellido") ?: "",
+                            location = document.getString("direccion") ?: "",
+                        )
+                        // Agregar el objeto Barbero a la lista
+                        barberos.add(barbero)
                     }
                 }
+                binding.rvBarbero.layoutManager = LinearLayoutManager(requireContext())
+                binding.rvBarbero.adapter = BarberoItemAdapter(barberos)
             }
+
         }
             .addOnFailureListener {
                 Toast.makeText(requireContext(), it.toString(), Toast.LENGTH_SHORT).show()

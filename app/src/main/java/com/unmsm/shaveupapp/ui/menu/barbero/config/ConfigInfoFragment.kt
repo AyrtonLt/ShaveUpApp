@@ -88,7 +88,7 @@ class ConfigInfoFragment : Fragment() {
                 binding.tietTelefono.setText(telephone)
                 binding.tietNameBarberia.setText(barberiaName)
                 binding.tietDireccion.setText(location)
-                binding.actvDistrito.setText(districtName)
+                //binding.actvDistrito.setText(districtName)
             }
         }.addOnFailureListener {
             Toast.makeText(requireContext(), "ERROR", Toast.LENGTH_SHORT).show()

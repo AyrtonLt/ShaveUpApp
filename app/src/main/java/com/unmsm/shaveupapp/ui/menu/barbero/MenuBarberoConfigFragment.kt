@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.app.ActivityCompat.finishAffinity
 import androidx.navigation.fragment.findNavController
 import com.unmsm.shaveupapp.R
 import com.unmsm.shaveupapp.databinding.FragmentMenuBarberoConfigBinding
@@ -22,6 +23,10 @@ class MenuBarberoConfigFragment : Fragment() {
 
         binding.btnEditInfo.setOnClickListener {
             findNavController().navigate(R.id.action_menuBarberoConfigFragment_to_configInfoFragment2)
+        }
+
+        binding.btnLogout.setOnClickListener {
+            activity?.finishAffinity()
         }
 
         return binding.root

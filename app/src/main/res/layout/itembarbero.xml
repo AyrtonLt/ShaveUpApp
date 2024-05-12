@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal">
+
+    <ImageView
+        android:id="@+id/ivProfilePhoto"
+        android:layout_width="90dp"
+        android:layout_height="90dp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/tvBarberiaName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Barbería nombre" />
+
+        <TextView
+            android:id="@+id/tvBarberoFullName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Nombre" />
+
+        <TextView
+            android:id="@+id/tvLocation"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Dirección" />
+
+    </LinearLayout>
+
+</LinearLayout>

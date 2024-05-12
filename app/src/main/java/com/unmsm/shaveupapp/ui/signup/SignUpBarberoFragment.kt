@@ -57,45 +57,58 @@ class SignUpBarberoFragment : Fragment() {
                 val location = binding.tietDireccion.text.toString()
                 val district = binding.actvDistrito.text.toString()
 
-                auth.createUserWithEmailAndPassword(email, password).addOnCompleteListener {
-                    if (it.isSuccessful) {
-                        val userId = auth.currentUser!!.uid
-                        val usuario = mutableMapOf<String, Any>()
 
-                        usuario["userType"] = "1"
-                        usuario["user_id"] = userId.toString()
-                        usuario["email"] = email
-                        usuario["password"] = password
-                        usuario["nombre"] = nombre
-                        usuario["apellido"] = apellido
-                        usuario["apodo"] = apodo
-                        usuario["telefono"] = telefono
-                        usuario["barberiaNombre"] = nameBarberia
-                        usuario["direccion"] = location
-                        usuario["distrito"] = district
+                if (email.isEmpty() || password.isEmpty() || nombre.isEmpty() || apellido.isEmpty() || telefono.isEmpty()) {
+                    Toast.makeText(
+                        requireContext(),
+                        "Existen campos vacíos",
+                        Toast.LENGTH_LONG
+                    ).show()
+                } else {
+                    auth.createUserWithEmailAndPassword(email, password).addOnCompleteListener {
+                        if (it.isSuccessful) {
+                            val userId = auth.currentUser!!.uid
+                            val usuario = mutableMapOf<String, Any>()
+
+                            usuario["userType"] = "1"
+                            usuario["user_id"] = userId.toString()
+                            usuario["email"] = email
+                            usuario["password"] = password
+                            usuario["nombre"] = nombre
+                            usuario["apellido"] = apellido
+                            usuario["apodo"] = apodo
+                            usuario["telefono"] = telefono
+                            usuario["barberiaNombre"] = nameBarberia
+                            usuario["direccion"] = location
+                            usuario["distrito"] = district
 
 
-                        FirebaseFirestore.getInstance().collection("usuario").document(userId)
-                            .set(usuario)
-                            .addOnSuccessListener {
-                                Toast.makeText(
-                                    requireContext(),
-                                    "Usuario creado",
-                                    Toast.LENGTH_SHORT
-                                ).show()
-                                val intent =
-                                    Intent(requireContext(), MenuBarberoActivity::class.java)
-                                startActivity(intent)
-                            }.addOnFailureListener {
-                                Toast.makeText(
-                                    requireContext(),
-                                    "Ocurrió un error :(",
-                                    Toast.LENGTH_SHORT
-                                ).show()
+                            FirebaseFirestore.getInstance().collection("usuario").document(userId)
+                                .set(usuario)
+                                .addOnSuccessListener {
+                                    Toast.makeText(
+                                        requireContext(),
+                                        "Usuario creado",
+                                        Toast.LENGTH_SHORT
+                                    ).show()
+                                    val intent =
+                                        Intent(requireContext(), MenuBarberoActivity::class.java)
+                                    intent.flags =
+                                        Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                                    startActivity(intent)
+                                }.addOnFailureListener {
+                                    Toast.makeText(
+                                        requireContext(),
+                                        "Ocurrió un error :(",
+                                        Toast.LENGTH_SHORT
+                                    ).show()
 
-                            }
+                                }
+                        }
                     }
                 }
+
+
             }
         }
         return binding.root

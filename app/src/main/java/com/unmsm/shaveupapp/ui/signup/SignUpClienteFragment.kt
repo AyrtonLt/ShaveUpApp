@@ -1,16 +1,24 @@
 package com.unmsm.shaveupapp.ui.signup
 
+import android.app.Activity.RESULT_OK
 import android.content.Intent
+import android.graphics.Bitmap
+import android.net.Uri
 import android.os.Bundle
+import android.provider.MediaStore
+import android.util.Log
 import android.util.Patterns
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.activity.result.contract.ActivityResultContracts
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.storage.FirebaseStorage
+import com.google.firebase.storage.StorageReference
 import com.unmsm.shaveupapp.R
 import com.unmsm.shaveupapp.databinding.FragmentSignUpClienteBinding
 import com.unmsm.shaveupapp.ui.menu.barbero.MenuBarberoActivity
@@ -25,6 +33,9 @@ class SignUpClienteFragment : Fragment() {
     private var _binding: FragmentSignUpClienteBinding? = null
     private val binding get() = _binding!!
 
+    var fileUri: Uri? = null
+
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -38,13 +49,14 @@ class SignUpClienteFragment : Fragment() {
         firstNameFocusListener()
         lastNameFocusListener()
 
+        val pickImage = registerForActivityResult(ActivityResultContracts.GetContent()) {
+            if (it != null) {
+                fileUri = it
+            }
+        }
+
         binding.btnChooseImage.setOnClickListener {
-            val intent = Intent()
-            intent.type = "image/*"
-            intent.action = Intent.ACTION_GET_CONTENT
-            startActivityForResult(
-                Intent.createChooser(intent, "Choose Image to Upload"), 0
-            )
+            pickImage.launch("image/*")
         }
 
         binding.btnCreateUser.setOnClickListener {
@@ -60,40 +72,49 @@ class SignUpClienteFragment : Fragment() {
                 val firstName = binding.tietFirstName.text.toString()
                 val lastName = binding.tietLastName.text.toString()
 
-                auth.createUserWithEmailAndPassword(email, password).addOnCompleteListener {
-                    if (it.isSuccessful) {
-                        val userId = auth.currentUser!!.uid
-                        val usuario = mutableMapOf<String, Any>()
+                if (email.isEmpty() || password.isEmpty() || firstName.isEmpty() || lastName.isEmpty()) {
+                    Toast.makeText(
+                        requireContext(),
+                        "Existen campos vacíos",
+                        Toast.LENGTH_LONG
+                    ).show()
+                } else {
+                    auth.createUserWithEmailAndPassword(email, password).addOnCompleteListener {
+                        if (it.isSuccessful) {
+                            val userId = auth.currentUser!!.uid
+                            val usuario = mutableMapOf<String, Any>()
 
-                        usuario["userType"] = "1"
-                        usuario["user_id"] = userId.toString()
-                        usuario["email"] = email
-                        usuario["password"] = password
-                        usuario["nombre"] = firstName
-                        usuario["apellido"] = lastName
+                            usuario["userType"] = "2"
+                            usuario["user_id"] = userId.toString()
+                            usuario["email"] = email
+                            usuario["password"] = password
+                            usuario["nombre"] = firstName
+                            usuario["apellido"] = lastName
 
-                        FirebaseFirestore.getInstance().collection("usuario").document(userId)
-                            .set(usuario).addOnSuccessListener {
-                                Toast.makeText(
-                                    requireContext(),
-                                    "Usuario creado",
-                                    Toast.LENGTH_SHORT
-                                ).show()
-                                val intent =
-                                    Intent(requireContext(), MenuBarberoActivity::class.java)
-                                startActivity(intent)
-                            }.addOnFailureListener {
-                                Toast.makeText(
-                                    requireContext(),
-                                    "Ocurrió un error :(",
-                                    Toast.LENGTH_SHORT
-                                ).show()
+                            FirebaseFirestore.getInstance().collection("usuario").document(userId)
+                                .set(usuario).addOnSuccessListener {
+                                    Toast.makeText(
+                                        requireContext(),
+                                        "Usuario creado",
+                                        Toast.LENGTH_SHORT
+                                    ).show()
+                                    val intent =
+                                        Intent(requireContext(), MenuClienteActivity::class.java)
+                                    intent.flags =
+                                        Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                                    startActivity(intent)
+                                }.addOnFailureListener {
+                                    Toast.makeText(
+                                        requireContext(),
+                                        "Ocurrió un error :(",
+                                        Toast.LENGTH_SHORT
+                                    ).show()
 
-                            }
+                                }
 
+                        }
                     }
                 }
-
             } else {
                 MaterialAlertDialogBuilder(requireContext()).setTitle("Error")
                     .setMessage("Existen errores").show()
@@ -171,6 +192,4 @@ class SignUpClienteFragment : Fragment() {
         }
         return null
     }
-
-
 }

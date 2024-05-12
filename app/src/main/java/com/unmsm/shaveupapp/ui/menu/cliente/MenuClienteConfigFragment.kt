@@ -24,6 +24,9 @@ class MenuClienteConfigFragment : Fragment() {
             findNavController().navigate(R.id.action_menuClienteConfigFragment_to_configInfoFragment)
         }
 
+        binding.btnLogout.setOnClickListener {
+            activity?.finishAffinity()
+        }
 
         return binding.root
     }

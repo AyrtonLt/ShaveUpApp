@@ -43,51 +43,56 @@ class LoginActivity : AppCompatActivity() {
             val email = binding.tietEmail.text.toString()
             val password = binding.tietPassword.text.toString()
 
-            auth.signInWithEmailAndPassword(email, password).addOnCompleteListener {
-                if (it.isSuccessful) {
-                    val userId = auth.currentUser!!.uid
+            if (email.isEmpty() || password.isEmpty()) {
+                Toast.makeText(
+                    this,
+                    "El email y la contraseña no pueden estar vacíos",
+                    Toast.LENGTH_LONG
+                ).show()
 
-                    FirebaseFirestore.getInstance().collection("usuario").document(userId).get()
-                        .addOnCompleteListener { document ->
-                            if (document.isSuccessful) {
-                                val userType = document.result.getString("userType")
-                                val gson = Gson()
-                                val userInfo = document.result.data
-                                val userInfoJson = gson.toJson(userInfo)
-                                Log.d("TAG", "${userInfo}")
+            } else {
+                auth.signInWithEmailAndPassword(email, password).addOnCompleteListener {
+                    if (it.isSuccessful) {
+                        val userId = auth.currentUser!!.uid
 
-                                when (userType) {
-                                    "1" -> {
-                                        val intent = Intent(this, MenuBarberoActivity::class.java)
-                                        intent.putExtra("USER_INFO", userInfoJson)
-                                        startActivity(intent)
+                        FirebaseFirestore.getInstance().collection("usuario").document(userId).get()
+                            .addOnCompleteListener { document ->
+                                if (document.isSuccessful) {
+                                    val userType = document.result.getString("userType")
+
+                                    when (userType) {
+                                        "1" -> {
+                                            val intent =
+                                                Intent(this, MenuBarberoActivity::class.java)
+                                            startActivity(intent)
+                                        }
+
+                                        "2" -> {
+                                            val intent =
+                                                Intent(this, MenuClienteActivity::class.java)
+                                            startActivity(intent)
+                                        }
+
+                                        else -> {
+                                            Toast.makeText(
+                                                this,
+                                                "Tipo de usuario no definido",
+                                                Toast.LENGTH_SHORT
+                                            ).show()
+                                        }
                                     }
-
-                                    "2" -> {
-                                        val intent = Intent(this, MenuClienteActivity::class.java)
-                                        intent.putExtra("USER_INFO", userInfoJson)
-                                        startActivity(intent)
-                                    }
-
-                                    else -> {
-                                        Toast.makeText(
-                                            this,
-                                            "Tipo de usuario no definido",
-                                            Toast.LENGTH_SHORT
-                                        ).show()
-                                    }
+                                } else {
+                                    Toast.makeText(
+                                        this,
+                                        "Error al obtener datos del usuario",
+                                        Toast.LENGTH_SHORT
+                                    ).show()
                                 }
-                            } else {
-                                Toast.makeText(
-                                    this,
-                                    "Error al obtener datos del usuario",
-                                    Toast.LENGTH_SHORT
-                                ).show()
                             }
-                        }
-                } else {
-                    MaterialAlertDialogBuilder(this).setTitle("Error")
-                        .setMessage("Usuario no registrado :(").show()
+                    } else {
+                        MaterialAlertDialogBuilder(this).setTitle("Error")
+                            .setMessage("Usuario no registrado :(").show()
+                    }
                 }
             }
 
