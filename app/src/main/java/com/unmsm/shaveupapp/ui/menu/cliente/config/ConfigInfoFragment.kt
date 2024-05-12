@@ -51,6 +51,8 @@ class ConfigInfoFragment : Fragment() {
                 Toast.makeText(requireContext(), "Información Actualizada!", Toast.LENGTH_SHORT)
                     .show()
 
+                parentFragmentManager.popBackStack()
+
             } else {
                 MaterialAlertDialogBuilder(requireContext()).setTitle("Error")
                     .setMessage("Existen errores").show()

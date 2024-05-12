@@ -47,6 +47,7 @@ class CreateServicioFragment : Fragment() {
                         "Servicio creado",
                         Toast.LENGTH_SHORT
                     ).show()
+                    parentFragmentManager.popBackStack()
                 }.addOnFailureListener {
                     Toast.makeText(
                         requireContext(),
