@@ -73,6 +73,7 @@ class MenuClienteBusquedaFragment : Fragment() {
         Toast.makeText(requireContext(), barberoItem.barberoFullName, Toast.LENGTH_SHORT).show()
         val intent = Intent(requireContext(), BarberoProfileActivity::class.java)
         intent.putExtra("barberoId", barberoItem.barberoFullName)
+        intent.putExtra("userId", barberoItem.userId)
         startActivity(intent)
     }
 }
