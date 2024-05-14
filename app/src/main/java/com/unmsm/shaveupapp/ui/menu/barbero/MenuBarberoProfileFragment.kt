@@ -67,7 +67,6 @@ class MenuBarberoProfileFragment : Fragment() {
                 binding.rvServicio.layoutManager = LinearLayoutManager(requireContext())
                 binding.rvServicio.adapter = ServicioItemAdapter(servicios)
             }
-
         }
     }
 
@@ -81,7 +80,6 @@ class MenuBarberoProfileFragment : Fragment() {
                 val barberiaName = it.data?.get("barberiaNombre")?.toString()
                 val phone = it.data?.get("telefono")?.toString()
                 val location = it.data?.get("direccion")?.toString()
-
 
                 binding.tvName.setText(firstName + " " + lastName)
                 binding.tvBarberiaName.setText(barberiaName)

@@ -1,7 +1,7 @@
 package com.unmsm.shaveupapp.ui.menu.cliente
 
+import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -13,8 +13,9 @@ import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import com.unmsm.shaveupapp.adapter.BarberoItem
 import com.unmsm.shaveupapp.adapter.BarberoItemAdapter
-import com.unmsm.shaveupapp.adapter.BarberoItemProvider
+import com.unmsm.shaveupapp.adapterServicios.ServicioItem
 import com.unmsm.shaveupapp.databinding.FragmentMenuClienteBusquedaBinding
+import com.unmsm.shaveupapp.ui.menu.cliente.visitingBarberoProfile.BarberoProfileActivity
 
 class MenuClienteBusquedaFragment : Fragment() {
 
@@ -58,12 +59,20 @@ class MenuClienteBusquedaFragment : Fragment() {
                     }
                 }
                 binding.rvBarbero.layoutManager = LinearLayoutManager(requireContext())
-                binding.rvBarbero.adapter = BarberoItemAdapter(barberos)
+                binding.rvBarbero.adapter = BarberoItemAdapter(
+                    barberos,
+                    { barberoItem -> onBarberoItemSelected(barberoItem) })
             }
-
         }
             .addOnFailureListener {
                 Toast.makeText(requireContext(), it.toString(), Toast.LENGTH_SHORT).show()
             }
+    }
+
+    private fun onBarberoItemSelected(barberoItem: BarberoItem) {
+        Toast.makeText(requireContext(), barberoItem.barberoFullName, Toast.LENGTH_SHORT).show()
+        val intent = Intent(requireContext(), BarberoProfileActivity::class.java)
+        intent.putExtra("barberoId", barberoItem.barberoFullName)
+        startActivity(intent)
     }
 }

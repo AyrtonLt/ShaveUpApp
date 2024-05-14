@@ -1,11 +1,12 @@
 package com.unmsm.shaveupapp.adapter
 
+import android.content.DialogInterface.OnClickListener
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.unmsm.shaveupapp.R
 
-class BarberoItemAdapter(private val barberoList: List<BarberoItem>) :
+class BarberoItemAdapter(private val barberoList: List<BarberoItem>, private val onClickListener: (BarberoItem) -> Unit) :
     RecyclerView.Adapter<BarberoItemViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BarberoItemViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
@@ -24,6 +25,6 @@ class BarberoItemAdapter(private val barberoList: List<BarberoItem>) :
 
     override fun onBindViewHolder(holder: BarberoItemViewHolder, position: Int) {
         val item = barberoList[position]
-        holder.render(item)
+        holder.render(item, onClickListener)
     }
 }

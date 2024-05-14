@@ -42,8 +42,6 @@ class ForgotPasswordActivity : AppCompatActivity() {
                 }
             }
         }
-
-
     }
 
     private fun emailFocusListener() {
