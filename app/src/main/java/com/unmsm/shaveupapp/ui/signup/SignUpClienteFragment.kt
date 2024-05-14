@@ -154,6 +154,7 @@ class SignUpClienteFragment : Fragment() {
         if (passwordText.length < 6) {
             return "Mínimo 6 dígitos"
         }
+
         return null
     }
 
