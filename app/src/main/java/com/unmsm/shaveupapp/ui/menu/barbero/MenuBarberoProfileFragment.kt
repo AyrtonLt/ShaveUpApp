@@ -58,7 +58,8 @@ class MenuBarberoProfileFragment : Fragment() {
                         val servicio = ServicioItem(
                             nombreServicio = document.getString("name") ?: "",
                             descripcionServicio = document.getString("desc") ?: "",
-                            precioServicio = document.getString("price") ?: ""
+                            precioServicio = document.getString("price") ?: "",
+                            isSelected = false
                         )
                         // Agregar el objeto Barbero a la lista
                         servicios.add(servicio)

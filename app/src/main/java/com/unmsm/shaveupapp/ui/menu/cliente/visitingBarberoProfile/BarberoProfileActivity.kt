@@ -1,5 +1,6 @@
 package com.unmsm.shaveupapp.ui.menu.cliente.visitingBarberoProfile
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import androidx.activity.enableEdgeToEdge
@@ -33,12 +34,18 @@ class BarberoProfileActivity : AppCompatActivity() {
         val bundle: Bundle? = intent.extras
         val nmaeBarbero = bundle!!.getString("barberoId")
         userId = bundle.getString("userId").toString()
-//        Log.i("000000000000","$userId")
-
 
         binding.tvNombreBarvero.text = nmaeBarbero
         getBarbero()
+
+        binding.btnReservar.setOnClickListener {
+            val intent = Intent(this, MakeReservationActivity::class.java)
+            intent.putExtra("userId", userId)
+            startActivity(intent)
+        }
     }
+
+
 
     private fun getBarbero() {
 

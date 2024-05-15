@@ -15,6 +15,9 @@
         android:theme="@style/Theme.ShaveUpApp"
         tools:targetApi="31">
         <activity
+            android:name=".ui.menu.cliente.visitingBarberoProfile.MakeReservationActivity"
+            android:exported="false" />
+        <activity
             android:name=".ui.menu.cliente.visitingBarberoProfile.BarberoProfileActivity"
             android:exported="false" />
         <activity
