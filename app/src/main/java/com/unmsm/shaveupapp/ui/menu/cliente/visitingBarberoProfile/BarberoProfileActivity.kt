@@ -8,6 +8,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.bumptech.glide.Glide
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
@@ -22,7 +23,7 @@ class BarberoProfileActivity : AppCompatActivity() {
     private lateinit var binding: ActivityBarberoProfileBinding
 
     private var db = Firebase.firestore
-    private lateinit var userId : String
+    private lateinit var userId: String
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -61,9 +62,16 @@ class BarberoProfileActivity : AppCompatActivity() {
                     binding.tvBarberiaName.text = userData?.get("barberiaNombre").toString()
                     binding.tvLocation.text = userData?.get("direccion").toString()
                     binding.tvPhone.text = userData?.get("telefono").toString()
+                    val imagelurl = userData?.get("urlProfilePhoto").toString()
                     // Procesa los datos del usuario según sea necesario
+
+
+                    Glide.with(this)
+                        .load(imagelurl)
+                        .into(binding.imageView1)
+
                 } else {
-                    Log.i("0000000000000","NO EXISTE ")
+                    Log.i("0000000000000", "NO EXISTE ")
                     // El documento no existe
                 }
             }
@@ -84,11 +92,11 @@ class BarberoProfileActivity : AppCompatActivity() {
                     if (document.getString("userBarbero") == userId.toString()) {
                         existeServicio = true
                         Log.i("00000000", "SI TIENE")
-                    }else{
+                    } else {
                         Log.i("00000000", "NOOO TIENE")
                     }
                 }
-                if(!existeServicio){
+                if (!existeServicio) {
                     binding.btnReservar.isEnabled = false
                 }
             }
