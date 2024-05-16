@@ -35,6 +35,7 @@ class MenuClienteBusquedaFragment : Fragment() {
     }
 
     private fun getBarbero() {
+
         db = FirebaseFirestore.getInstance()
         db.collection("usuario").get().addOnSuccessListener { result ->
             // Crear una lista para almacenar objetos Barbero
@@ -49,7 +50,7 @@ class MenuClienteBusquedaFragment : Fragment() {
                         // Crear un nuevo objeto Barbero con los datos del documento
                         val barbero = BarberoItem(
                             userId = document.getString("user_id") ?: "",
-                            urlPhoto = document.getString("user_id") ?: "",
+                            urlPhoto = document.getString("urlProfilePhoto") ?: "",
                             barberiaName = document.getString("barberiaNombre") ?: "",
                             barberoFullName = document.getString("apellido") ?: "",
                             location = document.getString("direccion") ?: "",

@@ -1,6 +1,6 @@
-package com.unmsm.shaveupapp.adapterReservas
+package com.unmsm.shaveupapp.adapterReservasPropuestas
 
-data class ReservaItem(
+data class ReservaPropuestaItem(
     val reservaId: String,
     val estado: String,
     val userId: String,

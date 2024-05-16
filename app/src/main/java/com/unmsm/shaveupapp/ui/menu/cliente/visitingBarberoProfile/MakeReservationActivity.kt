@@ -40,7 +40,7 @@ class MakeReservationActivity : AppCompatActivity() {
     private var servicios = mutableListOf<ServicioItem>()
 
     private var db = Firebase.firestore
-    private lateinit var barberId : String
+    private lateinit var barberId: String
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -56,16 +56,16 @@ class MakeReservationActivity : AppCompatActivity() {
 
         barberId = bundle!!.getString("userId").toString()
 
-        Log.i("00000000","$barberId")
+        Log.i("00000000", "$barberId")
 //        binding.tvSubtitle1.text = "USER IDEEEEEEEEEEEE"
 
         currentDay = Calendar.getInstance()
 
-        binding.tietDate.setOnClickListener(){
+        binding.tietDate.setOnClickListener() {
             onClickSetDate(binding.tietDate)
         }
 
-        binding.tietTime.setOnClickListener(){
+        binding.tietTime.setOnClickListener() {
             onClickSetTime(binding.tietTime)
         }
 
@@ -75,8 +75,10 @@ class MakeReservationActivity : AppCompatActivity() {
         fechaFocusListener()
         horaFocusListener()
 
-        binding.btnReservar.setOnClickListener(){
+        binding.btnReservar.setOnClickListener() {
 
+
+            val db = FirebaseFirestore.getInstance()
             //reservaItem
             //idCliente idBarbero idServicios[] fecha hora
             val serviciosSeleccionados = seleccionados()
@@ -91,17 +93,28 @@ class MakeReservationActivity : AppCompatActivity() {
                 val hora = binding.tietTime.text.toString()
 
 
-                if (fecha.isEmpty() || hora.isEmpty() || serviciosSeleccionados.isEmpty() ) {
+                if (fecha.isEmpty() || hora.isEmpty() || serviciosSeleccionados.isEmpty()) {
                     Toast.makeText(
                         this,
                         "Existen campos vacíos",
                         Toast.LENGTH_LONG
                     ).show()
                 } else {
+
+                    // Crear una referencia a la colección a usar
+                    val collectionRef = db.collection("citas")
+
+                    // Crear un nuevo documento con un ID generado automáticamente
+                    val newDocumentRef = collectionRef.document()
+
+                    // Obtener el ID generado automáticamente
+                    val documentId = newDocumentRef.id
+
                     //crear objetoreserva
                     val clienteId = FirebaseAuth.getInstance().currentUser!!.uid.toString()
                     val reserva = ReservaItem(
-                        "SE CREA AL GUARDARSE",
+                        documentId,
+                        "1",
                         clienteId,
                         barberId,
                         hora,
@@ -109,7 +122,41 @@ class MakeReservationActivity : AppCompatActivity() {
                         serviciosSeleccionados
                     )
 
-                    Log.i("0000000000000", "$reserva")
+                    // Establecer los datos en el documento
+                    newDocumentRef.set(reserva)
+                        .addOnSuccessListener {
+                            // Exito
+                            Toast.makeText(
+                                this,
+                                "Reserva creada",
+                                Toast.LENGTH_LONG
+                            ).show()
+                        }
+                        .addOnFailureListener { e ->
+                            // Fallo
+                            println("Error al escribir el documento: $e")
+                        }
+
+
+                    //crear objetoreserva
+                    /*val clienteId = FirebaseAuth.getInstance().currentUser!!.uid.toString()
+                    val reserva = ReservaItem(
+                        "1",
+                        clienteId,
+                        barberId,
+                        hora,
+                        fecha,
+                        serviciosSeleccionados
+                    )
+
+                    db.collection("citas").add(reserva)
+                        .addOnSuccessListener { documentReference ->
+                            println("Documento añadido con ID: ${documentReference.id}")
+                        }
+                        .addOnFailureListener { e ->
+                            println("Error al añadir documento: $e")
+                        }
+                    Log.i("0000000000000", "$reserva")*/
 
                 }
             } else {
@@ -134,7 +181,7 @@ class MakeReservationActivity : AppCompatActivity() {
                             servicioId = document.id.toString(),
                             nombreServicio = document.getString("name") ?: "",
                             descripcionServicio = document.getString("desc") ?: "",
-                            precioServicio = "S/ "+document.getString("price"),
+                            precioServicio = "S/ " + document.getString("price"),
                             isSelected = false
                         )
                         // Agregar el objeto Barbero a la lista
@@ -142,8 +189,9 @@ class MakeReservationActivity : AppCompatActivity() {
                     }
                 }
 
-                Log.i("000000000000","$servicios")
-                adapter = ServicioClienteAdapter(servicios) {position ->categoryOnItemSelected(position)}
+                Log.i("000000000000", "$servicios")
+                adapter =
+                    ServicioClienteAdapter(servicios) { position -> categoryOnItemSelected(position) }
                 binding.rvServicios.setHasFixedSize(true)
                 binding.rvServicios.layoutManager = LinearLayoutManager(this)
                 binding.rvServicios.adapter = adapter
@@ -151,23 +199,23 @@ class MakeReservationActivity : AppCompatActivity() {
         }
     }
 
-    private fun onClickSetDate(editText: EditText){
+    private fun onClickSetDate(editText: EditText) {
         val year = calendar.get(Calendar.YEAR)
         val month = calendar.get(Calendar.MONTH)
         val day = calendar.get(Calendar.DAY_OF_MONTH)
-        datePickerDialog = DatePickerDialog(this, {_, year, month, day ->
-            val selectedDate = "$day/${month+1}/$year"
-            calendar.set(year,month,day)
+        datePickerDialog = DatePickerDialog(this, { _, year, month, day ->
+            val selectedDate = "$day/${month + 1}/$year"
+            calendar.set(year, month, day)
             editText.setText(selectedDate)
         }, year, month, day)
         datePickerDialog.datePicker.minDate = currentDay.timeInMillis
         datePickerDialog.show()
     }
 
-    private fun onClickSetTime(editText: EditText){
+    private fun onClickSetTime(editText: EditText) {
         val hours = Calendar.HOUR
         val minutes = Calendar.MINUTE
-        val timePicker = TimePickerDialog(this, {_, hour, minute ->
+        val timePicker = TimePickerDialog(this, { _, hour, minute ->
             val formattedHour = if (hour < 10) "0$hour" else hour.toString()
             val formattedMinute = if (minute < 10) "0$minute" else minute.toString()
             val selectedTime = "$formattedHour:$formattedMinute"
@@ -176,15 +224,16 @@ class MakeReservationActivity : AppCompatActivity() {
         timePicker.show()
     }
 
-    private fun categoryOnItemSelected(position:Int){
+    private fun categoryOnItemSelected(position: Int) {
         servicios[position].isSelected = !servicios[position].isSelected
         adapter.notifyItemChanged(position)
     }
 
     private fun seleccionados(): List<String> {
         return servicios.filter { it.isSelected }
-            .map { it.servicioId }
+            .map { it.nombreServicio }
     }
+
     private fun fechaFocusListener() {
         binding.tietDate.setOnFocusChangeListener { _, focused ->
             if (!focused) {
@@ -217,7 +266,6 @@ class MakeReservationActivity : AppCompatActivity() {
         }
         return null
     }
-
 
 
 }
