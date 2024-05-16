@@ -2,6 +2,7 @@ package com.unmsm.shaveupapp.ui.signup
 
 import android.app.Activity
 import android.app.Activity.RESULT_OK
+import android.app.AlertDialog
 import android.content.Intent
 import android.graphics.Bitmap
 import android.net.Uri
@@ -39,6 +40,9 @@ class SignUpClienteFragment : Fragment() {
     private var filePath: Uri? = null
     private lateinit var storage: FirebaseStorage
     private lateinit var pickImageLauncher: ActivityResultLauncher<Intent>
+
+    private lateinit var progressDialog: AlertDialog
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -62,7 +66,9 @@ class SignUpClienteFragment : Fragment() {
         }
 
         binding.btnCreateUser.setOnClickListener {
+            showProgressDialog()
 
+            //Hola
             if (validateInputs()) {
 
                 val emailInput = binding.tietEmail.text.toString().trim()
@@ -72,6 +78,7 @@ class SignUpClienteFragment : Fragment() {
 
                 auth.createUserWithEmailAndPassword(emailInput, passwordInput)
                     .addOnCompleteListener { task ->
+
                         if (task.isSuccessful) {
                             val userId = auth.currentUser?.uid
                             if (userId != null) {
@@ -90,6 +97,7 @@ class SignUpClienteFragment : Fragment() {
             } else {
                 Toast.makeText(requireContext(), "existen errores", Toast.LENGTH_SHORT).show()
             }
+
         }
 
         return binding.root
@@ -200,7 +208,9 @@ class SignUpClienteFragment : Fragment() {
         FirebaseFirestore.getInstance().collection("usuario").document(userId)
             .set(usuario)
             .addOnSuccessListener {
-                Toast.makeText(requireContext(), "Usuario creado", Toast.LENGTH_SHORT).show()
+                Toast.makeText(requireContext(), "Usuario creado correctamente", Toast.LENGTH_LONG)
+                    .show()
+                dismissProgressDialog()
                 navigateToMenuCliente()
             }
             .addOnFailureListener { e ->
@@ -216,5 +226,23 @@ class SignUpClienteFragment : Fragment() {
 
     private fun showError(message: String) {
         Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
+    }
+
+    private fun showProgressDialog() {
+        // Inflar la vista personalizada
+        val inflater = LayoutInflater.from(context)
+        val view = inflater.inflate(R.layout.progress_dialog, null)
+
+        // Crear el AlertDialog y configurarlo
+        progressDialog = AlertDialog.Builder(requireContext())
+            .setView(view)
+            .setCancelable(false)
+            .create()
+
+        progressDialog.show()
+    }
+
+    private fun dismissProgressDialog() {
+        progressDialog.dismiss()
     }
 }
