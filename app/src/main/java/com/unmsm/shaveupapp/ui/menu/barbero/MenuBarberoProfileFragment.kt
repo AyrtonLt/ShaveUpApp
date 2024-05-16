@@ -56,6 +56,7 @@ class MenuBarberoProfileFragment : Fragment() {
                     if (document.getString("userBarbero") == userId.toString()) {
                         // Crear un nuevo objeto Barbero con los datos del documento
                         val servicio = ServicioItem(
+                            servicioId = "a", //FALTA EL ID SERVICIO
                             nombreServicio = document.getString("name") ?: "",
                             descripcionServicio = document.getString("desc") ?: "",
                             precioServicio = document.getString("price") ?: "",

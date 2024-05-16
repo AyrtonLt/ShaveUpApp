@@ -7,9 +7,13 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import com.unmsm.shaveupapp.R
+import com.unmsm.shaveupapp.adapterServicios.ServicioClienteAdapter
+import com.unmsm.shaveupapp.adapterServicios.ServicioItem
 import com.unmsm.shaveupapp.databinding.ActivityBarberoProfileBinding
 import com.unmsm.shaveupapp.databinding.FragmentCreateServicioBinding
 
@@ -37,6 +41,7 @@ class BarberoProfileActivity : AppCompatActivity() {
 
         binding.tvNombreBarvero.text = nmaeBarbero
         getBarbero()
+        getServiciosData()
 
         binding.btnReservar.setOnClickListener {
             val intent = Intent(this, MakeReservationActivity::class.java)
@@ -44,8 +49,6 @@ class BarberoProfileActivity : AppCompatActivity() {
             startActivity(intent)
         }
     }
-
-
 
     private fun getBarbero() {
 
@@ -67,6 +70,29 @@ class BarberoProfileActivity : AppCompatActivity() {
             .addOnFailureListener { exception ->
                 // Maneja el error
             }
+    }
+
+    private fun getServiciosData() {
+        db = FirebaseFirestore.getInstance()
+        db.collection("servicio").get().addOnSuccessListener { result ->
+
+            // Verificar si la colección no está vacía
+            if (!result.isEmpty) {
+                // Iterar sobre los documentos obtenidos
+                var existeServicio = false
+                for (document in result.documents) {
+                    if (document.getString("userBarbero") == userId.toString()) {
+                        existeServicio = true
+                        Log.i("00000000", "SI TIENE")
+                    }else{
+                        Log.i("00000000", "NOOO TIENE")
+                    }
+                }
+                if(!existeServicio){
+                    binding.btnReservar.isEnabled = false
+                }
+            }
+        }
     }
 //cliente@gmail.com
 }

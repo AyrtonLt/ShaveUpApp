@@ -5,7 +5,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.unmsm.shaveupapp.R
 
-class ServicioClienteAdapter(private val servicioList: List<ServicioItem>)
+class ServicioClienteAdapter(private val servicioList: List<ServicioItem>, private val onItemSelected:(Int) ->Unit)
     :RecyclerView.Adapter<ServicioClienteViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ServicioClienteViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
@@ -24,6 +24,6 @@ class ServicioClienteAdapter(private val servicioList: List<ServicioItem>)
 
     override fun onBindViewHolder(holder: ServicioClienteViewHolder, position: Int) {
         val item = servicioList[position]
-        holder.render(item)
+        holder.render(item, onItemSelected)
     }
 }

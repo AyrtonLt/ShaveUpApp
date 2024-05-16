@@ -8,9 +8,12 @@ class ServicioClienteViewHolder(view: View):RecyclerView.ViewHolder(view) {
 
     val binding = ItemservicioclienteBinding.bind(view)
 
-    fun render(servicioItemModel: ServicioItem) {
-        binding.tvServicioName.text = servicioItemModel.nombreServicio
-        binding.tvServicioDescription.text = servicioItemModel.descripcionServicio
-        binding.tvServicioPrecio.text = servicioItemModel.precioServicio
+    fun render(servicioItem: ServicioItem, onItemSelected: (Int) -> Unit) {
+        binding.tvServicioName.text = servicioItem.nombreServicio
+        binding.tvServicioDescription.text = servicioItem.descripcionServicio
+        binding.tvServicioPrecio.text = servicioItem.precioServicio
+
+        itemView.setOnClickListener(){onItemSelected(layoutPosition)}
+        binding.checkBox.isChecked = servicioItem.isSelected
     }
 }
