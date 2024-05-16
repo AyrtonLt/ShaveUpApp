@@ -46,7 +46,8 @@
                 android:id="@+id/tietEmail"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:inputType="text" />
+                android:inputType="textEmailAddress"
+                android:maxLength="254" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
@@ -65,7 +66,8 @@
                 android:id="@+id/tietPassword"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:inputType="textPassword" />
+                android:inputType="textPassword"
+                android:maxLength="16" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <TextView
@@ -92,7 +94,8 @@
                 android:id="@+id/tietFirstName"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:inputType="text" />
+                android:inputType="textPersonName"
+                android:maxLength="32" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
@@ -108,7 +111,8 @@
                 android:id="@+id/tietLastName"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:inputType="text" />
+                android:inputType="textPersonName"
+                android:maxLength="32" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
@@ -124,7 +128,8 @@
                 android:id="@+id/tietNickName"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:inputType="text" />
+                android:inputType="text"
+                android:maxLength="16" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
@@ -140,7 +145,8 @@
                 android:id="@+id/tietTelefono"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:inputType="phone" />
+                android:inputType="phone"
+                android:maxLength="9" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <TextView
@@ -168,7 +174,8 @@
                 android:id="@+id/tietNameBarberia"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:inputType="text" />
+                android:inputType="text"
+                android:maxLength="32" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
@@ -184,7 +191,8 @@
                 android:id="@+id/tietDireccion"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:inputType="text" />
+                android:inputType="text"
+                android:maxLength="64" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
@@ -206,6 +214,15 @@
         </com.google.android.material.textfield.TextInputLayout>
 
         <Button
+            android:id="@+id/btnChooseImage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="Elegir foto de perfil"
+            app:layout_constraintStart_toStartOf="@+id/tilDistrito"
+            app:layout_constraintTop_toBottomOf="@+id/tilDistrito" />
+
+        <Button
             android:id="@+id/btnCreateUser"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -213,7 +230,7 @@
             android:text="Registrar usuario"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tilDistrito" />
+            app:layout_constraintTop_toBottomOf="@id/btnChooseImage" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>

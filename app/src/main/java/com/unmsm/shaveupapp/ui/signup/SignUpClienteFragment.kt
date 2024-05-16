@@ -1,5 +1,6 @@
 package com.unmsm.shaveupapp.ui.signup
 
+import android.app.Activity
 import android.app.Activity.RESULT_OK
 import android.content.Intent
 import android.graphics.Bitmap
@@ -13,6 +14,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.firebase.auth.FirebaseAuth
@@ -33,9 +35,10 @@ class SignUpClienteFragment : Fragment() {
     private var _binding: FragmentSignUpClienteBinding? = null
     private val binding get() = _binding!!
 
-    var fileUri: Uri? = null
-
-
+    private lateinit var storageReference: StorageReference
+    private var filePath: Uri? = null
+    private lateinit var storage: FirebaseStorage
+    private lateinit var pickImageLauncher: ActivityResultLauncher<Intent>
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -44,153 +47,174 @@ class SignUpClienteFragment : Fragment() {
 
         auth = FirebaseAuth.getInstance()
 
-        emailFocusListener()
-        passwordFocusListener()
-        firstNameFocusListener()
-        lastNameFocusListener()
+        storage = FirebaseStorage.getInstance()
+        storageReference = storage.reference
 
-        val pickImage = registerForActivityResult(ActivityResultContracts.GetContent()) {
-            if (it != null) {
-                fileUri = it
+        pickImageLauncher =
+            registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+                if (result.resultCode == Activity.RESULT_OK && result.data != null && result.data!!.data != null) {
+                    filePath = result.data!!.data
+                }
             }
-        }
 
         binding.btnChooseImage.setOnClickListener {
-            pickImage.launch("image/*")
+            chooseImage()
         }
 
         binding.btnCreateUser.setOnClickListener {
-            val validEmail = binding.tilEmail.error == null
-            val validPassword = binding.tilPassword.error == null
-            val validFirstName = binding.tilFirstName.error == null
-            val validLastName = binding.tilLastName.error == null
 
-            if (validEmail && validPassword && validFirstName && validLastName) {
+            if (validateInputs()) {
 
-                val email = binding.tietEmail.text.toString()
-                val password = binding.tietPassword.text.toString()
-                val firstName = binding.tietFirstName.text.toString()
-                val lastName = binding.tietLastName.text.toString()
+                val emailInput = binding.tietEmail.text.toString().trim()
+                val passwordInput = binding.tietPassword.text.toString().trim()
+                val firstNameInput = binding.tietFirstName.text.toString().trim()
+                val lastNameInput = binding.tietLastName.text.toString().trim()
 
-                if (email.isEmpty() || password.isEmpty() || firstName.isEmpty() || lastName.isEmpty()) {
-                    Toast.makeText(
-                        requireContext(),
-                        "Existen campos vacíos",
-                        Toast.LENGTH_LONG
-                    ).show()
-                } else {
-                    auth.createUserWithEmailAndPassword(email, password).addOnCompleteListener {
-                        if (it.isSuccessful) {
-                            val userId = auth.currentUser!!.uid
-                            val usuario = mutableMapOf<String, Any>()
-
-                            usuario["userType"] = "2"
-                            usuario["user_id"] = userId.toString()
-                            usuario["email"] = email
-                            usuario["password"] = password
-                            usuario["nombre"] = firstName
-                            usuario["apellido"] = lastName
-
-                            FirebaseFirestore.getInstance().collection("usuario").document(userId)
-                                .set(usuario).addOnSuccessListener {
-                                    Toast.makeText(
-                                        requireContext(),
-                                        "Usuario creado",
-                                        Toast.LENGTH_SHORT
-                                    ).show()
-                                    val intent =
-                                        Intent(requireContext(), MenuClienteActivity::class.java)
-                                    intent.flags =
-                                        Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-                                    startActivity(intent)
-                                }.addOnFailureListener {
-                                    Toast.makeText(
-                                        requireContext(),
-                                        "Ocurrió un error :(",
-                                        Toast.LENGTH_SHORT
-                                    ).show()
-
-                                }
-
+                auth.createUserWithEmailAndPassword(emailInput, passwordInput)
+                    .addOnCompleteListener { task ->
+                        if (task.isSuccessful) {
+                            val userId = auth.currentUser?.uid
+                            if (userId != null) {
+                                uploadProfilePhotoandSaveUser(
+                                    userId,
+                                    firstNameInput,
+                                    lastNameInput
+                                )
+                            } else {
+                                showError("Error al obtener el ID del usuario.")
+                            }
+                        } else {
+                            showError("Error al crear el usuario: ${task.exception?.message}")
                         }
                     }
-                }
             } else {
-                MaterialAlertDialogBuilder(requireContext()).setTitle("Error")
-                    .setMessage("Existen errores").show()
+                Toast.makeText(requireContext(), "existen errores", Toast.LENGTH_SHORT).show()
             }
-
         }
 
         return binding.root
     }
 
-    private fun emailFocusListener() {
-        binding.tietEmail.setOnFocusChangeListener { _, focused ->
-            if (!focused) {
-                binding.tilEmail.error = validEmail()
-            }
-        }
+    private fun chooseImage() {
+        val intent = Intent()
+        intent.type = "image/*"
+        intent.action = Intent.ACTION_GET_CONTENT
+        val chooser = Intent.createChooser(intent, "Select Picture")
+        pickImageLauncher.launch(chooser)
     }
 
-    private fun validEmail(): String? {
-        val emailText = binding.tietEmail.text.toString()
-        if (!Patterns.EMAIL_ADDRESS.matcher(emailText).matches()) {
-            return "Email inválido"
-        }
-        return null
-    }
+    // Función para validar los Inputs
+    private fun validateInputs(): Boolean {
+        var isValid = true
 
-    private fun passwordFocusListener() {
-        binding.tietPassword.setOnFocusChangeListener { _, focused ->
-            if (!focused) {
-                binding.tilPassword.error = validPassword()
-            }
-        }
-    }
-
-    private fun validPassword(): String? {
-        val passwordText = binding.tietPassword.text.toString()
-        if (passwordText.length < 6) {
-            return "Mínimo 6 dígitos"
+        // Validación Email
+        val emailInput = binding.tietEmail.text.toString().trim()
+        if (emailInput.isEmpty()) {
+            binding.tilEmail.error = "Esta campo es obligatorio"
+        } else if (!Patterns.EMAIL_ADDRESS.matcher(emailInput).matches()) {
+            binding.tilEmail.error = "Email inválido"
+        } else {
+            binding.tilEmail.error = null
         }
 
-        return null
-    }
-
-    private fun firstNameFocusListener() {
-        binding.tietFirstName.setOnFocusChangeListener { _, focused ->
-            if (!focused) {
-                binding.tilFirstName.error = validFirstName()
-            }
+        // Validación Password
+        val passwordInput = binding.tietPassword.text.toString().trim()
+        if (passwordInput.isEmpty()) {
+            binding.tilPassword.error = "La contraseña no puede estar vacía"
+            isValid = false
+        } else if (passwordInput.length < 6) {
+            binding.tilPassword.error = "La contraseña debe tener al menos 6 caracteres"
+            isValid = false
+        } else {
+            binding.tilPassword.error = null
         }
-    }
 
-    private fun validFirstName(): String? {
-        val firstNameText = binding.tietFirstName.text.toString()
+        //Validación Nombre
+        val firstNameInput = binding.tietFirstName.text.toString().trim()
         val regex = Regex("^[a-zA-ZáéíóúÁÉÍÓÚñÑüÜ ]+$")
-
-        if (!firstNameText.matches(regex)) {
-            return "El nombre no es válido"
+        if (firstNameInput.isEmpty()) {
+            binding.tilFirstName.error = "Este campo es obligatorio"
+            isValid = false
+        } else if (!firstNameInput.matches(regex)) {
+            binding.tilFirstName.error = "Hay caracteres no permitidos"
+            isValid = false
+        } else {
+            binding.tilFirstName.error = null
         }
-        return null
+
+        // Validación Apellido
+        val lastNameInput = binding.tietLastName.text.toString().trim()
+        if (lastNameInput.isEmpty()) {
+            binding.tilLastName.error = "El apellido no puede estar vacío"
+            isValid = false
+        } else if (!lastNameInput.matches(regex)) {
+            binding.tilLastName.error = "Hay caracteres no permitidos"
+            isValid = false
+        } else {
+            binding.tilLastName.error = null
+        }
+
+        return isValid
     }
 
-    private fun lastNameFocusListener() {
-        binding.tietLastName.setOnFocusChangeListener { _, focused ->
-            if (!focused) {
-                binding.tilLastName.error = validLastName()
+    private fun uploadProfilePhotoandSaveUser(
+        userId: String,
+        firstName: String,
+        lastName: String
+    ) {
+        if (filePath != null) {
+            val ref = storageReference.child("profilePhoto/$userId")
+            ref.putFile(filePath!!)
+                .addOnSuccessListener {
+                    ref.downloadUrl.addOnSuccessListener { uri ->
+                        val profilePhotoUrl = uri.toString()
+                        saveUserToFirestore(userId, firstName, lastName, profilePhotoUrl)
+                    }
+                }
+                .addOnFailureListener { e ->
+                    Toast.makeText(requireContext(), "Failed " + e.message, Toast.LENGTH_SHORT)
+                        .show()
+                }
+        } else {
+            saveUserToFirestore(userId, firstName, lastName, "")
+        }
+    }
+
+    private fun saveUserToFirestore(
+        userId: String,
+        firstName: String,
+        lastName: String,
+        imageUrl: String
+    ) {
+        val usuario = mutableMapOf<String, Any>()
+        usuario["userType"] = "2"
+        usuario["user_id"] = userId
+        usuario["nombre"] = firstName
+        usuario["apellido"] = lastName
+
+        //Sólo si existe foto de perfil seleccionada
+        if (!imageUrl.isEmpty()) {
+            usuario["urlProfilePhoto"] = imageUrl
+        }
+
+        FirebaseFirestore.getInstance().collection("usuario").document(userId)
+            .set(usuario)
+            .addOnSuccessListener {
+                Toast.makeText(requireContext(), "Usuario creado", Toast.LENGTH_SHORT).show()
+                navigateToMenuCliente()
             }
-        }
+            .addOnFailureListener { e ->
+                showError("Ocurrió un error al guardar el usuario: ${e.message}")
+            }
     }
 
-    private fun validLastName(): CharSequence? {
-        val lastNameText = binding.tietLastName.text.toString()
-        val regex = Regex("^[a-zA-ZáéíóúÁÉÍÓÚñÑüÜ ]+$")
+    private fun navigateToMenuCliente() {
+        val intent = Intent(requireContext(), MenuClienteActivity::class.java)
+        intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+        startActivity(intent)
+    }
 
-        if (!lastNameText.matches(regex)) {
-            return "El nombre no es válido"
-        }
-        return null
+    private fun showError(message: String) {
+        Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
     }
 }

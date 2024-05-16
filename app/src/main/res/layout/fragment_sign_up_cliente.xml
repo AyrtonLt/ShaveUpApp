@@ -41,7 +41,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Email"
-            android:inputType="textEmailAddress" />
+            android:inputType="textEmailAddress"
+            android:maxLength="254" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -90,7 +91,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Nombre"
-            android:inputType="textPersonName" />
+            android:inputType="textPersonName"
+            android:maxLength="32" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -107,7 +109,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Apellido"
-            android:inputType="textPersonName" />
+            android:inputType="textPersonName"
+            android:maxLength="32" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
