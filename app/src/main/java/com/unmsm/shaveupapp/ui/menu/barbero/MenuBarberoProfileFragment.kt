@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.bumptech.glide.Glide
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.ktx.firestore
@@ -87,6 +88,15 @@ class MenuBarberoProfileFragment : Fragment() {
                 binding.tvBarberiaName.setText(barberiaName)
                 binding.tvPhone.setText(phone)
                 binding.tvLocation.setText(location)
+
+                val imagelurl = it.data?.get("urlProfilePhoto").toString()
+                // Procesa los datos del usuario según sea necesario
+
+
+                Glide.with(requireContext())
+                    .load(imagelurl)
+                    .into(binding.imageView1)
+
 
             }
         }.addOnFailureListener {

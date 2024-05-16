@@ -96,6 +96,7 @@ class SignUpClienteFragment : Fragment() {
                     }
             } else {
                 Toast.makeText(requireContext(), "existen errores", Toast.LENGTH_SHORT).show()
+                dismissProgressDialog()
             }
 
         }

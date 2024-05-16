@@ -131,6 +131,7 @@ class MakeReservationActivity : AppCompatActivity() {
                                 "Reserva creada",
                                 Toast.LENGTH_LONG
                             ).show()
+                            finish()
                         }
                         .addOnFailureListener { e ->
                             // Fallo

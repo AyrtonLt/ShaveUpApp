@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import com.bumptech.glide.Glide
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
@@ -39,6 +40,14 @@ class MenuClienteProfileFragment : Fragment() {
                 val lastName = it.data?.get("apellido")?.toString()
 
                 binding.tvName.setText(firstName + " " + lastName)
+
+                val imagelurl = it.data?.get("urlProfilePhoto").toString()
+                // Procesa los datos del usuario según sea necesario
+
+
+                Glide.with(requireContext())
+                    .load(imagelurl)
+                    .into(binding.imageView1)
 
             }
         }.addOnFailureListener {

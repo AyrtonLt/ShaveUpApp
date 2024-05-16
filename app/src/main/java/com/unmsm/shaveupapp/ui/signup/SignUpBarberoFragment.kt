@@ -1,6 +1,7 @@
 package com.unmsm.shaveupapp.ui.signup
 
 import android.app.Activity
+import android.app.AlertDialog
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
@@ -36,6 +37,8 @@ class SignUpBarberoFragment : Fragment() {
     private lateinit var storage: FirebaseStorage
     private lateinit var pickImageLauncher: ActivityResultLauncher<Intent>
 
+    private lateinit var progressDialog: AlertDialog
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -59,7 +62,7 @@ class SignUpBarberoFragment : Fragment() {
         }
 
         binding.btnCreateUser.setOnClickListener {
-
+            showProgressDialog()
             if (validateInputs()) {
 
                 val emailInput = binding.tietEmail.text.toString()
@@ -97,6 +100,7 @@ class SignUpBarberoFragment : Fragment() {
 
             } else {
                 Toast.makeText(requireContext(), "existen errores", Toast.LENGTH_SHORT).show()
+                dismissProgressDialog()
             }
         }
         return binding.root
@@ -162,7 +166,7 @@ class SignUpBarberoFragment : Fragment() {
 
         //Validación Apodo
         val nickNameInput = binding.tietNickName.text.toString().trim()
-        val regexNickName = "^[a-zA-Z0-9_-]*$".toRegex()
+        val regexNickName = "^[a-zA-Z0-9 _-]*$".toRegex()
         if (!regexNickName.matches(nickNameInput)) {
             binding.tilNickName.error = "Hay caracteres no permitidos"
             isValid = false
@@ -181,7 +185,7 @@ class SignUpBarberoFragment : Fragment() {
 
         //Validación Barberia
         val barberiaNameInput = binding.tietNameBarberia.text.toString().trim()
-        val regexBarberia = "^[a-zA-Z0-9_-]*$".toRegex()
+        val regexBarberia = "^[a-zA-Z0-9 _-]*$".toRegex()
         if (!regexBarberia.matches(barberiaNameInput)) {
             binding.tilNameBarberia.error = "Hay caracteres no permitidos"
             isValid = false
@@ -194,7 +198,7 @@ class SignUpBarberoFragment : Fragment() {
 
         //Validación Direccion
         val locationInput = binding.tietDireccion.text.toString().trim()
-        val regexLocation = "^[a-zA-Z0-9_-]*$".toRegex()
+        val regexLocation = "^[a-zA-Z0-9 _-]*$".toRegex()
         if (!regexLocation.matches(locationInput)) {
             binding.tilDireccion.error = "Hay caracteres no permitidos"
             isValid = false
@@ -303,5 +307,23 @@ class SignUpBarberoFragment : Fragment() {
 
     private fun showError(message: String) {
         Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
+    }
+
+    private fun showProgressDialog() {
+        // Inflar la vista personalizada
+        val inflater = LayoutInflater.from(context)
+        val view = inflater.inflate(R.layout.progress_dialog, null)
+
+        // Crear el AlertDialog y configurarlo
+        progressDialog = AlertDialog.Builder(requireContext())
+            .setView(view)
+            .setCancelable(false)
+            .create()
+
+        progressDialog.show()
+    }
+
+    private fun dismissProgressDialog() {
+        progressDialog.dismiss()
     }
 }
