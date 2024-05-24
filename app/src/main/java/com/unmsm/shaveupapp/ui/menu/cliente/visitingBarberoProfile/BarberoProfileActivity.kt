@@ -7,11 +7,14 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.recyclerview.widget.GridLayoutManager
 import com.bumptech.glide.Glide
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import com.unmsm.shaveupapp.R
+import com.unmsm.shaveupapp.adapterPhotoVisit.PhotoItemVisit
+import com.unmsm.shaveupapp.adapterPhotoVisit.PhotoItemVisitAdapter
 import com.unmsm.shaveupapp.databinding.ActivityBarberoProfileBinding
 import com.unmsm.shaveupapp.ui.login.LoginActivity
 
@@ -40,6 +43,7 @@ class BarberoProfileActivity : AppCompatActivity() {
         binding.tvNombreBarvero.text = nmaeBarbero
         getBarbero()
         getServiciosData()
+        getPhotos()
 
         binding.btnReservar.setOnClickListener {
             val intent = Intent(this, MakeReservationActivity::class.java)
@@ -102,6 +106,31 @@ class BarberoProfileActivity : AppCompatActivity() {
                 if (!existeServicio) {
                     binding.btnReservar.isEnabled = false
                 }
+            }
+        }
+    }
+
+    private fun getPhotos() {
+        db = FirebaseFirestore.getInstance()
+        db.collection("photos").get().addOnSuccessListener { result ->
+            // Crear una lista para almacenar objetos Foto
+            val fotos = mutableListOf<PhotoItemVisit>()
+
+            // Verificar si la colección no está vacía
+            if (!result.isEmpty) {
+                // Iterar sobre los documentos obtenidos
+                for (document in result.documents) {
+                    if (document.getString("userId") == barberId) {
+                        val foto = PhotoItemVisit(
+                            userId = document.getString("userId") ?: "",
+                            photoId = document.getString("photoId") ?: "",
+                            urlPhoto = document.getString("urlPhoto") ?: ""
+                        )
+                        fotos.add(foto)
+                    }
+                }
+                binding.rvFoto.layoutManager = GridLayoutManager(this, 2)
+                binding.rvFoto.adapter = PhotoItemVisitAdapter(fotos)
             }
         }
     }
