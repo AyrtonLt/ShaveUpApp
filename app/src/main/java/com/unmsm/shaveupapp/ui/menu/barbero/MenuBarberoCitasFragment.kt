@@ -37,6 +37,7 @@ class MenuBarberoCitasFragment : Fragment() {
         getReservasPropuestas()
         getReservasAceptadas()
         getReservasCanceladas()
+        getReservasTerminadas()
 
         return binding.root
     }
@@ -45,6 +46,7 @@ class MenuBarberoCitasFragment : Fragment() {
         getReservasPropuestas()
         getReservasAceptadas()
         getReservasCanceladas()
+        getReservasTerminadas()
     }
 
     private fun getReservasPropuestas() {
@@ -126,6 +128,28 @@ class MenuBarberoCitasFragment : Fragment() {
             }
     }
 
+    //Pasa a estado Terminado
+    private fun onFinishItemSelected(reservaItem: ReservaItem) {
+        db = FirebaseFirestore.getInstance()
+        val documentRef = db.collection("citas").document(reservaItem.reservaId)
+
+        // Actualizar la propiedad "estado"
+        documentRef.update("estado", "4")
+            .addOnSuccessListener {
+                // Exito
+                Toast.makeText(
+                    requireContext(),
+                    "Estado de la reserva actualizado",
+                    Toast.LENGTH_LONG
+                ).show()
+                reloadData()
+            }
+            .addOnFailureListener { e ->
+                // Fallo
+                println("Error al actualizar el estado: $e")
+            }
+    }
+
     private fun getReservasAceptadas() {
         db = FirebaseFirestore.getInstance()
         db.collection("citas").get().addOnSuccessListener { result ->
@@ -156,7 +180,7 @@ class MenuBarberoCitasFragment : Fragment() {
                 binding.rvReservasAceptadas.layoutManager = LinearLayoutManager(requireContext())
                 binding.rvReservasAceptadas.adapter = ReservaItemAdapter(
                     reservas,
-                    { reservaItem -> onReservaItemSelected(reservaItem) })
+                    { reservaItem -> onFinishItemSelected(reservaItem) })
             }
         }
     }
@@ -190,6 +214,42 @@ class MenuBarberoCitasFragment : Fragment() {
                 }
                 binding.rvReservasCanceladas.layoutManager = LinearLayoutManager(requireContext())
                 binding.rvReservasCanceladas.adapter = ReservaItemAdapter(
+                    reservas,
+                    { reservaItem -> onReservaItemSelected(reservaItem) })
+            }
+        }
+    }
+
+    // Obtiene reservas terminadas
+    private fun getReservasTerminadas(){
+        db = FirebaseFirestore.getInstance()
+        db.collection("citas").get().addOnSuccessListener { result ->
+            // Crear una lista para almacenar objetos Reserva
+            val reservas = mutableListOf<ReservaItem>()
+
+            // Verificar si la colección no está vacía
+            if (!result.isEmpty) {
+                // Iterar sobre los documentos obtenidos
+                for (document in result.documents) {
+                    val userId = FirebaseAuth.getInstance().currentUser!!.uid
+                    if (document.getString("estado") == "4" && document.getString("barberroId") == userId) {
+                        // Crear un nuevo objeto Barbero con los datos del documento
+                        val reserva = ReservaItem(
+                            reservaId = document.getString("reservaId") ?: "",
+                            estado = document.getString("estado") ?: "",
+                            userId = document.getString("userId") ?: "",
+                            barberroId = document.getString("barberroId") ?: "",
+                            hora = document.getString("hora") ?: "",
+                            fecha = document.getString("fecha") ?: "",
+                            serviciosList = document.get("serviciosList") as? List<String>
+                                ?: listOf()
+                        )
+                        // Agregar el objeto Barbero a la lista
+                        reservas.add(reserva)
+                    }
+                }
+                binding.rvReservasTerminadas.layoutManager = LinearLayoutManager(requireContext())
+                binding.rvReservasTerminadas.adapter = ReservaItemAdapter(
                     reservas,
                     { reservaItem -> onReservaItemSelected(reservaItem) })
             }

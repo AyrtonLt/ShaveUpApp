@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="horizontal"
+    android:paddingVertical="2.5dp">
+
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:strokeColor="@color/design_default_color_secondary_variant"
+        app:strokeWidth="1dp"
+        app:cardCornerRadius="10dp">
+
+        <LinearLayout
+            android:layout_margin="5dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tvUserName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textStyle="bold"
+                android:text="nombre cliente" />
+
+            <TextView
+                android:id="@+id/tvComentario"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="COMENTARIO" />
+            <TextView
+                android:id="@+id/tvServicio"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Servicios" />
+
+            <TextView
+                android:id="@+id/tvPuntuacion"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="estrellas: ★☆☆☆☆" />
+
+        </LinearLayout>
+
+    </com.google.android.material.card.MaterialCardView>
+
+
+</LinearLayout>

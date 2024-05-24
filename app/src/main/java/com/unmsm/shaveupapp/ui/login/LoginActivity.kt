@@ -2,7 +2,6 @@ package com.unmsm.shaveupapp.ui.login
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
@@ -11,7 +10,6 @@ import androidx.core.view.WindowInsetsCompat
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
-import com.google.gson.Gson
 import com.unmsm.shaveupapp.R
 import com.unmsm.shaveupapp.databinding.ActivityLoginBinding
 import com.unmsm.shaveupapp.ui.forgotpassword.ForgotPasswordActivity
@@ -59,7 +57,8 @@ class LoginActivity : AppCompatActivity() {
                             .addOnCompleteListener { document ->
                                 if (document.isSuccessful) {
                                     val userType = document.result.getString("userType")
-
+                                    DatosCompartidos.guardarDatoUserType(userType.toString())
+                                    DatosCompartidos.guardarUserName(document.result.getString("nombre").toString())
                                     when (userType) {
                                         "1" -> {
                                             val intent =
@@ -106,6 +105,36 @@ class LoginActivity : AppCompatActivity() {
         binding.btnSignUp.setOnClickListener {
             val intent = Intent(this, SignUpActivity::class.java)
             startActivity(intent)
+        }
+    }
+
+    //Datos compartidos
+    object DatosCompartidos {
+        var userType: String? = null
+        var miDato2: String? = null
+        var userName: String? = null
+        fun guardarDatoUserType(dato: String) {
+            userType = dato
+        }
+
+        fun obtenerDatoUserType(): String? {
+            return userType
+        }
+
+        fun guardarDatoBarberoId(dato: String) {
+            miDato2 = dato
+        }
+
+        fun obtenerBarberoId(): String? {
+            return miDato2
+        }
+
+        fun guardarUserName(dato: String) {
+            userName = dato
+        }
+
+        fun obtenerUserName(): String? {
+            return userName
         }
     }
 }

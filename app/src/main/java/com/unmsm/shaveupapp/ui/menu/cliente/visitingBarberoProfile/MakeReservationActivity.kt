@@ -190,7 +190,7 @@ class MakeReservationActivity : AppCompatActivity() {
                     }
                 }
 
-                Log.i("000000000000", "$servicios")
+//                Log.i("000000000000", "$servicios")
                 adapter =
                     ServicioClienteAdapter(servicios) { position -> categoryOnItemSelected(position) }
                 binding.rvServicios.setHasFixedSize(true)

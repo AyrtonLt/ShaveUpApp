@@ -7,23 +7,20 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
-import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import com.unmsm.shaveupapp.R
-import com.unmsm.shaveupapp.adapterServicios.ServicioClienteAdapter
-import com.unmsm.shaveupapp.adapterServicios.ServicioItem
 import com.unmsm.shaveupapp.databinding.ActivityBarberoProfileBinding
-import com.unmsm.shaveupapp.databinding.FragmentCreateServicioBinding
+import com.unmsm.shaveupapp.ui.login.LoginActivity
 
 class BarberoProfileActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityBarberoProfileBinding
 
     private var db = Firebase.firestore
-    private lateinit var userId: String
+    private lateinit var barberId: String
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -38,15 +35,21 @@ class BarberoProfileActivity : AppCompatActivity() {
 
         val bundle: Bundle? = intent.extras
         val nmaeBarbero = bundle!!.getString("barberoId")
-        userId = bundle.getString("userId").toString()
-
+        barberId = bundle.getString("userId").toString()
+        LoginActivity.DatosCompartidos.guardarDatoBarberoId(barberId)
         binding.tvNombreBarvero.text = nmaeBarbero
         getBarbero()
         getServiciosData()
 
         binding.btnReservar.setOnClickListener {
             val intent = Intent(this, MakeReservationActivity::class.java)
-            intent.putExtra("userId", userId)
+            intent.putExtra("userId", barberId)
+            startActivity(intent)
+        }
+        //boton comentarios
+        binding.btnComentarios.setOnClickListener{
+            val intent = Intent(this, ComentariosBarberoActivity::class.java)
+            intent.putExtra("barberId", barberId)
             startActivity(intent)
         }
     }
@@ -54,7 +57,7 @@ class BarberoProfileActivity : AppCompatActivity() {
     private fun getBarbero() {
 
         db.collection("usuario")
-            .document(userId)
+            .document(barberId)
             .get()
             .addOnSuccessListener { documentSnapshot ->
                 if (documentSnapshot.exists()) {
@@ -89,7 +92,7 @@ class BarberoProfileActivity : AppCompatActivity() {
                 // Iterar sobre los documentos obtenidos
                 var existeServicio = false
                 for (document in result.documents) {
-                    if (document.getString("userBarbero") == userId.toString()) {
+                    if (document.getString("userBarbero") == barberId.toString()) {
                         existeServicio = true
                         Log.i("00000000", "SI TIENE")
                     } else {
