@@ -8,6 +8,7 @@ import com.unmsm.shaveupapp.databinding.ItemreservaBinding
 import com.unmsm.shaveupapp.ui.login.LoginActivity
 import java.text.SimpleDateFormat
 import java.util.*
+import kotlin.math.*
 
 class ReservaItemViewHolder(view: View) : RecyclerView.ViewHolder(view) {
 
@@ -17,6 +18,8 @@ class ReservaItemViewHolder(view: View) : RecyclerView.ViewHolder(view) {
 
         val diasPasados = getDaysDifference(reservaItemModel.fecha)
 
+        Log.i("0000000000000","$diasPasados")
+
         val userTipe = LoginActivity.DatosCompartidos.obtenerDatoUserType()
         // estado aceptado y usuario es barbero
         if (reservaItemModel.estado == "2" && userTipe == "1"){
@@ -25,7 +28,7 @@ class ReservaItemViewHolder(view: View) : RecyclerView.ViewHolder(view) {
             binding.btnTerminarServicio.setOnClickListener(){
                 onClickListener(reservaItemModel)
             }
-        //estado terminado y usuario es cliente y diferencia de dias menor que
+        //estado terminado y usuario es cliente y diferencia de dias menor que 1 ya esta comentado
         }else if(reservaItemModel.estado == "4" && userTipe == "2" && diasPasados <= 1){
             binding.btnTerminarServicio.visibility = View.GONE
             binding.btnHacerComentario.visibility = View.VISIBLE
@@ -35,9 +38,9 @@ class ReservaItemViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         }else{
             binding.btnHacerComentario.visibility = View.GONE
             binding.btnTerminarServicio.visibility = View.GONE
-            itemView.setOnClickListener {
-                onClickListener(reservaItemModel)
-            }
+//            itemView.setOnClickListener {
+//                onClickListener(reservaItemModel)
+//            }
         }
 
         binding.tvFecha.text = reservaItemModel.fecha
@@ -54,7 +57,7 @@ class ReservaItemViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val diffInMillis = targetDate?.time?.minus(currentDate.time) ?: 0
         val diffInDays = (diffInMillis / (24 * 60 * 60 * 1000)).toInt()
 
-        return diffInDays
+        return diffInDays.absoluteValue
     }
 
 }

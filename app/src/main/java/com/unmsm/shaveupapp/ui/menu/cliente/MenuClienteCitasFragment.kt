@@ -157,7 +157,7 @@ class MenuClienteCitasFragment : Fragment() {
                 // Iterar sobre los documentos obtenidos
                 for (document in result.documents) {
                     val userId = FirebaseAuth.getInstance().currentUser!!.uid
-                    if (document.getString("estado") == "4" && document.getString("userId") == userId) {
+                    if ((document.getString("estado") == "4" || document.getString("estado") == "5") && document.getString("userId") == userId) {
                         // Crear un nuevo objeto Barbero con los datos del documento
                         val reserva = ReservaItem(
                             reservaId = document.getString("reservaId") ?: "",
@@ -190,6 +190,7 @@ class MenuClienteCitasFragment : Fragment() {
         val intent = Intent(requireContext(), MenuClienteCrearComentarioActivity::class.java)
         intent.putExtra("barberId", reservaItem.barberroId)
         intent.putExtra("userId", reservaItem.userId)
+        intent.putExtra("reservaId", reservaItem.reservaId)
         intent.putExtra("servicios", reservaItem.serviciosList.joinToString(separator = ", "))
         startActivity(intent)
     }

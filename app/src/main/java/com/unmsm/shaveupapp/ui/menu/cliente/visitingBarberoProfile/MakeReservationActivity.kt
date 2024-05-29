@@ -137,28 +137,6 @@ class MakeReservationActivity : AppCompatActivity() {
                             // Fallo
                             println("Error al escribir el documento: $e")
                         }
-
-
-                    //crear objetoreserva
-                    /*val clienteId = FirebaseAuth.getInstance().currentUser!!.uid.toString()
-                    val reserva = ReservaItem(
-                        "1",
-                        clienteId,
-                        barberId,
-                        hora,
-                        fecha,
-                        serviciosSeleccionados
-                    )
-
-                    db.collection("citas").add(reserva)
-                        .addOnSuccessListener { documentReference ->
-                            println("Documento añadido con ID: ${documentReference.id}")
-                        }
-                        .addOnFailureListener { e ->
-                            println("Error al añadir documento: $e")
-                        }
-                    Log.i("0000000000000", "$reserva")*/
-
                 }
             } else {
                 MaterialAlertDialogBuilder(this).setTitle("Error")
