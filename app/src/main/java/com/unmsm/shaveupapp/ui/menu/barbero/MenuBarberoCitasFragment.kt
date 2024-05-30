@@ -1,6 +1,6 @@
 package com.unmsm.shaveupapp.ui.menu.barbero
 
-import android.content.Intent
+
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -12,15 +12,13 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
-import com.unmsm.shaveupapp.R
-import com.unmsm.shaveupapp.adapter.BarberoItem
-import com.unmsm.shaveupapp.adapter.BarberoItemAdapter
+
 import com.unmsm.shaveupapp.adapterReservas.ReservaItem
 import com.unmsm.shaveupapp.adapterReservas.ReservaItemAdapter
 import com.unmsm.shaveupapp.adapterReservasPropuestas.ReservaPropuestaItem
 import com.unmsm.shaveupapp.adapterReservasPropuestas.ReservaPropuestaItemAdapter
 import com.unmsm.shaveupapp.databinding.FragmentMenuBarberoCitasBinding
-import com.unmsm.shaveupapp.ui.menu.cliente.visitingBarberoProfile.BarberoProfileActivity
+
 
 class MenuBarberoCitasFragment : Fragment() {
 
@@ -232,7 +230,7 @@ class MenuBarberoCitasFragment : Fragment() {
                 // Iterar sobre los documentos obtenidos
                 for (document in result.documents) {
                     val userId = FirebaseAuth.getInstance().currentUser!!.uid
-                    if (document.getString("estado") == "4" && document.getString("barberroId") == userId) {
+                    if ((document.getString("estado") == "4" || document.getString("estado") == "5") && document.getString("barberroId") == userId) {
                         // Crear un nuevo objeto Barbero con los datos del documento
                         val reserva = ReservaItem(
                             reservaId = document.getString("reservaId") ?: "",

@@ -1,19 +1,15 @@
 package com.unmsm.shaveupapp.ui.menu.cliente
 
 import android.os.Bundle
-import android.util.Log
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
-import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.unmsm.shaveupapp.R
 import com.unmsm.shaveupapp.adapterComentario.ComentarioItem
-import com.unmsm.shaveupapp.adapterReservas.ReservaItem
-import com.unmsm.shaveupapp.databinding.ActivityMakeReservationBinding
 import com.unmsm.shaveupapp.databinding.ActivityMenuClienteCrearComentarioBinding
 import com.unmsm.shaveupapp.ui.login.LoginActivity
 

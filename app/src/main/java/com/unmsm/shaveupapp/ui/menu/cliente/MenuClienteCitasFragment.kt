@@ -2,6 +2,7 @@ package com.unmsm.shaveupapp.ui.menu.cliente
 
 import android.content.Intent
 import android.os.Bundle
+
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -12,13 +13,12 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
-import com.unmsm.shaveupapp.R
+
 import com.unmsm.shaveupapp.adapterReservas.ReservaItem
 import com.unmsm.shaveupapp.adapterReservas.ReservaItemAdapter
-import com.unmsm.shaveupapp.adapterReservasPropuestas.ReservaPropuestaItem
-import com.unmsm.shaveupapp.adapterReservasPropuestas.ReservaPropuestaItemAdapter
+
 import com.unmsm.shaveupapp.databinding.FragmentMenuClienteCitasBinding
-import com.unmsm.shaveupapp.ui.menu.cliente.visitingBarberoProfile.ComentariosBarberoActivity
+
 
 class MenuClienteCitasFragment : Fragment() {
 
@@ -38,6 +38,11 @@ class MenuClienteCitasFragment : Fragment() {
 //        getReservasTerminadas()
 
         return binding.root
+    }
+
+    override fun onStart() {
+        super.onStart()
+        reloadData()
     }
 
     private fun getReservasPropuestas() {
