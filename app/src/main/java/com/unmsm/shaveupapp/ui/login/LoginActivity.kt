@@ -61,6 +61,7 @@ class LoginActivity : AppCompatActivity() {
                                     DatosCompartidos.guardarUserName(document.result.getString("nombre").toString())
                                     when (userType) {
                                         "1" -> {
+                                            DatosCompartidos.guardarDatoBarberoId(document.result.getString("user_id").toString())
                                             val intent =
                                                 Intent(this, MenuBarberoActivity::class.java)
                                             startActivity(intent)
