@@ -19,6 +19,44 @@
         android:queryHint="Buscar..."
         android:focusable="false"/>
 
+    <com.google.android.material.button.MaterialButtonToggleGroup
+        app:singleSelection="true"
+        android:id="@+id/toggleButton"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/svSearch"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+        <Button
+            style="?attr/materialButtonOutlinedStyle"
+            android:id="@+id/btnBarberoS"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Barbero"
+            />
+        <Button
+            style="?attr/materialButtonOutlinedStyle"
+            android:id="@+id/btnBarberia"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Barbería"
+            />
+        <Button
+            style="?attr/materialButtonOutlinedStyle"
+            android:id="@+id/btnLugar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Locación"
+            />
+        <Button
+            style="?attr/materialButtonOutlinedStyle"
+            android:id="@+id/btnServicio"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Servicio"
+            />
+    </com.google.android.material.button.MaterialButtonToggleGroup>
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvBarbero"
         android:layout_width="match_parent"
@@ -27,7 +65,7 @@
         app:spanCount="1"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/svSearch"/>
+        app:layout_constraintTop_toBottomOf="@+id/toggleButton"/>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
