@@ -17,6 +17,7 @@ import com.unmsm.shaveupapp.adapterPhotoVisit.PhotoItemVisit
 import com.unmsm.shaveupapp.adapterPhotoVisit.PhotoItemVisitAdapter
 import com.unmsm.shaveupapp.databinding.ActivityBarberoProfileBinding
 import com.unmsm.shaveupapp.ui.login.LoginActivity
+import com.unmsm.shaveupapp.ui.menu.barbero.FullPhotoActivity
 
 class BarberoProfileActivity : AppCompatActivity() {
 
@@ -130,9 +131,17 @@ class BarberoProfileActivity : AppCompatActivity() {
                     }
                 }
                 binding.rvFoto.layoutManager = GridLayoutManager(this, 2)
-                binding.rvFoto.adapter = PhotoItemVisitAdapter(fotos)
+                binding.rvFoto.adapter = PhotoItemVisitAdapter(fotos,
+                    {photoItemVisit -> onClickPhoto(photoItemVisit)})
             }
         }
     }
 //cliente@gmail.com
+
+    private fun onClickPhoto(photoItemVisit: PhotoItemVisit) {
+        val intent = Intent(this, FullPhotoActivity::class.java).apply {
+            putExtra("urlPhoto", photoItemVisit.urlPhoto) // Reemplaza "clave" por la clave que desees y "valor" por el valor que quieras enviar
+        }
+        startActivity(intent)
+    }
 }

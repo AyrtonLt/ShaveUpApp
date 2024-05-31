@@ -172,8 +172,14 @@ class MenuBarberoProfileFragment : Fragment() {
     private fun onClickPhoto(photoItem: PhotoItem) {
         val builder = AlertDialog.Builder(requireContext())
         builder.setTitle("Atención")
-        builder.setMessage("Estás seguro de eliminar esta foto?")
+        builder.setMessage("Selecciona la acción que desear realizar")
+        builder.setPositiveButton("Ver foto") {_, _ ->
+            val intent = Intent(requireContext(), FullPhotoActivity::class.java).apply {
+                putExtra("urlPhoto", photoItem.urlPhoto) // Reemplaza "clave" por la clave que desees y "valor" por el valor que quieras enviar
+            }
+            startActivity(intent)
 
+        }
         builder.setNegativeButton("Eliminar") { dialog, which ->
 
             db = FirebaseFirestore.getInstance()
