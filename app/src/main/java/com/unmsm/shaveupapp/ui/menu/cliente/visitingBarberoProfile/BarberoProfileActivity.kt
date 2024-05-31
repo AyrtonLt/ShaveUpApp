@@ -8,11 +8,14 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import com.unmsm.shaveupapp.R
+import com.unmsm.shaveupapp.adapterComentario.ComentarioItem
+import com.unmsm.shaveupapp.adapterComentario.ComentarioItemAdapter
 import com.unmsm.shaveupapp.adapterPhotoVisit.PhotoItemVisit
 import com.unmsm.shaveupapp.adapterPhotoVisit.PhotoItemVisitAdapter
 import com.unmsm.shaveupapp.databinding.ActivityBarberoProfileBinding
@@ -24,6 +27,7 @@ class BarberoProfileActivity : AppCompatActivity() {
 
     private var db = Firebase.firestore
     private lateinit var barberId: String
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -44,6 +48,7 @@ class BarberoProfileActivity : AppCompatActivity() {
         getBarbero()
         getServiciosData()
         getPhotos()
+        getComentarios()
 
         binding.btnReservar.setOnClickListener {
             val intent = Intent(this, MakeReservationActivity::class.java)
@@ -134,5 +139,50 @@ class BarberoProfileActivity : AppCompatActivity() {
             }
         }
     }
+
+    private fun getComentarios() {
+        db = FirebaseFirestore.getInstance()
+        db.collection("comentarios").get().addOnSuccessListener { result ->
+            // Crear una lista para almacenar objetos Reserva
+            val comentarios = mutableListOf<ComentarioItem>()
+
+
+            // Verificar si la colección no está vacía
+            if (!result.isEmpty) {
+                // Iterar sobre los documentos obtenidos
+                for (document in result.documents) {
+                    if (document.getString("barberoId") == barberId) {
+                        // Crear un nuevo objeto Barbero con los datos del documento
+                        val comentario = ComentarioItem(
+                            comentarioId = document.getString("comentarioId") ?: "",
+                            userId = document.getString("userId") ?: "",
+                            userName = document.getString("userName") ?: "",
+                            barberoId = document.getString("barberoId") ?: "",
+                            comentario = document.getString("comentario") ?: "",
+                            servicios = document.getString("servicios") ?: "",
+                            puntuacion = document.getString("puntuacion") ?: ""
+                        )
+                        // Agregar el objeto Barbero a la lista
+                        comentarios.add(comentario)
+                    }
+                }
+                if (comentarios.isEmpty()){
+                    binding.btnComentarios.isEnabled = false
+                } else {
+                    val puntuaciones = comentarios.map { comentario ->
+                        comentario.puntuacion.toDoubleOrNull() ?: 0.0
+                    }
+
+                    val promedioPuntuaciones = if (puntuaciones.isNotEmpty()) {
+                        puntuaciones.average()
+                    } else {
+                        0.0 // o cualquier valor por defecto que prefieras
+                    }
+                    binding.rbPuntuacion.rating = promedioPuntuaciones.toFloat()
+                }
+            }
+        }
+    }
+
 //cliente@gmail.com
 }
