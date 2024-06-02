@@ -1,26 +1,47 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="vertical"
-    android:layout_marginBottom="10dp">
+    android:orientation="horizontal"
+    android:padding="2.5dp">
 
-    <TextView
-        android:id="@+id/tvServicioName"
+    <com.google.android.material.card.MaterialCardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Servicio nombre" />
+        app:cardCornerRadius="10dp"
+        app:strokeColor="@color/design_default_color_secondary_variant"
+        app:strokeWidth="1.5dp">
 
-    <TextView
-        android:id="@+id/tvServicioDescription"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Descripción servicio" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
 
-    <TextView
-        android:id="@+id/tvServicioPrecio"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Dirección" />
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tvServicioName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Servicio nombre"
+                android:textSize="16dp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/tvServicioDescription"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Descripción servicio" />
+
+            <TextView
+                android:id="@+id/tvServicioPrecio"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Dirección" />
+
+        </LinearLayout>
+
+    </com.google.android.material.card.MaterialCardView>
 
 </LinearLayout>

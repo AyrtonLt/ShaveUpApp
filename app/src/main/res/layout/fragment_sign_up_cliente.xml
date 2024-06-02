@@ -12,7 +12,9 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="50dp"
         android:text="Usuario Cliente"
-        android:textSize="20dp"
+        android:textColor="@color/md_theme_onPrimaryFixedVariant"
+        android:textSize="27dp"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -21,10 +23,10 @@
         android:id="@+id/tvLogo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="56dp"
         android:layout_marginTop="20dp"
         android:text="Información de Inicio de sesión"
         android:textSize="20dp"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tvUsuario" />
 
@@ -71,10 +73,10 @@
         android:id="@+id/tvLogo2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
+        android:layout_marginStart="56dp"
+        android:layout_marginTop="5dp"
         android:text="Información de Inicio de sesión"
         android:textSize="20dp"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tilPassword" />
 
@@ -118,8 +120,10 @@
         android:id="@+id/btnChooseImage"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="20dp"
         android:text="Elegir foto de perfil"
+        app:cornerRadius="10dp"
+        app:icon="@drawable/ic_upload_file"
         app:layout_constraintStart_toStartOf="@+id/tilLastName"
         app:layout_constraintTop_toBottomOf="@+id/tilLastName" />
 
@@ -127,8 +131,8 @@
         android:id="@+id/btnCreateUser"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:text="Registrar"
+        android:layout_marginTop="25dp"
+        android:text="Registrar usuario"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btnChooseImage" />

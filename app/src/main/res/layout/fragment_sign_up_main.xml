@@ -10,9 +10,11 @@
         android:id="@+id/tvTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="50dp"
         android:text="Creación de usuario"
-        android:textSize="20dp"
+        android:textColor="@color/md_theme_onPrimaryFixedVariant"
+        android:textSize="27dp"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -21,7 +23,7 @@
         android:id="@+id/tvSubTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="20dp"
         android:text="Qué tipo de usuario eres?"
         android:textSize="20dp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -29,25 +31,33 @@
         app:layout_constraintTop_toBottomOf="@+id/tvTitle" />
 
     <Button
-        android:layout_marginTop="20dp"
         android:id="@+id/btnChooseCliente"
-        android:layout_width="wrap_content"
+        android:layout_width="125dp"
         android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
         android:text="Cliente"
         android:textSize="20dp"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:cornerRadius="10dp"
+        app:icon="@drawable/ic_cliente"
+        app:iconGravity="textTop"
+        app:iconSize="60dp"
+        app:layout_constraintEnd_toStartOf="@+id/btnChooseBarbero"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tvSubTitle" />
 
     <Button
-        android:layout_marginTop="20dp"
         android:id="@+id/btnChooseBarbero"
-        android:layout_width="wrap_content"
+        android:layout_width="125dp"
         android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
         android:text="Barbero"
         android:textSize="20dp"
+        app:cornerRadius="10dp"
+        app:icon="@drawable/ic_barbero"
+        app:iconGravity="textTop"
+        app:iconSize="60dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnChooseCliente" />
+        app:layout_constraintStart_toEndOf="@+id/btnChooseCliente"
+        app:layout_constraintTop_toBottomOf="@+id/tvSubTitle" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
