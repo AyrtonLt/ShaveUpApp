@@ -3,36 +3,58 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="horizontal">
+    android:orientation="horizontal"
+    android:padding="2.5dp">
 
-    <ImageView
-        android:id="@+id/ivProfilePhoto"
-        android:layout_width="90dp"
-        android:layout_height="90dp" />
-
-    <LinearLayout
+    <com.google.android.material.card.MaterialCardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        app:cardCornerRadius="10dp"
+        app:strokeColor="@color/design_default_color_secondary_variant"
+        app:strokeWidth="1.5dp">
 
-        <TextView
-            android:id="@+id/tvBarberiaName"
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Barbería nombre" />
+            android:layout_margin="8dp">
 
-        <TextView
-            android:id="@+id/tvBarberoFullName"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Nombre" />
+            <ImageView
+                android:id="@+id/ivProfilePhoto"
+                android:layout_width="90dp"
+                android:layout_height="90dp" />
 
-        <TextView
-            android:id="@+id/tvLocation"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Dirección" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_marginStart="12dp"
+                android:layout_toEndOf="@+id/ivProfilePhoto"
+                android:orientation="vertical">
 
-    </LinearLayout>
+                <TextView
+                    android:id="@+id/tvBarberiaName"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Barbería nombre"
+                    android:textSize="16dp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/tvBarberoFullName"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Nombre" />
+
+                <TextView
+                    android:id="@+id/tvLocation"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Dirección" />
+
+            </LinearLayout>
+
+        </RelativeLayout>
+
+    </com.google.android.material.card.MaterialCardView>
 
 </LinearLayout>
