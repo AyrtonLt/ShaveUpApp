@@ -10,9 +10,10 @@
         android:id="@+id/tvLogo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="24dp"
         android:text="Configuración"
-        android:textSize="20dp"
+        android:textSize="25dp"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -25,6 +26,10 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="30dp"
         android:text="Editar información"
+        android:textSize="20dp"
+        app:icon="@drawable/ic_edit_info"
+        app:iconPadding="10dp"
+        app:iconSize="25dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tvLogo" />
 
@@ -35,6 +40,10 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="30dp"
         android:text="Cerrar sesión"
+        android:textSize="20dp"
+        app:icon="@drawable/ic_exit_session"
+        app:iconPadding="10dp"
+        app:iconSize="25dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btnEditInfo" />
 

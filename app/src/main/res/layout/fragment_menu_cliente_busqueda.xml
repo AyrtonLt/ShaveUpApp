@@ -5,8 +5,8 @@
     android:id="@+id/coordinatorLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_marginStart="30dp"
-    android:layout_marginEnd="30dp"
+    android:layout_marginStart="23dp"
+    android:layout_marginEnd="23dp"
     android:paddingBottom="150dp"
     tools:context=".ui.menu.cliente.MenuClienteBusquedaFragment">
 
@@ -35,15 +35,16 @@
         <Button
             style="?attr/materialButtonOutlinedStyle"
             android:id="@+id/btnBarberoS"
-            android:layout_width="85dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Barbero"
             android:textSize="10dp"
+            app:cornerRadius="10dp"
             />
         <Button
             style="?attr/materialButtonOutlinedStyle"
             android:id="@+id/btnBarberia"
-            android:layout_width="85dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Barbería"
             android:textSize="10dp"
@@ -51,7 +52,7 @@
         <Button
             style="?attr/materialButtonOutlinedStyle"
             android:id="@+id/btnLugar"
-            android:layout_width="85dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Locación"
             android:textSize="10dp"
@@ -59,10 +60,11 @@
         <Button
             style="?attr/materialButtonOutlinedStyle"
             android:id="@+id/btnServicio"
-            android:layout_width="85dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Servicio"
             android:textSize="10dp"
+            app:cornerRadius="10dp"
             />
     </com.google.android.material.button.MaterialButtonToggleGroup>
 

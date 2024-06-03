@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="horizontal"
-    android:paddingVertical="2.5dp"
-    android:paddingRight="30dp">
+    android:padding="2.5dp">
 
     <com.google.android.material.card.MaterialCardView
         android:layout_width="match_parent"
@@ -15,19 +14,27 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:strokeColor="@color/design_default_color_secondary_variant"
-        app:strokeWidth="1dp"
+        app:strokeWidth="1.5dp"
         tools:ignore="MissingConstraints">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:paddingHorizontal="5dp">
+            android:layout_margin="8dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tvDetalle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Nombre"
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/tvFecha"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="3dp"
                 android:text="Barbería nombre" />
 
             <TextView
@@ -36,28 +43,31 @@
                 android:layout_height="wrap_content"
                 android:text="Barbería nombre" />
 
-            <TextView
-                android:id="@+id/tvDetalle"
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Nombre" />
+                android:layout_marginTop="3dp"
+                android:gravity="center_horizontal"
+                android:orientation="horizontal">
 
-            <Button
-                android:id="@+id/btnTerminarServicio"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Terminar servicio" />
+                <Button
+                    android:id="@+id/btnTerminarServicio"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Terminar servicio" />
 
-            <Button
-                android:id="@+id/btnHacerComentario"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Hacer Comentario" />
+                <Button
+                    android:id="@+id/btnHacerComentario"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="40dp"
+                    android:text="Hacer Comentario" />
+
+            </LinearLayout>
 
         </LinearLayout>
 
     </com.google.android.material.card.MaterialCardView>
-
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

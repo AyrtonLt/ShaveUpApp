@@ -1,6 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -12,31 +10,43 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:paddingBottom="130dp">
+        android:paddingBottom="150dp">
+
+        <TextView
+            android:id="@+id/tvTitleReserva2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="28dp"
+            android:layout_marginTop="24dp"
+            android:text="Reservas"
+            android:textColor="@color/md_theme_onPrimaryFixedVariant"
+            android:textSize="25dp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/tvReservaPropuesta"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="28dp"
-            android:layout_marginTop="24dp"
+            android:layout_marginTop="15dp"
             android:text="Reservas propuestas"
             android:textSize="20dp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toBottomOf="@+id/tvTitleReserva2" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rvReservasPropuestas"
             android:layout_width="match_parent"
             android:layout_height="140dp"
             android:layout_marginStart="30dp"
-            android:layout_marginTop="30dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="30dp"
             app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/tvReservaPropuesta"
+            app:layout_constraintTop_toBottomOf="@+id/tvReservaPropuesta"
             app:spanCount="1" />
 
         <TextView
@@ -44,7 +54,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="28dp"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="15dp"
             android:text="Reservas aceptadas"
             android:textSize="20dp"
             app:layout_constraintStart_toStartOf="parent"
@@ -55,11 +65,12 @@
             android:layout_width="match_parent"
             android:layout_height="140dp"
             android:layout_marginStart="30dp"
-            android:layout_marginTop="30dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="30dp"
             app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/tvReservaAceptada"
+            app:layout_constraintTop_toBottomOf="@+id/tvReservaAceptada"
             app:spanCount="1" />
 
         <TextView
@@ -67,7 +78,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="28dp"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="15dp"
             android:text="Reservas canceladas"
             android:textSize="20dp"
             app:layout_constraintStart_toStartOf="parent"
@@ -78,11 +89,12 @@
             android:layout_width="match_parent"
             android:layout_height="140dp"
             android:layout_marginStart="30dp"
-            android:layout_marginTop="30dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="30dp"
             app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/tvReservaCancelada"
+            app:layout_constraintTop_toBottomOf="@+id/tvReservaCancelada"
             app:spanCount="1" />
 
         <TextView
@@ -90,7 +102,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="28dp"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="15dp"
             android:text="Reservas terminadas"
             android:textSize="20dp"
             app:layout_constraintStart_toStartOf="parent"
@@ -101,11 +113,12 @@
             android:layout_width="match_parent"
             android:layout_height="140dp"
             android:layout_marginStart="30dp"
-            android:layout_marginTop="30dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="30dp"
             app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/tvReservaTerminada"
+            app:layout_constraintTop_toBottomOf="@+id/tvReservaTerminada"
             app:spanCount="1" />
 
 

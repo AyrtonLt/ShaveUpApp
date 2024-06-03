@@ -7,14 +7,28 @@
     tools:context=".ui.menu.barbero.config.ConfigInfoFragment">
 
     <TextView
+        android:id="@+id/tvTitleEditBarbero"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:text="Editar Barbero"
+        android:textColor="@color/md_theme_onPrimaryFixedVariant"
+        android:textSize="25dp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
         android:id="@+id/tvSubtitle2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="56dp"
-        android:layout_marginTop="12dp"
+        android:layout_marginTop="15dp"
         android:text="Información personal"
+        android:textSize="16dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@id/tvTitleEditBarbero" />
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/tilFirstName"
@@ -85,8 +99,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="56dp"
-        android:layout_marginTop="12dp"
+        android:layout_marginTop="8dp"
         android:text="Dónde trabajas"
+        android:textSize="16dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tilTelefono" />
 
@@ -145,6 +160,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Elegir foto de perfil"
+        app:cornerRadius="8dp"
+        android:layout_marginTop="10dp"
+        app:icon="@drawable/ic_upload_file"
         app:layout_constraintStart_toStartOf="@+id/tilDistrito"
         app:layout_constraintTop_toBottomOf="@+id/tilDistrito" />
 
@@ -152,7 +170,7 @@
         android:id="@+id/btnUpdateUser"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
+        android:layout_marginTop="10dp"
         android:text="Actualizar"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

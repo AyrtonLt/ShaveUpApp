@@ -9,14 +9,14 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingBottom="150dp"
+        android:paddingBottom="90dp"
         tools:context=".ui.menu.cliente.visitingBarberoProfile.BarberoProfileActivity">
 
         <ImageView
             android:id="@+id/imageView1"
             android:layout_width="250dp"
             android:layout_height="250dp"
-            android:layout_marginTop="30dp"
+            android:layout_marginTop="24dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -25,7 +25,7 @@
             android:id="@+id/rbPuntuacion"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="12dp"
+            android:layout_marginTop="15dp"
             android:numStars="5"
             android:stepSize="0.5"
             android:isIndicator="true"
@@ -38,21 +38,24 @@
             android:id="@+id/tvNombreBarvero"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="352dp"
+            android:layout_marginTop="15dp"
             android:text="BienvenidoTextView"
             android:textSize="20dp"
+            android:textStyle="bold"
+            android:textColor="@color/md_theme_onPrimaryFixedVariant"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toBottomOf="@id/rbPuntuacion" />
 
         <Button
             android:id="@+id/btnReservar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="10dp"
             android:text="Reservar"
+            app:icon="@drawable/ic_reserve"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.25"
+            app:layout_constraintHorizontal_bias="0.23"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tvNombreBarvero" />
 
@@ -60,10 +63,11 @@
             android:id="@+id/btnComentarios"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="10dp"
             android:text="Comentarios"
+            app:icon="@drawable/ic_comments"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.75"
+            app:layout_constraintHorizontal_bias="0.83"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tvNombreBarvero" />
 
@@ -83,6 +87,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="30dp"
+            android:layout_marginTop="8dp"
             android:text="Barbería Nombre"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tvSubtitle1" />
@@ -106,7 +111,7 @@
             app:layout_constraintTop_toBottomOf="@+id/tvPhone" />
 
         <TextView
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="15dp"
             android:id="@id/tvSubtitle3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -121,6 +126,7 @@
             android:layout_width="match_parent"
             android:layout_height="150dp"
             android:layout_marginStart="30dp"
+            android:layout_marginTop="8dp"
             android:layout_marginEnd="30dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tvSubtitle3" />
