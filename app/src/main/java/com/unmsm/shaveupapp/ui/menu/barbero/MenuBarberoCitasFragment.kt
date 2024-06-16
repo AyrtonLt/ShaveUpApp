@@ -18,6 +18,8 @@ import com.unmsm.shaveupapp.adapterReservas.ReservaItemAdapter
 import com.unmsm.shaveupapp.adapterReservasPropuestas.ReservaPropuestaItem
 import com.unmsm.shaveupapp.adapterReservasPropuestas.ReservaPropuestaItemAdapter
 import com.unmsm.shaveupapp.databinding.FragmentMenuBarberoCitasBinding
+import java.text.SimpleDateFormat
+import java.util.Locale
 
 
 class MenuBarberoCitasFragment : Fragment() {
@@ -52,6 +54,7 @@ class MenuBarberoCitasFragment : Fragment() {
         db.collection("citas").get().addOnSuccessListener { result ->
             // Crear una lista para almacenar objetos Reserva
             val reservas = mutableListOf<ReservaPropuestaItem>()
+            val dateFormat = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault())
 
             // Verificar si la colección no está vacía
             if (!result.isEmpty) {
@@ -74,6 +77,12 @@ class MenuBarberoCitasFragment : Fragment() {
                         reservas.add(reserva)
                     }
                 }
+
+                // Ordenar la lista de reservas por fecha desde la más reciente a la más antigua
+                reservas.sortByDescending {
+                    dateFormat.parse(it.fecha)
+                }
+
                 binding.rvReservasPropuestas.layoutManager = LinearLayoutManager(requireContext())
                 binding.rvReservasPropuestas.adapter = ReservaPropuestaItemAdapter(
                     reservas,
@@ -153,6 +162,7 @@ class MenuBarberoCitasFragment : Fragment() {
         db.collection("citas").get().addOnSuccessListener { result ->
             // Crear una lista para almacenar objetos Reserva
             val reservas = mutableListOf<ReservaItem>()
+            val dateFormat = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault())
 
             // Verificar si la colección no está vacía
             if (!result.isEmpty) {
@@ -175,6 +185,12 @@ class MenuBarberoCitasFragment : Fragment() {
                         reservas.add(reserva)
                     }
                 }
+
+                // Ordenar la lista de reservas por fecha desde la más reciente a la más antigua
+                reservas.sortByDescending {
+                    dateFormat.parse(it.fecha)
+                }
+
                 binding.rvReservasAceptadas.layoutManager = LinearLayoutManager(requireContext())
                 binding.rvReservasAceptadas.adapter = ReservaItemAdapter(
                     reservas,
@@ -188,6 +204,7 @@ class MenuBarberoCitasFragment : Fragment() {
         db.collection("citas").get().addOnSuccessListener { result ->
             // Crear una lista para almacenar objetos Reserva
             val reservas = mutableListOf<ReservaItem>()
+            val dateFormat = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault())
 
             // Verificar si la colección no está vacía
             if (!result.isEmpty) {
@@ -210,6 +227,12 @@ class MenuBarberoCitasFragment : Fragment() {
                         reservas.add(reserva)
                     }
                 }
+
+                // Ordenar la lista de reservas por fecha desde la más reciente a la más antigua
+                reservas.sortByDescending {
+                    dateFormat.parse(it.fecha)
+                }
+
                 binding.rvReservasCanceladas.layoutManager = LinearLayoutManager(requireContext())
                 binding.rvReservasCanceladas.adapter = ReservaItemAdapter(
                     reservas,
@@ -224,6 +247,7 @@ class MenuBarberoCitasFragment : Fragment() {
         db.collection("citas").get().addOnSuccessListener { result ->
             // Crear una lista para almacenar objetos Reserva
             val reservas = mutableListOf<ReservaItem>()
+            val dateFormat = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault())
 
             // Verificar si la colección no está vacía
             if (!result.isEmpty) {
@@ -246,6 +270,12 @@ class MenuBarberoCitasFragment : Fragment() {
                         reservas.add(reserva)
                     }
                 }
+
+                // Ordenar la lista de reservas por fecha desde la más reciente a la más antigua
+                reservas.sortByDescending {
+                    dateFormat.parse(it.fecha)
+                }
+
                 binding.rvReservasTerminadas.layoutManager = LinearLayoutManager(requireContext())
                 binding.rvReservasTerminadas.adapter = ReservaItemAdapter(
                     reservas,

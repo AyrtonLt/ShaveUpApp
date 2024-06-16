@@ -1,6 +1,7 @@
 package com.unmsm.shaveupapp.ui.menu.cliente.visitingBarberoProfile
 
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import androidx.activity.enableEdgeToEdge
@@ -28,7 +29,7 @@ class BarberoProfileActivity : AppCompatActivity() {
 
     private var db = Firebase.firestore
     private lateinit var barberId: String
-
+    private lateinit var phoneNumber: String
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -57,9 +58,16 @@ class BarberoProfileActivity : AppCompatActivity() {
             startActivity(intent)
         }
         //boton comentarios
-        binding.btnComentarios.setOnClickListener{
+        binding.btnComentarios.setOnClickListener {
             val intent = Intent(this, ComentariosBarberoActivity::class.java)
             intent.putExtra("barberId", barberId)
+            startActivity(intent)
+        }
+        //Botón WhatsApp
+        binding.btnWhatsApp.setOnClickListener {
+            val intent = Intent(Intent(Intent.ACTION_VIEW))
+            intent.data = Uri.parse("https://api.whatsapp.com/send?phone=" + phoneNumber)
+            //(Intent.ACTION_VIEW, Uri.parse("https://api.whatsapp.com/send?phone="+phonestr+ "&text="+messagestr)); para mandar mensaje
             startActivity(intent)
         }
     }
@@ -75,6 +83,7 @@ class BarberoProfileActivity : AppCompatActivity() {
                     binding.tvBarberiaName.text = userData?.get("barberiaNombre").toString()
                     binding.tvLocation.text = userData?.get("direccion").toString()
                     binding.tvPhone.text = userData?.get("telefono").toString()
+                    phoneNumber = userData?.get("telefono").toString()
                     val imagelurl = userData?.get("urlProfilePhoto").toString()
                     // Procesa los datos del usuario según sea necesario
 
@@ -137,7 +146,7 @@ class BarberoProfileActivity : AppCompatActivity() {
                 }
                 binding.rvFoto.layoutManager = GridLayoutManager(this, 2)
                 binding.rvFoto.adapter = PhotoItemVisitAdapter(fotos,
-                    {photoItemVisit -> onClickPhoto(photoItemVisit)})
+                    { photoItemVisit -> onClickPhoto(photoItemVisit) })
             }
         }
     }
@@ -168,7 +177,7 @@ class BarberoProfileActivity : AppCompatActivity() {
                         comentarios.add(comentario)
                     }
                 }
-                if (comentarios.isEmpty()){
+                if (comentarios.isEmpty()) {
                     binding.btnComentarios.isEnabled = false
                 } else {
                     val puntuaciones = comentarios.map { comentario ->
@@ -190,7 +199,10 @@ class BarberoProfileActivity : AppCompatActivity() {
 
     private fun onClickPhoto(photoItemVisit: PhotoItemVisit) {
         val intent = Intent(this, FullPhotoActivity::class.java).apply {
-            putExtra("urlPhoto", photoItemVisit.urlPhoto) // Reemplaza "clave" por la clave que desees y "valor" por el valor que quieras enviar
+            putExtra(
+                "urlPhoto",
+                photoItemVisit.urlPhoto
+            ) // Reemplaza "clave" por la clave que desees y "valor" por el valor que quieras enviar
         }
         startActivity(intent)
     }

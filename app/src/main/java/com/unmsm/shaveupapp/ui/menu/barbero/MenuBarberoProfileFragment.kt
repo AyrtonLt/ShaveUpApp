@@ -81,6 +81,11 @@ class MenuBarberoProfileFragment : Fragment() {
         return binding.root
     }
 
+    override fun onResume() {
+        super.onResume()
+        getServiciosData()
+    }
+
     private fun getServiciosData() {
         db = FirebaseFirestore.getInstance()
         db.collection("servicio").get().addOnSuccessListener { result ->
@@ -95,7 +100,7 @@ class MenuBarberoProfileFragment : Fragment() {
                     if (document.getString("userBarbero") == userId.toString()) {
                         // Crear un nuevo objeto Barbero con los datos del documento
                         val servicio = ServicioItem(
-                            servicioId = "a", //FALTA EL ID SERVICIO
+                            servicioId = document.getString("servicioId") ?: "",
                             nombreServicio = document.getString("name") ?: "",
                             descripcionServicio = document.getString("desc") ?: "",
                             precioServicio = document.getString("price") ?: "",
@@ -106,7 +111,9 @@ class MenuBarberoProfileFragment : Fragment() {
                     }
                 }
                 binding.rvServicio.layoutManager = LinearLayoutManager(requireContext())
-                binding.rvServicio.adapter = ServicioItemAdapter(servicios)
+                binding.rvServicio.adapter = ServicioItemAdapter(
+                    servicios,
+                    { ServicioItem -> onClickServicio(ServicioItem) })
             }
         }
     }
@@ -169,13 +176,65 @@ class MenuBarberoProfileFragment : Fragment() {
         }
     }
 
+    private fun onClickServicio(servicioItem: ServicioItem) {
+        val builder = AlertDialog.Builder(requireContext())
+        builder.setTitle("Atención")
+        builder.setMessage("Selecciona la acción que desear realizar")
+        builder.setPositiveButton("Editar servicio") { _, _ ->
+            val intent = Intent(requireContext(), EditServicioActivity::class.java).apply {
+                putExtra(
+                    "servicioId",
+                    servicioItem.servicioId
+                ) // Reemplaza "clave" por la clave que desees y "valor" por el valor que quieras enviar
+            }
+            startActivity(intent)
+
+        }
+        builder.setNegativeButton("Eliminar") { dialog, which ->
+
+            db = FirebaseFirestore.getInstance()
+            db.collection("servicio").document(servicioItem.servicioId).delete()
+                .addOnSuccessListener {
+                    // Acción del botón 2
+                    Toast.makeText(
+                        requireContext(),
+                        "El servicio ha sido borrada con éxito",
+                        Toast.LENGTH_SHORT
+                    )
+                        .show()
+
+                    getServiciosData()
+
+                }.addOnFailureListener { e ->
+                Toast.makeText(
+                    requireContext(),
+                    "Error deleting servicio: ${e.message}",
+                    Toast.LENGTH_SHORT
+                ).show()
+
+            }
+
+
+        }
+
+        builder.setNeutralButton("Cancelar") { dialog, which ->
+            dialog.dismiss()
+        }
+
+        val dialog: AlertDialog = builder.create()
+        dialog.show()
+    }
+
     private fun onClickPhoto(photoItem: PhotoItem) {
         val builder = AlertDialog.Builder(requireContext())
         builder.setTitle("Atención")
         builder.setMessage("Selecciona la acción que desear realizar")
-        builder.setPositiveButton("Ver foto") {_, _ ->
+        builder.setPositiveButton("Ver foto") { _, _ ->
             val intent = Intent(requireContext(), FullPhotoActivity::class.java).apply {
-                putExtra("urlPhoto", photoItem.urlPhoto) // Reemplaza "clave" por la clave que desees y "valor" por el valor que quieras enviar
+                putExtra(
+                    "urlPhoto",
+                    photoItem.urlPhoto
+                ) // Reemplaza "clave" por la clave que desees y "valor" por el valor que quieras enviar
             }
             startActivity(intent)
 

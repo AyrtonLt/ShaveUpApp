@@ -15,6 +15,9 @@
         android:theme="@style/Theme.ShaveUpApp"
         tools:targetApi="31">
         <activity
+            android:name=".ui.menu.barbero.EditServicioActivity"
+            android:exported="false" />
+        <activity
             android:name=".ui.menu.barbero.FullPhotoActivity"
             android:exported="false" />
         <activity

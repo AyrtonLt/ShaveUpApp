@@ -26,9 +26,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="15dp"
+            android:isIndicator="true"
             android:numStars="5"
             android:stepSize="0.5"
-            android:isIndicator="true"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
@@ -40,9 +40,9 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="15dp"
             android:text="BienvenidoTextView"
+            android:textColor="@color/md_theme_onPrimaryFixedVariant"
             android:textSize="20dp"
             android:textStyle="bold"
-            android:textColor="@color/md_theme_onPrimaryFixedVariant"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/rbPuntuacion" />
@@ -111,11 +111,11 @@
             app:layout_constraintTop_toBottomOf="@+id/tvPhone" />
 
         <TextView
-            android:layout_marginTop="15dp"
             android:id="@id/tvSubtitle3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="30dp"
+            android:layout_marginTop="15dp"
             android:text="Fotos"
             android:textSize="20dp"
             app:layout_constraintStart_toStartOf="parent"
@@ -130,6 +130,19 @@
             android:layout_marginEnd="30dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tvSubtitle3" />
+
+        <Button
+            android:id="@+id/btnWhatsApp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="WhatsApp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.23"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/rvFoto"
+
+            />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

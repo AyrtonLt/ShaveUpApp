@@ -42,4 +42,9 @@
         android:name="com.unmsm.shaveupapp.ui.menu.cliente.config.ConfigPasswordFragment"
         android:label="fragment_config_password"
         tools:layout="@layout/fragment_config_password" />
+    <fragment
+        android:id="@+id/findNearbyBarberFragment"
+        android:name="com.unmsm.shaveupapp.ui.menu.cliente.FindNearbyBarberFragment"
+        android:label="fragment_find_nearby_barber"
+        tools:layout="@layout/fragment_find_nearby_barber" />
 </navigation>

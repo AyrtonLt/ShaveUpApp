@@ -6,6 +6,11 @@
         android:icon="@drawable/iconuser"
         android:title="Tú" />
     <item
+        android:id="@+id/findNearbyBarberFragment"
+        android:enabled="true"
+        android:icon="@drawable/iconlocation"
+        android:title="Mapa" />
+    <item
         android:id="@+id/menuClienteBusquedaFragment"
         android:enabled="true"
         android:icon="@drawable/iconsearch"
@@ -18,7 +23,6 @@
     <item
         android:id="@+id/menuClienteConfigFragment"
         android:enabled="true"
-
         android:icon="@drawable/iconconfig"
         android:title="Config" />
 </menu>

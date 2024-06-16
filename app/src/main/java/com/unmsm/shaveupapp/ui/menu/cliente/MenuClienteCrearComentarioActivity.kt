@@ -93,7 +93,7 @@ class MenuClienteCrearComentarioActivity : AppCompatActivity() {
                         }
                         .addOnFailureListener { e ->
                             // Fallo
-                            println("Error al escribir el documento: $e")
+                             println("Error al escribir el documento: $e")
                         }
                     servicioComentado(reservaId)
                 }
