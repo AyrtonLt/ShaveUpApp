@@ -78,6 +78,10 @@ class MenuBarberoProfileFragment : Fragment() {
             chooseImage()
         }
 
+        binding.btnUploadProducto.setOnClickListener {
+            findNavController().navigate(R.id.action_menuBarberoProfileFragment_to_createProductoFragment)
+        }
+
         return binding.root
     }
 
@@ -206,13 +210,13 @@ class MenuBarberoProfileFragment : Fragment() {
                     getServiciosData()
 
                 }.addOnFailureListener { e ->
-                Toast.makeText(
-                    requireContext(),
-                    "Error deleting servicio: ${e.message}",
-                    Toast.LENGTH_SHORT
-                ).show()
+                    Toast.makeText(
+                        requireContext(),
+                        "Error deleting servicio: ${e.message}",
+                        Toast.LENGTH_SHORT
+                    ).show()
 
-            }
+                }
 
 
         }
