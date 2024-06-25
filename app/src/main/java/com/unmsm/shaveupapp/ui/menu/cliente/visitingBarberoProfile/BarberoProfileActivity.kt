@@ -182,7 +182,9 @@ class BarberoProfileActivity : AppCompatActivity() {
                             barberoId = document.getString("barberoId") ?: "",
                             comentario = document.getString("comentario") ?: "",
                             servicios = document.getString("servicios") ?: "",
-                            puntuacion = document.getString("puntuacion") ?: ""
+                            puntuacion = document.getString("puntuacion") ?: "",
+                            photoUrl = document.getString("photoUrl") ?: ""
+
                         )
                         // Agregar el objeto Barbero a la lista
                         comentarios.add(comentario)

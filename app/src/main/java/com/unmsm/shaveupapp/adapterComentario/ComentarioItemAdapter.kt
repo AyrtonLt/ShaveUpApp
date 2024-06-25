@@ -5,7 +5,10 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.unmsm.shaveupapp.R
 
-class ComentarioItemAdapter(private val comentarioList: List<ComentarioItem>, private val onClickListener: (ComentarioItem) -> Unit):
+class ComentarioItemAdapter(
+    private val comentarioList: List<ComentarioItem>,
+    private val onClickListener: (ComentarioItem) -> Unit
+) :
     RecyclerView.Adapter<ComentarioItemViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ComentarioItemViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)

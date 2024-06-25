@@ -8,4 +8,5 @@ data class ComentarioItem(
     val comentario: String,
     val servicios: String,
     val puntuacion: String,
+    val photoUrl: String
 )

@@ -54,6 +54,17 @@
         app:layout_constraintTop_toBottomOf="@+id/tilComentario" />
 
     <Button
+        android:id="@+id/btnChooseImage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="Elegir foto de reseña"
+        app:cornerRadius="10dp"
+        app:icon="@drawable/ic_upload_file"
+        app:layout_constraintStart_toStartOf="@+id/rbPuntuacion"
+        app:layout_constraintTop_toBottomOf="@+id/rbPuntuacion" />
+
+    <Button
         android:id="@+id/btnCreateComentario"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -62,6 +73,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/rbPuntuacion" />
+        app:layout_constraintTop_toBottomOf="@+id/btnChooseImage" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

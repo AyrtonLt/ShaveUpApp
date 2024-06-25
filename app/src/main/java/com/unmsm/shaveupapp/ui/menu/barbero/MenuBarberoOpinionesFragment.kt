@@ -1,10 +1,13 @@
 package com.unmsm.shaveupapp.ui.menu.barbero
 
+import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
@@ -57,7 +60,8 @@ class MenuBarberoOpinionesFragment : Fragment() {
                             barberoId = document.getString("barberoId") ?: "",
                             comentario = document.getString("comentario") ?: "",
                             servicios = document.getString("servicios") ?: "",
-                            puntuacion = document.getString("puntuacion") ?: ""
+                            puntuacion = document.getString("puntuacion") ?: "",
+                            photoUrl = document.getString("photoUrl") ?: ""
                         )
                         // Agregar el objeto Barbero a la lista
                         comentarios.add(comentario)
@@ -71,7 +75,26 @@ class MenuBarberoOpinionesFragment : Fragment() {
         }
     }
 
-    private fun onItemSelected(comentarioItem: ComentarioItem){
+    private fun onItemSelected(comentarioItem: ComentarioItem) {
+        Log.i("000000000000000000000000000000000000000000000000", comentarioItem.photoUrl)
+
+
+        if (comentarioItem.photoUrl.isEmpty()) {
+            Toast.makeText(
+                requireContext(),
+                "Este comentario no posee foto",
+                Toast.LENGTH_LONG
+            ).show()
+        } else {
+            val intent = Intent(requireContext(), FullPhotoActivity::class.java).apply {
+                putExtra(
+                    "urlPhoto",
+                    comentarioItem.photoUrl
+                ) // Reemplaza "clave" por la clave que desees y "valor" por el valor que quieras enviar
+            }
+            startActivity(intent)
+        }
+
 
     }
 

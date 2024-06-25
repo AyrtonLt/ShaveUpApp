@@ -13,6 +13,10 @@ class ComentarioItemViewHolder(view: View) : RecyclerView.ViewHolder(view){
         binding.tvComentario.text = comentarioItem.comentario
         binding.tvServicio.text = comentarioItem.servicios
         binding.tvPuntuacion.text = paintStars(comentarioItem.puntuacion)
+
+        itemView.setOnClickListener {
+            onClickListener(comentarioItem)
+        }
     }
 
     fun paintStars(rating: String): String {
