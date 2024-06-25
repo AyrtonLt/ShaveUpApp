@@ -31,6 +31,8 @@ class BarberoProfileActivity : AppCompatActivity() {
     private lateinit var barberId: String
     private lateinit var phoneNumber: String
 
+    private lateinit var location: String
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -70,6 +72,12 @@ class BarberoProfileActivity : AppCompatActivity() {
             //(Intent.ACTION_VIEW, Uri.parse("https://api.whatsapp.com/send?phone="+phonestr+ "&text="+messagestr)); para mandar mensaje
             startActivity(intent)
         }
+        //Botón Location
+        binding.btnGeo.setOnClickListener {
+            val uri = Uri.parse("geo:0,0?q=$location")
+            val intent = Intent(Intent.ACTION_VIEW, uri)
+            startActivity(intent)
+        }
     }
 
     private fun getBarbero() {
@@ -87,6 +95,9 @@ class BarberoProfileActivity : AppCompatActivity() {
                     val imagelurl = userData?.get("urlProfilePhoto").toString()
                     // Procesa los datos del usuario según sea necesario
 
+                    val direc = userData?.get("direccion").toString()
+                    val district = userData?.get("distrito").toString()
+                    location = "$direc, $district"
 
                     Glide.with(this)
                         .load(imagelurl)

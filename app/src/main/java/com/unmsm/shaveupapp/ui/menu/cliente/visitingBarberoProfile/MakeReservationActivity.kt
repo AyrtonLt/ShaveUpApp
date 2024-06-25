@@ -92,13 +92,24 @@ class MakeReservationActivity : AppCompatActivity() {
                 val fecha = binding.tietDate.text.toString()
                 val hora = binding.tietTime.text.toString()
 
+                val horabien = esFechaHoraActual(fecha,hora)
+                Log.i("0000000000000000000","La hora esta bien $horabien")
 
-                if (fecha.isEmpty() || hora.isEmpty() || serviciosSeleccionados.isEmpty()) {
-                    Toast.makeText(
-                        this,
-                        "Existen campos vacíos",
-                        Toast.LENGTH_LONG
-                    ).show()
+                if (fecha.isEmpty() || hora.isEmpty() || serviciosSeleccionados.isEmpty() || !horabien) {
+                    if(!horabien) {
+                        Toast.makeText(
+                            this,
+                            "Esta hora no está permitida",
+                            Toast.LENGTH_LONG
+                        ).show()
+                    } else {
+                        Toast.makeText(
+                            this,
+                            "Existen campos vacíos",
+                            Toast.LENGTH_LONG
+                        ).show()
+                    }
+
                 } else {
 
                     // Crear una referencia a la colección a usar
@@ -245,6 +256,29 @@ class MakeReservationActivity : AppCompatActivity() {
         }
         return null
     }
+    fun esFechaHoraActual(fecha: String, hora: String): Boolean {
+        // Obtener el Calendar actual
+        val calendarioActual = Calendar.getInstance()
+
+        try {
+            // Parsear la fecha y hora dadas
+            val formatoFechaHora = "dd/MM/yyyy HH:mm"
+            val sdf = java.text.SimpleDateFormat(formatoFechaHora)
+            val fechaHoraDada = sdf.parse("$fecha $hora")
+
+            // Convertir la fecha y hora dadas a Calendar
+            val calendarioDado = Calendar.getInstance()
+            calendarioDado.time = fechaHoraDada
+
+            // Comparar la fecha y hora dadas con la actual
+            return !calendarioDado.before(calendarioActual)
+        } catch (e: Exception) {
+            // Manejar cualquier error de formato de fecha o hora
+            println("Error al procesar la fecha y hora: ${e.message}")
+            return false
+        }
+    }
+
 
 
 }
