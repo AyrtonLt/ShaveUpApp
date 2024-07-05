@@ -47,4 +47,9 @@
         android:name="com.unmsm.shaveupapp.ui.menu.cliente.FindNearbyBarberFragment"
         android:label="fragment_find_nearby_barber"
         tools:layout="@layout/fragment_find_nearby_barber" />
+    <fragment
+        android:id="@+id/menuClientePedidosFragment"
+        android:name="com.unmsm.shaveupapp.ui.menu.cliente.MenuClientePedidosFragment"
+        android:label="fragment_menu_cliente_pedidos"
+        tools:layout="@layout/fragment_menu_cliente_pedidos" />
 </navigation>

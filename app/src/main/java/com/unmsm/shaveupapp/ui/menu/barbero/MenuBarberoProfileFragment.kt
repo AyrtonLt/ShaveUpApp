@@ -23,14 +23,14 @@ import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
 import com.unmsm.shaveupapp.R
-import com.unmsm.shaveupapp.adapter.BarberoItem
-import com.unmsm.shaveupapp.adapter.BarberoItemAdapter
 import com.unmsm.shaveupapp.adapterPhoto.PhotoItem
 import com.unmsm.shaveupapp.adapterPhoto.PhotoItemAdapter
-import com.unmsm.shaveupapp.adapterReservas.ReservaItem
+import com.unmsm.shaveupapp.adapterProducto.ProductoItem
+import com.unmsm.shaveupapp.adapterProducto.ProductoItemAdapter
 import com.unmsm.shaveupapp.adapterServicios.ServicioItem
 import com.unmsm.shaveupapp.adapterServicios.ServicioItemAdapter
 import com.unmsm.shaveupapp.databinding.FragmentMenuBarberoProfileBinding
+import com.unmsm.shaveupapp.ui.menu.barbero.createProducto.EditProductoActivity
 import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
@@ -88,6 +88,7 @@ class MenuBarberoProfileFragment : Fragment() {
     override fun onResume() {
         super.onResume()
         getServiciosData()
+        getProductos()
     }
 
     private fun getServiciosData() {
@@ -180,6 +181,37 @@ class MenuBarberoProfileFragment : Fragment() {
         }
     }
 
+    private fun getProductos() {
+        db = FirebaseFirestore.getInstance()
+        db.collection("productos").get().addOnSuccessListener { result ->
+            // Crear una lista para almacenar objetos Foto
+            val productos = mutableListOf<ProductoItem>()
+
+            // Verificar si la colección no está vacía
+            if (!result.isEmpty) {
+                // Iterar sobre los documentos obtenidos
+                for (document in result.documents) {
+                    val userId = FirebaseAuth.getInstance().currentUser!!.uid
+                    if (document.getString("barberoId") == userId) {
+                        val producto = ProductoItem(
+                            productoId = document.getString("productoId") ?: "",
+                            barberoId = document.getString("barberoId") ?: "",
+                            productoName = document.getString("productoName") ?: "",
+                            productoInfo = document.getString("productoInfo") ?: "",
+                            productoPrice = document.getString("productoPrice") ?: "",
+                            productoPhoto = document.getString("productoPhoto") ?: "",
+                            productoMaxQuantity = document.getString("productoMaxQuantity") ?: "",
+                        )
+                        productos.add(producto)
+                    }
+                }
+                binding.rvProducto.layoutManager = GridLayoutManager(requireContext(), 2)
+                binding.rvProducto.adapter = ProductoItemAdapter(productos,
+                    { productoItem -> onClickProducto(productoItem) })
+            }
+        }
+    }
+
     private fun onClickServicio(servicioItem: ServicioItem) {
         val builder = AlertDialog.Builder(requireContext())
         builder.setTitle("Atención")
@@ -265,6 +297,55 @@ class MenuBarberoProfileFragment : Fragment() {
                 ).show()
 
             }
+
+
+        }
+
+        builder.setNeutralButton("Cancelar") { dialog, which ->
+            dialog.dismiss()
+        }
+
+        val dialog: AlertDialog = builder.create()
+        dialog.show()
+    }
+
+    private fun onClickProducto(productoItem: ProductoItem) {
+        val builder = AlertDialog.Builder(requireContext())
+        builder.setTitle("Atención")
+        builder.setMessage("Selecciona la acción que desear realizar")
+        builder.setPositiveButton("Editar información del producto") { _, _ ->
+            val intent = Intent(requireContext(), EditProductoActivity::class.java).apply {
+                putExtra(
+                    "productoId",
+                    productoItem.productoId
+                ) // Reemplaza "clave" por la clave que desees y "valor" por el valor que quieras enviar
+            }
+            startActivity(intent)
+
+        }
+        builder.setNegativeButton("Eliminar") { dialog, which ->
+
+            db = FirebaseFirestore.getInstance()
+            db.collection("productos").document(productoItem.productoId).delete()
+                .addOnSuccessListener {
+                    // Acción del botón 2
+                    Toast.makeText(
+                        requireContext(),
+                        "El producto ha sido borrada con éxito",
+                        Toast.LENGTH_SHORT
+                    )
+                        .show()
+
+                    getProductos()
+
+                }.addOnFailureListener { e ->
+                    Toast.makeText(
+                        requireContext(),
+                        "Error deleting producto: ${e.message}",
+                        Toast.LENGTH_SHORT
+                    ).show()
+
+                }
 
 
         }

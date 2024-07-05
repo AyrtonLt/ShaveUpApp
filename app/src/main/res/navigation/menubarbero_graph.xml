@@ -56,7 +56,12 @@
         tools:layout="@layout/fragment_create_servicio" />
     <fragment
         android:id="@+id/createProductoFragment"
-        android:name="com.unmsm.shaveupapp.ui.menu.barbero.createBarbero.CreateProductoFragment"
+        android:name="com.unmsm.shaveupapp.ui.menu.barbero.createProducto.CreateProductoFragment"
         android:label="fragment_create_producto"
         tools:layout="@layout/fragment_create_producto" />
+    <fragment
+        android:id="@+id/pedidosFragment2"
+        android:name="com.unmsm.shaveupapp.ui.menu.barbero.PedidosFragment"
+        android:label="fragment_pedidos"
+        tools:layout="@layout/fragment_pedidos" />
 </navigation>

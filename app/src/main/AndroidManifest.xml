@@ -15,6 +15,12 @@
         android:theme="@style/Theme.ShaveUpApp"
         tools:targetApi="31">
         <activity
+            android:name=".ui.menu.cliente.visitingBarberoProfile.BuyProductActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.menu.barbero.createProducto.EditProductoActivity"
+            android:exported="false" />
+        <activity
             android:name=".ui.menu.barbero.EditServicioActivity"
             android:exported="false" />
         <activity

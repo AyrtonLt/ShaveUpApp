@@ -19,6 +19,8 @@ import com.unmsm.shaveupapp.adapterComentario.ComentarioItem
 import com.unmsm.shaveupapp.adapterComentario.ComentarioItemAdapter
 import com.unmsm.shaveupapp.adapterPhotoVisit.PhotoItemVisit
 import com.unmsm.shaveupapp.adapterPhotoVisit.PhotoItemVisitAdapter
+import com.unmsm.shaveupapp.adapterProductoVisit.ProductoItemVisit
+import com.unmsm.shaveupapp.adapterProductoVisit.ProductoItemVisitAdapter
 import com.unmsm.shaveupapp.databinding.ActivityBarberoProfileBinding
 import com.unmsm.shaveupapp.ui.login.LoginActivity
 import com.unmsm.shaveupapp.ui.menu.barbero.FullPhotoActivity
@@ -53,6 +55,7 @@ class BarberoProfileActivity : AppCompatActivity() {
         getServiciosData()
         getPhotos()
         getComentarios()
+        getProductos()
 
         binding.btnReservar.setOnClickListener {
             val intent = Intent(this, MakeReservationActivity::class.java)
@@ -162,6 +165,36 @@ class BarberoProfileActivity : AppCompatActivity() {
         }
     }
 
+    private fun getProductos() {
+        db = FirebaseFirestore.getInstance()
+        db.collection("productos").get().addOnSuccessListener { result ->
+            // Crear una lista para almacenar objetos Foto
+            val productos = mutableListOf<ProductoItemVisit>()
+
+            // Verificar si la colección no está vacía
+            if (!result.isEmpty) {
+                // Iterar sobre los documentos obtenidos
+                for (document in result.documents) {
+                    if (document.getString("barberoId") == barberId) {
+                        val producto = ProductoItemVisit(
+                            productoId = document.getString("productoId") ?: "",
+                            barberoId = document.getString("barberoId") ?: "",
+                            productoName = document.getString("productoName") ?: "",
+                            productoInfo = document.getString("productoInfo") ?: "",
+                            productoPrice = document.getString("productoPrice") ?: "",
+                            productoPhoto = document.getString("productoPhoto") ?: "",
+                            productoMaxQuantity = document.getString("productoMaxQuantity") ?: ""
+                        )
+                        productos.add(producto)
+                    }
+                }
+                binding.rvProducto.layoutManager = GridLayoutManager(this, 2)
+                binding.rvProducto.adapter = ProductoItemVisitAdapter(productos,
+                    { productoItemVisit -> onClickProducto(productoItemVisit) })
+            }
+        }
+    }
+
     private fun getComentarios() {
         db = FirebaseFirestore.getInstance()
         db.collection("comentarios").get().addOnSuccessListener { result ->
@@ -216,6 +249,20 @@ class BarberoProfileActivity : AppCompatActivity() {
                 "urlPhoto",
                 photoItemVisit.urlPhoto
             ) // Reemplaza "clave" por la clave que desees y "valor" por el valor que quieras enviar
+        }
+        startActivity(intent)
+    }
+
+    private fun onClickProducto(productoItemVisit: ProductoItemVisit) {
+        val intent = Intent(this, BuyProductActivity::class.java).apply {
+            putExtra(
+                "productoId",
+                productoItemVisit.productoId
+            )
+            putExtra(
+                "barberId",
+                barberId
+            )// Reemplaza "clave" por la clave que desees y "valor" por el valor que quieras enviar
         }
         startActivity(intent)
     }

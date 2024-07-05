@@ -6,6 +6,11 @@
         android:icon="@drawable/iconuser"
         android:title="Tú" />
     <item
+        android:id="@+id/pedidosFragment2"
+        android:enabled="true"
+        android:icon="@drawable/iconlocation"
+        android:title="Pedidos" />
+    <item
         android:id="@+id/menuBarberoCitasFragment"
         android:enabled="true"
         android:icon="@drawable/iconcita"

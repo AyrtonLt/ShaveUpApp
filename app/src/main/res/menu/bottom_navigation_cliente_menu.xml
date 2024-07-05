@@ -6,10 +6,10 @@
         android:icon="@drawable/iconuser"
         android:title="Tú" />
     <item
-        android:id="@+id/findNearbyBarberFragment"
+        android:id="@+id/menuClientePedidosFragment"
         android:enabled="true"
         android:icon="@drawable/iconlocation"
-        android:title="Mapa" />
+        android:title="Pedidos" />
     <item
         android:id="@+id/menuClienteBusquedaFragment"
         android:enabled="true"
