@@ -13,6 +13,7 @@ import android.widget.Toast
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
@@ -21,10 +22,13 @@ import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
 import com.unmsm.shaveupapp.R
+import com.unmsm.shaveupapp.adapter.BarberoItem
+import com.unmsm.shaveupapp.adapter.BarberoItemAdapter
 import com.unmsm.shaveupapp.adapterPhoto.PhotoItem
 import com.unmsm.shaveupapp.adapterPhoto.PhotoItemAdapter
 import com.unmsm.shaveupapp.databinding.FragmentMenuClienteProfileBinding
 import com.unmsm.shaveupapp.ui.menu.barbero.FullPhotoActivity
+import com.unmsm.shaveupapp.ui.menu.cliente.visitingBarberoProfile.BarberoProfileActivity
 import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
@@ -51,6 +55,7 @@ class MenuClienteProfileFragment : Fragment() {
 
         getUserData()
         getPhotos()
+        getFavBarber()
 
         storage = FirebaseStorage.getInstance()
         storageReference = storage.reference
@@ -70,12 +75,51 @@ class MenuClienteProfileFragment : Fragment() {
         return binding.root
     }
 
+    override fun onStart() {
+        super.onStart()
+        getUserData()
+        getPhotos()
+        getFavBarber()
+    }
+
     private fun chooseImage() {
         val intent = Intent()
         intent.type = "image/*"
         intent.action = Intent.ACTION_GET_CONTENT
         val chooser = Intent.createChooser(intent, "Select Picture")
         pickImageLauncher.launch(chooser)
+    }
+
+    private fun getFavBarber() {
+        db = FirebaseFirestore.getInstance()
+        val userId = FirebaseAuth.getInstance().currentUser!!.uid
+        db.collection("like").whereEqualTo("clienteId", userId).get()
+            .addOnSuccessListener { result ->
+                val barberos = mutableListOf<BarberoItem>()
+
+                if (!result.isEmpty) {
+                    for (document in result.documents) {
+                        val barbero = BarberoItem(
+                            userId = document.getString("barberId") ?: "",
+                            urlPhoto = document.getString("urlPhotoB") ?: "",
+                            barberiaName = document.getString("barberiaName") ?: "",
+                            barberoFullName = document.getString("firstName") ?: "",
+                            location = document.getString("location") ?: ""
+                        )
+                        barberos.add(barbero)
+                    }
+                    binding.rvBarberoFav.layoutManager = LinearLayoutManager(requireContext())
+                    binding.rvBarberoFav.adapter = BarberoItemAdapter(barberos,
+                        { barberoItem -> onBarberoFav(barberoItem) })
+                }
+            }
+    }
+
+    private fun onBarberoFav(barberoItem: BarberoItem) {
+        val intent = Intent(requireContext(), BarberoProfileActivity::class.java)
+        intent.putExtra("barberoId", barberoItem.barberoFullName)
+        intent.putExtra("userId", barberoItem.userId)
+        startActivity(intent)
     }
 
     private fun getUserData() {
@@ -133,9 +177,12 @@ class MenuClienteProfileFragment : Fragment() {
         val builder = AlertDialog.Builder(requireContext())
         builder.setTitle("Atención")
         builder.setMessage("Selecciona la acción que desear realizar")
-        builder.setPositiveButton("Ver foto") {_, _ ->
+        builder.setPositiveButton("Ver foto") { _, _ ->
             val intent = Intent(requireContext(), FullPhotoActivity::class.java).apply {
-                putExtra("urlPhoto", photoItem.urlPhoto) // Reemplaza "clave" por la clave que desees y "valor" por el valor que quieras enviar
+                putExtra(
+                    "urlPhoto",
+                    photoItem.urlPhoto
+                ) // Reemplaza "clave" por la clave que desees y "valor" por el valor que quieras enviar
             }
             startActivity(intent)
 

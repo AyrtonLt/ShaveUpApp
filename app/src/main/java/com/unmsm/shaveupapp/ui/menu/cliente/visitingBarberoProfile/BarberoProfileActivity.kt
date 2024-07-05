@@ -4,6 +4,7 @@ import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.util.Log
+import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
@@ -11,6 +12,7 @@ import androidx.core.view.WindowInsetsCompat
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
@@ -27,6 +29,10 @@ import com.unmsm.shaveupapp.ui.menu.barbero.FullPhotoActivity
 
 class BarberoProfileActivity : AppCompatActivity() {
 
+    companion object {
+        lateinit var auth: FirebaseAuth
+    }
+
     private lateinit var binding: ActivityBarberoProfileBinding
 
     private var db = Firebase.firestore
@@ -34,7 +40,9 @@ class BarberoProfileActivity : AppCompatActivity() {
     private lateinit var phoneNumber: String
 
     private lateinit var location: String
-
+    private lateinit var urlPhotoB: String
+    private lateinit var barberiaName: String
+    private lateinit var firstName: String
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -46,11 +54,15 @@ class BarberoProfileActivity : AppCompatActivity() {
             insets
         }
 
+        auth = FirebaseAuth.getInstance()
+
         val bundle: Bundle? = intent.extras
         val nmaeBarbero = bundle!!.getString("barberoId")
+        firstName = nmaeBarbero.toString()
         barberId = bundle.getString("userId").toString()
         LoginActivity.DatosCompartidos.guardarDatoBarberoId(barberId)
         binding.tvNombreBarvero.text = nmaeBarbero
+        getLike()
         getBarbero()
         getServiciosData()
         getPhotos()
@@ -81,6 +93,77 @@ class BarberoProfileActivity : AppCompatActivity() {
             val intent = Intent(Intent.ACTION_VIEW, uri)
             startActivity(intent)
         }
+        //BOtón Like
+        binding.btnLike.setOnClickListener {
+            val textBtn = binding.btnLike.text.toString()
+            val userId = auth.currentUser?.uid.toString()
+
+
+            if (textBtn == "Me gusta") {
+
+                // Crear una referencia a la colección a usar
+                val collectionRef = db.collection("like")
+
+                // Crear un nuevo documento con un ID generado automáticamente
+                val newDocumentRef = collectionRef.document()
+
+                // Obtener el ID generado automáticamente
+                val documentId = newDocumentRef.id
+
+                val like = mutableMapOf<String, Any>()
+                like["documentId"] = documentId
+                like["clienteId"] = userId
+                like["barberId"] = barberId
+                like["urlPhotoB"] = urlPhotoB
+                like["barberiaName"] = barberiaName
+                like["firstName"] = firstName
+                like["location"] = location
+
+                // Establecer los datos en el documento
+                newDocumentRef.set(like)
+                    .addOnSuccessListener {
+                        // Exito
+                        Toast.makeText(
+                            this,
+                            "Barbero agregado a Favoritos",
+                            Toast.LENGTH_LONG
+                        ).show()
+                        binding.btnLike.setText("No me gusta")
+                    }
+                    .addOnFailureListener { e ->
+                        // Fallo
+                        println("Error al escribir el documento: $e")
+                    }
+
+
+            } else if (textBtn == "No me gusta") {
+                // Crear una referencia a la colección a usar
+                val collectionRef = db.collection("like")
+
+                collectionRef.whereEqualTo("barberId", barberId).get()
+                    .addOnSuccessListener { documents ->
+                        for (document in documents) {
+                            // Eliminar cada documento que coincida
+                            document.reference.delete()
+                                .addOnSuccessListener {
+                                    Toast.makeText(
+                                        this,
+                                        "Barbero eliminado de Favoritos",
+                                        Toast.LENGTH_LONG
+                                    ).show()
+                                    binding.btnLike.setText("Me gusta")
+                                }
+                                .addOnFailureListener { e ->
+                                    println("Error al eliminar el documento: $e")
+                                }
+                        }
+                    }
+                    .addOnFailureListener { e ->
+                        println("Error al buscar documentos: $e")
+                    }
+            }
+
+        }
     }
 
     private fun getBarbero() {
@@ -101,6 +184,9 @@ class BarberoProfileActivity : AppCompatActivity() {
                     val direc = userData?.get("direccion").toString()
                     val district = userData?.get("distrito").toString()
                     location = "$direc, $district"
+                    urlPhotoB = imagelurl
+                    barberiaName = userData?.get("barberiaNombre").toString()
+
 
                     Glide.with(this)
                         .load(imagelurl)
@@ -114,6 +200,28 @@ class BarberoProfileActivity : AppCompatActivity() {
             .addOnFailureListener { exception ->
                 // Maneja el error
             }
+    }
+
+    private fun getLike() {
+        db = FirebaseFirestore.getInstance()
+        db.collection("like").get().addOnSuccessListener { result ->
+            if (!result.isEmpty) {
+                var existeLike = false
+                for (document in result.documents) {
+                    if (document.getString("barberId") == barberId.toString()) {
+                        existeLike = true
+                        Log.i("00000000", "SI TIENE")
+                    } else {
+                        Log.i("00000000", "NOOO TIENE")
+                    }
+                }
+                if (existeLike) {
+                    binding.btnLike.setText("No me gusta")
+                } else {
+                    binding.btnLike.setText("Me gusta")
+                }
+            }
+        }
     }
 
     private fun getServiciosData() {

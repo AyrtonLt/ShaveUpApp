@@ -40,6 +40,31 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView1" />
 
+
+
+    <TextView
+        android:id="@id/tvSubtitle4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="20dp"
+        android:text="Favorito(s)"
+        android:textSize="20dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvName" />
+
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvBarberoFav"
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginEnd="30dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvSubtitle4" />
+
+
     <TextView
         android:id="@id/tvSubtitle3"
         android:layout_width="wrap_content"
@@ -49,7 +74,8 @@
         android:text="Fotos"
         android:textSize="20dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvName" />
+        app:layout_constraintTop_toBottomOf="@+id/rvBarberoFav" />
+
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvFoto"
@@ -71,5 +97,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/rvFoto" />
+
+
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
