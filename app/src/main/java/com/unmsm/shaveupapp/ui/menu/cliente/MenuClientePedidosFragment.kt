@@ -53,6 +53,7 @@ class MenuClientePedidosFragment : Fragment() {
         db = FirebaseFirestore.getInstance()
         db.collection("pedidos").get().addOnSuccessListener { result ->
             val pedidos = mutableListOf<PedidoItem>()
+            val dateFormat = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault())
 
             if (!result.isEmpty) {
                 for (document in result.documents) {
@@ -74,6 +75,10 @@ class MenuClientePedidosFragment : Fragment() {
                     }
                 }
 
+                pedidos.sortByDescending {
+                    dateFormat.parse(it.fecha)
+                }
+
                 binding.rvPedidosSolicitados.layoutManager = LinearLayoutManager(requireContext())
                 binding.rvPedidosSolicitados.adapter = PedidoItemAdapter(
                     pedidos,
@@ -87,6 +92,7 @@ class MenuClientePedidosFragment : Fragment() {
         db = FirebaseFirestore.getInstance()
         db.collection("pedidos").get().addOnSuccessListener { result ->
             val pedidos = mutableListOf<PedidoItem>()
+            val dateFormat = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault())
 
             if (!result.isEmpty) {
                 for (document in result.documents) {
@@ -108,6 +114,10 @@ class MenuClientePedidosFragment : Fragment() {
                     }
                 }
 
+                pedidos.sortByDescending {
+                    dateFormat.parse(it.fecha)
+                }
+
                 binding.rvPedidosAceptados.layoutManager = LinearLayoutManager(requireContext())
                 binding.rvPedidosAceptados.adapter = PedidoItemAdapter(
                     pedidos,
@@ -121,6 +131,7 @@ class MenuClientePedidosFragment : Fragment() {
         db = FirebaseFirestore.getInstance()
         db.collection("pedidos").get().addOnSuccessListener { result ->
             val pedidos = mutableListOf<PedidoItem>()
+            val dateFormat = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault())
 
             if (!result.isEmpty) {
                 for (document in result.documents) {
@@ -142,6 +153,10 @@ class MenuClientePedidosFragment : Fragment() {
                     }
                 }
 
+                pedidos.sortByDescending {
+                    dateFormat.parse(it.fecha)
+                }
+
                 binding.rvPedidosCancelados.layoutManager = LinearLayoutManager(requireContext())
                 binding.rvPedidosCancelados.adapter = PedidoItemAdapter(
                     pedidos,
@@ -155,6 +170,7 @@ class MenuClientePedidosFragment : Fragment() {
         db = FirebaseFirestore.getInstance()
         db.collection("pedidos").get().addOnSuccessListener { result ->
             val pedidos = mutableListOf<PedidoItem>()
+            val dateFormat = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault())
 
             if (!result.isEmpty) {
                 for (document in result.documents) {
@@ -176,6 +192,10 @@ class MenuClientePedidosFragment : Fragment() {
                     }
                 }
 
+                pedidos.sortByDescending {
+                    dateFormat.parse(it.fecha)
+                }
+
                 binding.rvPedidoListoEntregas.layoutManager = LinearLayoutManager(requireContext())
                 binding.rvPedidoListoEntregas.adapter = PedidoItemAdapter(
                     pedidos,
@@ -190,6 +210,7 @@ class MenuClientePedidosFragment : Fragment() {
         db = FirebaseFirestore.getInstance()
         db.collection("pedidos").get().addOnSuccessListener { result ->
             val pedidos = mutableListOf<PedidoItem>()
+            val dateFormat = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault())
 
             if (!result.isEmpty) {
                 for (document in result.documents) {
@@ -209,6 +230,10 @@ class MenuClientePedidosFragment : Fragment() {
 
                         pedidos.add(pedido)
                     }
+                }
+
+                pedidos.sortByDescending {
+                    dateFormat.parse(it.fecha)
                 }
 
                 binding.rvPedidoEntregados.layoutManager = LinearLayoutManager(requireContext())
