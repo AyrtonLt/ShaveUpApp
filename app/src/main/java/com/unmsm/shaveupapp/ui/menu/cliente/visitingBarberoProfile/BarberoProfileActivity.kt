@@ -10,7 +10,6 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
@@ -18,7 +17,6 @@ import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import com.unmsm.shaveupapp.R
 import com.unmsm.shaveupapp.adapterComentario.ComentarioItem
-import com.unmsm.shaveupapp.adapterComentario.ComentarioItemAdapter
 import com.unmsm.shaveupapp.adapterPhotoVisit.PhotoItemVisit
 import com.unmsm.shaveupapp.adapterPhotoVisit.PhotoItemVisitAdapter
 import com.unmsm.shaveupapp.adapterProductoVisit.ProductoItemVisit
@@ -324,7 +322,8 @@ class BarberoProfileActivity : AppCompatActivity() {
                             comentario = document.getString("comentario") ?: "",
                             servicios = document.getString("servicios") ?: "",
                             puntuacion = document.getString("puntuacion") ?: "",
-                            photoUrl = document.getString("photoUrl") ?: ""
+                            photoUrl = document.getString("photoUrl") ?: "",
+                            fecha = document.getString("fecha") ?: ""
 
                         )
                         // Agregar el objeto Barbero a la lista

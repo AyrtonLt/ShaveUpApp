@@ -19,6 +19,12 @@ import com.unmsm.shaveupapp.R
 import com.unmsm.shaveupapp.adapterComentario.ComentarioItem
 import com.unmsm.shaveupapp.databinding.ActivityMenuClienteCrearComentarioBinding
 import com.unmsm.shaveupapp.ui.login.LoginActivity
+import java.text.SimpleDateFormat
+import java.util.Date
+import java.util.Locale
+
+
+
 
 class MenuClienteCrearComentarioActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMenuClienteCrearComentarioBinding
@@ -113,7 +119,8 @@ class MenuClienteCrearComentarioActivity : AppCompatActivity() {
                                         comentarioText.toString(),
                                         servicios,
                                         puntuacion,
-                                        comentarioPhotoUrl)
+                                        comentarioPhotoUrl,
+                                        getCurrentDate())
                                     // Log.i("0000000000000","${comentario}")
 
 
@@ -153,7 +160,8 @@ class MenuClienteCrearComentarioActivity : AppCompatActivity() {
                             comentarioText.toString(),
                             servicios,
                             puntuacion,
-                            "")
+                            "",
+                            getCurrentDate())
                         // Log.i("0000000000000","${comentario}")
 
 
@@ -202,6 +210,13 @@ class MenuClienteCrearComentarioActivity : AppCompatActivity() {
         intent.action = Intent.ACTION_GET_CONTENT
         val chooser = Intent.createChooser(intent, "Select Picture")
         pickImageLauncher.launch(chooser)
+    }
+
+    private fun getCurrentDate(): String {
+        // Formato de fecha: yyyy-MM-dd
+        val sdf = SimpleDateFormat("dd-MM-yyyy", Locale.getDefault())
+        // Obtener la fecha actual
+        return sdf.format(Date())
     }
 
     private fun validComent(): String? {

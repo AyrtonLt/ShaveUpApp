@@ -9,16 +9,12 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
-import com.unmsm.shaveupapp.R
 import com.unmsm.shaveupapp.databinding.FragmentMenuBarberoOpinionesBinding
 import com.unmsm.shaveupapp.adapterComentario.ComentarioItem
 import com.unmsm.shaveupapp.adapterComentario.ComentarioItemAdapter
-import com.unmsm.shaveupapp.adapterReservas.ReservaItem
-import com.unmsm.shaveupapp.adapterReservas.ReservaItemAdapter
 import com.unmsm.shaveupapp.ui.login.LoginActivity
 
 class MenuBarberoOpinionesFragment : Fragment() {
@@ -61,7 +57,8 @@ class MenuBarberoOpinionesFragment : Fragment() {
                             comentario = document.getString("comentario") ?: "",
                             servicios = document.getString("servicios") ?: "",
                             puntuacion = document.getString("puntuacion") ?: "",
-                            photoUrl = document.getString("photoUrl") ?: ""
+                            photoUrl = document.getString("photoUrl") ?: "",
+                            fecha = document.getString("fecha") ?: ""
                         )
                         // Agregar el objeto Barbero a la lista
                         comentarios.add(comentario)
