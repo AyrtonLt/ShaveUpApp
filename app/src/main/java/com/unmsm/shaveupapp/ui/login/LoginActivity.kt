@@ -55,7 +55,7 @@ class LoginActivity : AppCompatActivity() {
             if (email.isEmpty() || password.isEmpty()) {
                 Toast.makeText(
                     this,
-                    "El email y la contraseña no pueden estar vacíos",
+                    getString(R.string.email_password_empty),
                     Toast.LENGTH_LONG
                 ).show()
 
@@ -87,7 +87,7 @@ class LoginActivity : AppCompatActivity() {
                                         else -> {
                                             Toast.makeText(
                                                 this,
-                                                "Tipo de usuario no definido",
+                                                getString(R.string.no_type_user),
                                                 Toast.LENGTH_SHORT
                                             ).show()
                                         }
@@ -95,14 +95,14 @@ class LoginActivity : AppCompatActivity() {
                                 } else {
                                     Toast.makeText(
                                         this,
-                                        "Error al obtener datos del usuario",
+                                        getString(R.string.no_user_data),
                                         Toast.LENGTH_SHORT
                                     ).show()
                                 }
                             }
                     } else {
                         MaterialAlertDialogBuilder(this).setTitle("Error")
-                            .setMessage("Usuario no registrado :(").show()
+                            .setMessage(getString(R.string.no_registered)).show()
                     }
                 }
             }

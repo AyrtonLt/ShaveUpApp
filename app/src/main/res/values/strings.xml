@@ -23,4 +23,28 @@
     <string name="email_sent_success">Correo enviado</string>
     <string name="email_sent_error">Ocurrió un error :(</string>
     <string name="invalid_email">Correo Invalido</string>
+    <string name="email_password_empty">El email y la contraseña no pueden estar vacíos</string>
+    <string name="no_type_user">Error retrieving user data.</string>
+    <string name="no_user_data">Error al obtener datos del usuario</string>
+    <string name="no_registered">Usuario no registrado :c</string>
+    <string name="error_retrieve_user_id">Error al obtener el ID del usuario</string>
+    <string name="error_create_user">Error al crear el usuario :c</string>
+    <string name="errors_exist">Existen errores</string>
+    <string name="field_required">Este campo es obligatorio</string>
+    <string name="password_not_empty">La contraseña no puede estar vacía</string>
+    <string name="password_min_length">La contraseña debe tener al menos 6 caracteres</string>
+    <string name="invalid_characters">Hay caracteres no permitidos</string>
+    <string name="failed">Falló</string>
+    <string name="user_created_success">Usuario creado correctamente</string>
+    <string name="error_saving_user">Ocurrió un error al guardar el usuario</string>
+    <string name="user_barber">Usuario Barbero</string>
+    <string name="personal_information">Información personal</string>
+    <string name="nickname">Apodo</string>
+    <string name="phone">Teléfono</string>
+    <string name="where_do_you_work">Dónde trabajas</string>
+    <string name="barbershop_name">Nombre de la barbería</string>
+    <string name="address">Dirección</string>
+    <string name="district">Distrito</string>
+    <string name="must_select_option">Tiene que seleccionar una opción</string>
+
 </resources>

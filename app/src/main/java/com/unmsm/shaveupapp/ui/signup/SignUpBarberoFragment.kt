@@ -19,6 +19,7 @@ import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
 import com.unmsm.shaveupapp.R
+import com.unmsm.shaveupapp.adapterLanguage.LanguageManager
 import com.unmsm.shaveupapp.databinding.FragmentSignUpBarberoBinding
 import com.unmsm.shaveupapp.ui.menu.barbero.MenuBarberoActivity
 import com.unmsm.shaveupapp.ui.menu.cliente.MenuClienteActivity
@@ -44,6 +45,7 @@ class SignUpBarberoFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentSignUpBarberoBinding.inflate(layoutInflater, container, false)
+        LanguageManager.updateLocale(requireContext(), LanguageManager.getSelectedLanguage(requireContext()))
 
         auth = FirebaseAuth.getInstance()
 
@@ -91,15 +93,15 @@ class SignUpBarberoFragment : Fragment() {
                                     districtInput
                                 )
                             } else {
-                                showError("Error al obtener el ID del usuario.")
+                                showError(getString(R.string.error_retrieve_user_id))
                             }
                         } else {
-                            showError("Error al crear el usuario: ${task.exception?.message}")
+                            showError(getString(R.string.error_create_user) + " ${task.exception?.message}")
                         }
                     }
 
             } else {
-                Toast.makeText(requireContext(), "existen errores", Toast.LENGTH_SHORT).show()
+                Toast.makeText(requireContext(), getString(R.string.errors_exist), Toast.LENGTH_SHORT).show()
                 dismissProgressDialog()
             }
         }
@@ -120,9 +122,9 @@ class SignUpBarberoFragment : Fragment() {
         // Validación Email
         val emailInput = binding.tietEmail.text.toString().trim()
         if (emailInput.isEmpty()) {
-            binding.tilEmail.error = "Esta campo es obligatorio"
+            binding.tilEmail.error = getString(R.string.field_required)
         } else if (!Patterns.EMAIL_ADDRESS.matcher(emailInput).matches()) {
-            binding.tilEmail.error = "Email inválido"
+            binding.tilEmail.error = getString(R.string.invalid_email)
         } else {
             binding.tilEmail.error = null
         }
@@ -130,10 +132,10 @@ class SignUpBarberoFragment : Fragment() {
         // Validación Password
         val passwordInput = binding.tietPassword.text.toString().trim()
         if (passwordInput.isEmpty()) {
-            binding.tilPassword.error = "La contraseña no puede estar vacía"
+            binding.tilPassword.error = getString(R.string.password_not_empty)
             isValid = false
         } else if (passwordInput.length < 6) {
-            binding.tilPassword.error = "La contraseña debe tener al menos 6 caracteres"
+            binding.tilPassword.error = getString(R.string.password_min_length)
             isValid = false
         } else {
             binding.tilPassword.error = null
@@ -143,10 +145,10 @@ class SignUpBarberoFragment : Fragment() {
         val firstNameInput = binding.tietFirstName.text.toString().trim()
         val regex = Regex("^[a-zA-ZáéíóúÁÉÍÓÚñÑüÜ ]+$")
         if (firstNameInput.isEmpty()) {
-            binding.tilFirstName.error = "Este campo es obligatorio"
+            binding.tilFirstName.error = getString(R.string.field_required)
             isValid = false
         } else if (!firstNameInput.matches(regex)) {
-            binding.tilFirstName.error = "Hay caracteres no permitidos"
+            binding.tilFirstName.error = getString(R.string.invalid_characters)
             isValid = false
         } else {
             binding.tilFirstName.error = null
@@ -155,10 +157,10 @@ class SignUpBarberoFragment : Fragment() {
         // Validación Apellido
         val lastNameInput = binding.tietLastName.text.toString().trim()
         if (lastNameInput.isEmpty()) {
-            binding.tilLastName.error = "El apellido no puede estar vacío"
+            binding.tilLastName.error = getString(R.string.field_required)
             isValid = false
         } else if (!lastNameInput.matches(regex)) {
-            binding.tilLastName.error = "Hay caracteres no permitidos"
+            binding.tilLastName.error = getString(R.string.invalid_characters)
             isValid = false
         } else {
             binding.tilLastName.error = null
@@ -168,7 +170,7 @@ class SignUpBarberoFragment : Fragment() {
         val nickNameInput = binding.tietNickName.text.toString().trim()
         val regexNickName = "^[a-zA-Z0-9 _-]*$".toRegex()
         if (!regexNickName.matches(nickNameInput)) {
-            binding.tilNickName.error = "Hay caracteres no permitidos"
+            binding.tilNickName.error = getString(R.string.invalid_characters)
             isValid = false
         } else {
             binding.tilNickName.error = null
@@ -177,7 +179,7 @@ class SignUpBarberoFragment : Fragment() {
         // Validacion Telefono
         val phoneInput = binding.tietTelefono.text.toString().trim()
         if (phoneInput.isEmpty()) {
-            binding.tietTelefono.error = "Este campo es obligatorio"
+            binding.tietTelefono.error = getString(R.string.field_required)
             isValid = false
         } else {
             binding.tietTelefono.error = null
@@ -187,10 +189,10 @@ class SignUpBarberoFragment : Fragment() {
         val barberiaNameInput = binding.tietNameBarberia.text.toString().trim()
         val regexBarberia = "^[a-zA-Z0-9 _-]*$".toRegex()
         if (!regexBarberia.matches(barberiaNameInput)) {
-            binding.tilNameBarberia.error = "Hay caracteres no permitidos"
+            binding.tilNameBarberia.error = getString(R.string.invalid_characters)
             isValid = false
         } else if (barberiaNameInput.isEmpty()) {
-            binding.tilNameBarberia.error = "Este campo es obligatorio"
+            binding.tilNameBarberia.error = getString(R.string.field_required)
             isValid = false
         } else {
             binding.tilNameBarberia.error = null
@@ -200,10 +202,10 @@ class SignUpBarberoFragment : Fragment() {
         val locationInput = binding.tietDireccion.text.toString().trim()
         val regexLocation = "^[a-zA-Z0-9 _-]*$".toRegex()
         if (!regexLocation.matches(locationInput)) {
-            binding.tilDireccion.error = "Hay caracteres no permitidos"
+            binding.tilDireccion.error = getString(R.string.invalid_characters)
             isValid = false
         } else if (locationInput.isEmpty()) {
-            binding.tilDireccion.error = "Este campo es obligatorio"
+            binding.tilDireccion.error = getString(R.string.field_required)
             isValid = false
         } else {
             binding.tilDireccion.error = null
@@ -212,7 +214,7 @@ class SignUpBarberoFragment : Fragment() {
         //Validación Distrito
         val districtInput = binding.actvDistrito.text.toString().trim()
         if (districtInput.isEmpty()) {
-            binding.tilDistrito.error = "Tiene que seleccionar una opción"
+            binding.tilDistrito.error = getString(R.string.must_select_option)
             isValid = false
         } else {
             binding.tilDistrito.error = null
@@ -247,7 +249,7 @@ class SignUpBarberoFragment : Fragment() {
                     }
                 }
                 .addOnFailureListener { e ->
-                    Toast.makeText(requireContext(), "Failed " + e.message, Toast.LENGTH_SHORT)
+                    Toast.makeText(requireContext(), getString(R.string.failed) + e.message, Toast.LENGTH_SHORT)
                         .show()
                 }
         } else {
@@ -291,11 +293,11 @@ class SignUpBarberoFragment : Fragment() {
         FirebaseFirestore.getInstance().collection("usuario").document(userId)
             .set(usuario)
             .addOnSuccessListener {
-                Toast.makeText(requireContext(), "Usuario creado", Toast.LENGTH_SHORT).show()
+                Toast.makeText(requireContext(), getString(R.string.user_created_success), Toast.LENGTH_SHORT).show()
                 navigateToMenuBarbero()
             }
             .addOnFailureListener { e ->
-                showError("Ocurrió un error al guardar el usuario: ${e.message}")
+                showError(getString(R.string.error_saving_user) + "${e.message}")
             }
     }
 

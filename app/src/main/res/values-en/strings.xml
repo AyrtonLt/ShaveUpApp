@@ -23,4 +23,27 @@
     <string name="email_sent_success">Email sent</string>
     <string name="email_sent_error">An error occurred :(</string>
     <string name="invalid_email">invalid_email</string>
+    <string name="email_password_empty">The email and password cannot be empty</string>
+    <string name="no_type_user">User type not defined</string>
+    <string name="no_user_data">Error retrieving user data</string>
+    <string name="no_registered">User not registered :c</string>
+    <string name="error_retrieve_user_id">Error retrieving user ID.</string>
+    <string name="error_create_user">Error creating user :c</string>
+    <string name="errors_exist">There are errors</string>
+    <string name="field_required">This field is required</string>
+    <string name="password_not_empty">Password cannot be empty.</string>
+    <string name="password_min_length">Password must be at least 6 characters long</string>
+    <string name="invalid_characters">There are invalid characters</string>
+    <string name="failed">Failed</string>
+    <string name="user_created_success">User created successfully</string>
+    <string name="error_saving_user">An error occurred while saving the user</string>
+    <string name="user_barber">Barber user</string>
+    <string name="personal_information">Personal information</string>
+    <string name="nickname">Nickname</string>
+    <string name="phone">Phone</string>
+    <string name="where_do_you_work">Where do you work</string>
+    <string name="barbershop_name">Barbershop name</string>
+    <string name="address">Address</string>
+    <string name="district">District</string>
+    <string name="must_select_option">You must select an option</string>
 </resources>

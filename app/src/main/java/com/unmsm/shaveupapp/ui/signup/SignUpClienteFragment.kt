@@ -90,14 +90,14 @@ class SignUpClienteFragment : Fragment() {
                                     lastNameInput
                                 )
                             } else {
-                                showError("Error al obtener el ID del usuario.")
+                                showError(getString(R.string.error_retrieve_user_id))
                             }
                         } else {
-                            showError("Error al crear el usuario: ${task.exception?.message}")
+                            showError(getString(R.string.error_create_user) + " ${task.exception?.message}")
                         }
                     }
             } else {
-                Toast.makeText(requireContext(), "existen errores", Toast.LENGTH_SHORT).show()
+                Toast.makeText(requireContext(), getString(R.string.errors_exist), Toast.LENGTH_SHORT).show()
                 dismissProgressDialog()
             }
 
@@ -133,9 +133,9 @@ class SignUpClienteFragment : Fragment() {
         // Validación Email
         val emailInput = binding.tietEmail.text.toString().trim()
         if (emailInput.isEmpty()) {
-            binding.tilEmail.error = "Esta campo es obligatorio"
+            binding.tilEmail.error = getString(R.string.field_required)
         } else if (!Patterns.EMAIL_ADDRESS.matcher(emailInput).matches()) {
-            binding.tilEmail.error = "Email inválido"
+            binding.tilEmail.error = getString(R.string.invalid_email)
         } else {
             binding.tilEmail.error = null
         }
@@ -143,10 +143,10 @@ class SignUpClienteFragment : Fragment() {
         // Validación Password
         val passwordInput = binding.tietPassword.text.toString().trim()
         if (passwordInput.isEmpty()) {
-            binding.tilPassword.error = "La contraseña no puede estar vacía"
+            binding.tilPassword.error = getString(R.string.password_not_empty)
             isValid = false
         } else if (passwordInput.length < 6) {
-            binding.tilPassword.error = "La contraseña debe tener al menos 6 caracteres"
+            binding.tilPassword.error = getString(R.string.password_min_length)
             isValid = false
         } else {
             binding.tilPassword.error = null
@@ -156,10 +156,10 @@ class SignUpClienteFragment : Fragment() {
         val firstNameInput = binding.tietFirstName.text.toString().trim()
         val regex = Regex("^[a-zA-ZáéíóúÁÉÍÓÚñÑüÜ ]+$")
         if (firstNameInput.isEmpty()) {
-            binding.tilFirstName.error = "Este campo es obligatorio"
+            binding.tilFirstName.error = getString(R.string.field_required)
             isValid = false
         } else if (!firstNameInput.matches(regex)) {
-            binding.tilFirstName.error = "Hay caracteres no permitidos"
+            binding.tilFirstName.error = getString(R.string.invalid_characters)
             isValid = false
         } else {
             binding.tilFirstName.error = null
@@ -168,10 +168,10 @@ class SignUpClienteFragment : Fragment() {
         // Validación Apellido
         val lastNameInput = binding.tietLastName.text.toString().trim()
         if (lastNameInput.isEmpty()) {
-            binding.tilLastName.error = "El apellido no puede estar vacío"
+            binding.tilLastName.error = getString(R.string.field_required)
             isValid = false
         } else if (!lastNameInput.matches(regex)) {
-            binding.tilLastName.error = "Hay caracteres no permitidos"
+            binding.tilLastName.error = getString(R.string.invalid_characters)
             isValid = false
         } else {
             binding.tilLastName.error = null
@@ -195,7 +195,7 @@ class SignUpClienteFragment : Fragment() {
                     }
                 }
                 .addOnFailureListener { e ->
-                    Toast.makeText(requireContext(), "Failed " + e.message, Toast.LENGTH_SHORT)
+                    Toast.makeText(requireContext(), getString(R.string.failed) + e.message, Toast.LENGTH_SHORT)
                         .show()
                 }
         } else {
@@ -223,13 +223,13 @@ class SignUpClienteFragment : Fragment() {
         FirebaseFirestore.getInstance().collection("usuario").document(userId)
             .set(usuario)
             .addOnSuccessListener {
-                Toast.makeText(requireContext(), "Usuario creado correctamente", Toast.LENGTH_LONG)
+                Toast.makeText(requireContext(), getString(R.string.user_created_success), Toast.LENGTH_LONG)
                     .show()
                 dismissProgressDialog()
                 navigateToMenuCliente()
             }
             .addOnFailureListener { e ->
-                showError("Ocurrió un error al guardar el usuario: ${e.message}")
+                showError(getString(R.string.error_saving_user) + "${e.message}")
             }
     }
 
