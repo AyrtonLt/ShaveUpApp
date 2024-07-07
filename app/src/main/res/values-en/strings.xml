@@ -20,4 +20,7 @@
     <string name="choose_profile">Choose profile picture</string>
     <string name="register_user">Register user</string>
     <string name="user_details">Customer information</string>
+    <string name="email_sent_success">Email sent</string>
+    <string name="email_sent_error">An error occurred :(</string>
+    <string name="invalid_email">invalid_email</string>
 </resources>

@@ -38,9 +38,9 @@ class ForgotPasswordActivity : AppCompatActivity() {
 
             auth.sendPasswordResetEmail(email.trim()).addOnCompleteListener {
                 if (it.isSuccessful) {
-                    Toast.makeText(this, "Email enviado", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this, getString(R.string.email_sent_success), Toast.LENGTH_SHORT).show()
                 } else {
-                    Toast.makeText(this, "Ocurrió un error :(", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this, getString(R.string.email_sent_error), Toast.LENGTH_SHORT).show()
                 }
             }
         }
@@ -65,7 +65,7 @@ class ForgotPasswordActivity : AppCompatActivity() {
     private fun validEmail(): String? {
         val emailText = binding.tietEmail.text.toString()
         if(!Patterns.EMAIL_ADDRESS.matcher(emailText).matches()){
-            return "Email inválido"
+            return getString(R.string.invalid_email)
         }
         return null
     }
