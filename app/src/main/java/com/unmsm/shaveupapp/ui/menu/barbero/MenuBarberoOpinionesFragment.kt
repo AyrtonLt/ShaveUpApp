@@ -16,6 +16,8 @@ import com.unmsm.shaveupapp.databinding.FragmentMenuBarberoOpinionesBinding
 import com.unmsm.shaveupapp.adapterComentario.ComentarioItem
 import com.unmsm.shaveupapp.adapterComentario.ComentarioItemAdapter
 import com.unmsm.shaveupapp.ui.login.LoginActivity
+import java.text.SimpleDateFormat
+import java.util.Locale
 
 class MenuBarberoOpinionesFragment : Fragment() {
 
@@ -42,7 +44,7 @@ class MenuBarberoOpinionesFragment : Fragment() {
         db.collection("comentarios").get().addOnSuccessListener { result ->
             // Crear una lista para almacenar objetos Reserva
             val comentarios = mutableListOf<ComentarioItem>()
-
+            val dateFormat = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault())
             // Verificar si la colección no está vacía
             if (!result.isEmpty) {
                 // Iterar sobre los documentos obtenidos
@@ -63,6 +65,9 @@ class MenuBarberoOpinionesFragment : Fragment() {
                         // Agregar el objeto Barbero a la lista
                         comentarios.add(comentario)
                     }
+                }
+                comentarios.sortByDescending {
+                    dateFormat.parse(it.fecha)
                 }
                 binding.rvComentarios.layoutManager = LinearLayoutManager(requireContext())
                 binding.rvComentarios.adapter = ComentarioItemAdapter(

@@ -214,7 +214,7 @@ class MenuClienteCrearComentarioActivity : AppCompatActivity() {
 
     private fun getCurrentDate(): String {
         // Formato de fecha: yyyy-MM-dd
-        val sdf = SimpleDateFormat("dd-MM-yyyy", Locale.getDefault())
+        val sdf = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault())
         // Obtener la fecha actual
         return sdf.format(Date())
     }
