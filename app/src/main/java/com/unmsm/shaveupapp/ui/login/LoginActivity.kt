@@ -1,5 +1,4 @@
 package com.unmsm.shaveupapp.ui.login
-
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
@@ -11,6 +10,7 @@ import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.unmsm.shaveupapp.R
+import com.unmsm.shaveupapp.adapterLanguage.LanguageManager
 import com.unmsm.shaveupapp.databinding.ActivityLoginBinding
 import com.unmsm.shaveupapp.ui.forgotpassword.ForgotPasswordActivity
 import com.unmsm.shaveupapp.ui.menu.barbero.MenuBarberoActivity
@@ -27,6 +27,7 @@ class LoginActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        LanguageManager.updateLocale(this, LanguageManager.getSelectedLanguage(this))
         enableEdgeToEdge()
         binding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(binding.root)
@@ -34,6 +35,16 @@ class LoginActivity : AppCompatActivity() {
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
+        }
+
+        binding.switchLanguage.isChecked = LanguageManager.getSelectedLanguage(this) == "es"
+        binding.switchLanguage.setOnCheckedChangeListener { buttonView, isChecked ->
+            if (isChecked) {
+                LanguageManager.setSelectedLanguage(this, "es")
+            } else {
+                LanguageManager.setSelectedLanguage(this, "en")
+            }
+            recreate() // Recrear la actividad para aplicar el nuevo idioma
         }
 
         auth = FirebaseAuth.getInstance()
@@ -107,6 +118,18 @@ class LoginActivity : AppCompatActivity() {
             val intent = Intent(this, SignUpActivity::class.java)
             startActivity(intent)
         }
+
+        // Actualizar visualmente solo los elementos que cambian con el idioma
+        updateTexts()
+    }
+
+    private fun updateTexts() {
+        binding.switchLanguage.text = getString(R.string.change_language)
+        binding.tilEmail.hint = getString(R.string.Email)
+        binding.tilPassword.hint = getString(R.string.Password)
+        binding.btnSignIn.text = getString(R.string.Login)
+        binding.btnSignUp.text = getString(R.string.new_account)
+        binding.btnForgotPassword.text = getString(R.string.ForgotPassword)
     }
 
     //Datos compartidos

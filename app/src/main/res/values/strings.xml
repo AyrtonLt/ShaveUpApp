@@ -1,6 +1,23 @@
-<resources>
+<resources >
     <string name="app_name">ShaveUpApp</string>
     <string name="app_logo">ShaveUp</string>
-    <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="change_language">ES</string>
+    <string name="Email">Correo</string>
+    <string name="Password">Contraseña</string>
+    <string name="ForgotPassword">¿Olvidaste tu contraseña?</string>
+    <string name="Login">Iniciar sesión</string>
+    <string name="new_account">¿No tienes una cuenta? Créate una aquí</string>
+    <string name="change_password">Cambiar contraseña</string>
+    <string name="create_account">Creación de usuario</string>
+    <string name="client">Cliente</string>
+    <string name="type_user">¿Qué tipo de usuario eres?</string>
+    <string name="barber">Barbero</string>
+    <string name="customer_user">Usuario Cliente</string>
+    <string name="login_details">Información de Inicio de sesión</string>
+    <string name="first_Name">Nombre</string>
+    <string name="last_name">Apellido</string>
+    <string name="choose_profile">Elegir foto de perfil</string>
+    <string name="register_user">Registrar usuario</string>
+    <string name="user_details">Información de Cliente</string>
 </resources>

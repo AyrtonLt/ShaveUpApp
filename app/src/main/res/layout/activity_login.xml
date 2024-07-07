@@ -17,6 +17,15 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <androidx.appcompat.widget.SwitchCompat
+        android:id="@+id/switchLanguage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/change_language"
+        android:layout_marginEnd="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/tilEmail"
         android:layout_width="300dp"
@@ -29,7 +38,7 @@
             android:id="@+id/tietEmail"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Email"
+            android:hint="@string/Email"
             android:inputType="textEmailAddress" />
 
     </com.google.android.material.textfield.TextInputLayout>
@@ -47,7 +56,7 @@
             android:id="@+id/tietPassword"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Contraseña"
+            android:hint="@string/Password"
             android:inputType="textPassword" />
 
     </com.google.android.material.textfield.TextInputLayout>
@@ -57,7 +66,7 @@
         style="@style/Widget.Material3.Button.TextButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="¿Olvidaste tu contraseña?"
+        android:text="@string/ForgotPassword"
         app:layout_constraintEnd_toEndOf="@+id/tilPassword"
         app:layout_constraintTop_toBottomOf="@+id/tilPassword" />
 
@@ -66,7 +75,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
-        android:text="Iniciar sesión"
+        android:text="@string/Login"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btnForgotPassword" />
@@ -76,8 +85,8 @@
         style="@style/Widget.Material3.Button.OutlinedButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="80dp"
-        android:text="¿No tienes una cuenta? Créate una aquí"
+        android:layout_marginTop="60dp"
+        android:text="@string/new_account"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btnSignIn" />

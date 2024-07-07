@@ -9,6 +9,7 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.google.firebase.auth.FirebaseAuth
 import com.unmsm.shaveupapp.R
+import com.unmsm.shaveupapp.adapterLanguage.LanguageManager
 import com.unmsm.shaveupapp.databinding.ActivityForgotPasswordBinding
 
 class ForgotPasswordActivity : AppCompatActivity() {
@@ -21,6 +22,7 @@ class ForgotPasswordActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        LanguageManager.updateLocale(this, LanguageManager.getSelectedLanguage(this))
         enableEdgeToEdge()
         auth = FirebaseAuth.getInstance()
         binding = ActivityForgotPasswordBinding.inflate(layoutInflater)
@@ -42,6 +44,14 @@ class ForgotPasswordActivity : AppCompatActivity() {
                 }
             }
         }
+        updateTexts()
+
+    }
+
+    private fun updateTexts() {
+        binding.tvLogo.text = getString(R.string.change_password)
+        binding.tilEmail.hint = getString(R.string.Email)
+        binding.btnSendEmail.text = getString(R.string.change_password)
     }
 
     private fun emailFocusListener() {

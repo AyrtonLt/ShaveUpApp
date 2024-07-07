@@ -23,6 +23,7 @@ import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
 import com.unmsm.shaveupapp.R
+import com.unmsm.shaveupapp.adapterLanguage.LanguageManager
 import com.unmsm.shaveupapp.databinding.FragmentSignUpClienteBinding
 import com.unmsm.shaveupapp.ui.menu.barbero.MenuBarberoActivity
 import com.unmsm.shaveupapp.ui.menu.cliente.MenuClienteActivity
@@ -48,6 +49,7 @@ class SignUpClienteFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentSignUpClienteBinding.inflate(layoutInflater, container, false)
+        LanguageManager.updateLocale(requireContext(), LanguageManager.getSelectedLanguage(requireContext()))
 
         auth = FirebaseAuth.getInstance()
 
@@ -100,8 +102,20 @@ class SignUpClienteFragment : Fragment() {
             }
 
         }
-
+        updateTexts()
         return binding.root
+    }
+
+    private fun updateTexts() {
+        binding.tvUsuario.text = getString(R.string.customer_user)
+        binding.tvLogo.text = getString(R.string.login_details)
+        binding.tilEmail.hint = getString(R.string.Email)
+        binding.tilPassword.hint = getString(R.string.Password)
+        binding.tvLogo2.text = getString(R.string.user_details)
+        binding.tilFirstName.hint = getString(R.string.first_Name)
+        binding.tilLastName.hint = getString(R.string.last_name)
+        binding.btnChooseImage.text = getString(R.string.choose_profile)
+        binding.btnCreateUser.text = getString(R.string.register_user)
     }
 
     private fun chooseImage() {

@@ -11,7 +11,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="50dp"
-        android:text="Usuario Cliente"
+        android:text="@string/customer_user"
         android:textColor="@color/md_theme_onPrimaryFixedVariant"
         android:textSize="27dp"
         android:textStyle="bold"
@@ -25,7 +25,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="56dp"
         android:layout_marginTop="20dp"
-        android:text="Información de Inicio de sesión"
+        android:text="@string/login_details"
         android:textSize="20dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tvUsuario" />
@@ -42,7 +42,7 @@
             android:id="@+id/tietEmail"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Email"
+            android:hint="@string/Email"
             android:inputType="textEmailAddress"
             android:maxLength="254" />
 
@@ -63,7 +63,7 @@
             android:id="@+id/tietPassword"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Contraseña"
+            android:hint="@string/Password"
             android:inputType="textPassword"
             android:maxLength="16" />
 
@@ -75,7 +75,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="56dp"
         android:layout_marginTop="5dp"
-        android:text="Información de Inicio de sesión"
+        android:text="@string/user_details"
         android:textSize="20dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tilPassword" />
@@ -92,7 +92,7 @@
             android:id="@+id/tietFirstName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Nombre"
+            android:hint="@string/first_Name"
             android:inputType="textPersonName"
             android:maxLength="32" />
 
@@ -110,7 +110,7 @@
             android:id="@+id/tietLastName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Apellido"
+            android:hint="@string/last_name"
             android:inputType="textPersonName"
             android:maxLength="32" />
 
@@ -121,7 +121,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
-        android:text="Elegir foto de perfil"
+        android:text="@string/choose_profile"
         app:cornerRadius="10dp"
         app:icon="@drawable/ic_upload_file"
         app:layout_constraintStart_toStartOf="@+id/tilLastName"
@@ -132,7 +132,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="25dp"
-        android:text="Registrar usuario"
+        android:text="@string/register_user"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btnChooseImage" />

@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.unmsm.shaveupapp.R
+import com.unmsm.shaveupapp.adapterLanguage.LanguageManager
 import com.unmsm.shaveupapp.databinding.ActivitySignUpBinding
 
 class SignUpActivity : AppCompatActivity() {
@@ -22,5 +23,7 @@ class SignUpActivity : AppCompatActivity() {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
+
+        LanguageManager.updateLocale(this, LanguageManager.getSelectedLanguage(this))
     }
 }
