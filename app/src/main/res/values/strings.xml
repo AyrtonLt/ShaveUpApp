@@ -122,6 +122,16 @@
     <string name="error_writing_document">Error al escribir el documento</string>
     <string name="register_new_service_info">Registrar nueva información del servicio</string>
     <string name="modify_product">Modificar producto</string>
+    <string name="search">Búsqueda</string>
+    <string name="edit_client">Editar cliente</string>
+    <string name="create_comment">Crear Comentario</string>
+    <string name="comment">Comentario</string>
+    <string name="choose_review_photo">Elegir foto de reseña</string>
+    <string name="register_comment">Registrar comentario</string>
+    <string name="search_hint">Buscar...</string>
+    <string name="barbershop">Barbería</string>
+    <string name="location">Locación</string>
+
 
 
 

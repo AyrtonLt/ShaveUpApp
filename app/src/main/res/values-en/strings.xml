@@ -122,6 +122,16 @@
     <string name="error_writing_document">Error writing document</string>
     <string name="register_new_service_info">Register new service information</string>
     <string name="modify_product">Modify product</string>
+    <string name="search">Search</string>
+    <string name="edit_client">Edit client</string>
+    <string name="create_comment">Create Comment</string>
+    <string name="comment">Comment</string>
+    <string name="choose_review_photo">Choose review photo</string>
+    <string name="register_comment">Register comment</string>
+    <string name="search_hint">Search...</string>
+    <string name="barbershop">Barbershop</string>
+    <string name="location">Location</string>
+
 
 
 

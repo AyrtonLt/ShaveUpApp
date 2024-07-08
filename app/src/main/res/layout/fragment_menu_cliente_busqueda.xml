@@ -19,7 +19,7 @@
         app:layout_constraintTop_toTopOf="parent"
         android:iconifiedByDefault="false"
         android:searchHintIcon="@null"
-        android:queryHint="Buscar..."
+        android:queryHint="@string/search_hint"
         android:focusable="false"/>
 
     <com.google.android.material.button.MaterialButtonToggleGroup
@@ -36,7 +36,7 @@
             android:id="@+id/btnBarberoS"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Barbero"
+            android:text="@string/barber"
             android:textSize="10dp"
             app:cornerRadius="10dp"
             />
@@ -45,7 +45,7 @@
             android:id="@+id/btnBarberia"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Barbería"
+            android:text="@string/barbershop"
             android:textSize="10dp"
             />
         <Button
@@ -53,7 +53,7 @@
             android:id="@+id/btnLugar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Locación"
+            android:text="@string/location"
             android:textSize="10dp"
             />
         <Button
@@ -61,7 +61,7 @@
             android:id="@+id/btnServicio"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Servicio"
+            android:text="@string/services"
             android:textSize="10dp"
             app:cornerRadius="10dp"
             />
