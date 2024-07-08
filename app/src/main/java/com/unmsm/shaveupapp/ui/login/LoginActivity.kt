@@ -38,7 +38,7 @@ class LoginActivity : AppCompatActivity() {
         }
 
         binding.switchLanguage.isChecked = LanguageManager.getSelectedLanguage(this) == "es"
-        binding.switchLanguage.setOnCheckedChangeListener { buttonView, isChecked ->
+        binding.switchLanguage.setOnCheckedChangeListener { _, isChecked ->
             if (isChecked) {
                 LanguageManager.setSelectedLanguage(this, "es")
             } else {

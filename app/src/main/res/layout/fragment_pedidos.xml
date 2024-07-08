@@ -17,7 +17,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="28dp"
             android:layout_marginTop="24dp"
-            android:text="Pedidos"
+            android:text="@string/orders"
             android:textColor="@color/md_theme_onPrimaryFixedVariant"
             android:textSize="25dp"
             android:textStyle="bold"
@@ -30,7 +30,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="28dp"
             android:layout_marginTop="15dp"
-            android:text="Pedidos solicitados"
+            android:text="@string/requested_orders"
             android:textSize="20dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tvTitlePedido" />
@@ -54,7 +54,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="28dp"
             android:layout_marginTop="15dp"
-            android:text="Pedidos aceptados"
+            android:text="@string/accepted_orders"
             android:textSize="20dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/rvPedidosSolicitados" />
@@ -78,7 +78,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="28dp"
             android:layout_marginTop="15dp"
-            android:text="Pedidos cancelados"
+            android:text="@string/cancelled_orders"
             android:textSize="20dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/rvPedidosAceptados" />
@@ -102,7 +102,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="28dp"
             android:layout_marginTop="15dp"
-            android:text="Pedidos listo para entrega"
+            android:text="@string/orders_ready"
             android:textSize="20dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/rvPedidosCancelados" />
@@ -126,7 +126,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="28dp"
             android:layout_marginTop="15dp"
-            android:text="Pedidos entregados"
+            android:text="@string/delivered_orders"
             android:textSize="20dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/rvPedidoListoEntregas" />

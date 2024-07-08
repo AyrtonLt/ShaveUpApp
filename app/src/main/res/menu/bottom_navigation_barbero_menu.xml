@@ -4,25 +4,25 @@
         android:id="@+id/menuBarberoProfileFragment"
         android:enabled="true"
         android:icon="@drawable/iconuser"
-        android:title="Tú" />
+        android:title="@string/you" />
     <item
         android:id="@+id/pedidosFragment2"
         android:enabled="true"
         android:icon="@drawable/iconbag"
-        android:title="Pedidos" />
+        android:title="@string/orders" />
     <item
         android:id="@+id/menuBarberoCitasFragment"
         android:enabled="true"
         android:icon="@drawable/iconcita"
-        android:title="Citas" />
+        android:title="@string/appointments" />
     <item
         android:id="@+id/menuBarberoOpinionesFragment"
         android:enabled="true"
         android:icon="@drawable/iconstar"
-        android:title="Opiniones" />
+        android:title="@string/reviews" />
     <item
         android:id="@+id/menuBarberoConfigFragment"
         android:enabled="true"
         android:icon="@drawable/iconconfig"
-        android:title="Config" />
+        android:title="@string/settings" />
 </menu>

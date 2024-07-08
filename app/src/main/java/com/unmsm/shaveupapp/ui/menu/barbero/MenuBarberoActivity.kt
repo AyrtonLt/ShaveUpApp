@@ -10,6 +10,7 @@ import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
 import com.unmsm.shaveupapp.R
+import com.unmsm.shaveupapp.adapterLanguage.LanguageManager
 import com.unmsm.shaveupapp.databinding.ActivityMenuBarberoBinding
 
 class MenuBarberoActivity : AppCompatActivity() {
@@ -28,7 +29,6 @@ class MenuBarberoActivity : AppCompatActivity() {
             insets
         }
         initUI()
-
         val json = intent.getStringExtra("USER_INFO")
         Log.d("TAGR", "${json}")
     }

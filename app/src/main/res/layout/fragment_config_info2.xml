@@ -11,7 +11,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="4dp"
-        android:text="Editar Barbero"
+        android:text="@string/edit_barber"
         android:textColor="@color/md_theme_onPrimaryFixedVariant"
         android:textSize="17dp"
         android:textStyle="bold"
@@ -25,7 +25,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="56dp"
         android:layout_marginTop="5dp"
-        android:text="Información personal"
+        android:text="@string/personal_information"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tvTitleEditBarbero" />
 
@@ -33,7 +33,7 @@
         android:id="@+id/tilFirstName"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
-        android:hint="Nombre"
+        android:hint="@string/first_Name"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tvSubtitle2">
@@ -49,7 +49,7 @@
         android:id="@+id/tilLastName"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
-        android:hint="Apellido"
+        android:hint="@string/last_name"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tilFirstName">
@@ -65,7 +65,7 @@
         android:id="@+id/tilNickName"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
-        android:hint="Apodo"
+        android:hint="@string/nickname"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tilLastName">
@@ -81,7 +81,7 @@
         android:id="@+id/tilTelefono"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
-        android:hint="Teléfono"
+        android:hint="@string/phone"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tilNickName">
@@ -99,7 +99,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="56dp"
         android:layout_marginTop="4dp"
-        android:text="Dónde trabajas"
+        android:text="@string/where_do_you_work"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tilTelefono" />
 
@@ -107,7 +107,7 @@
         android:id="@+id/tilNameBarberia"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
-        android:hint="Nombre de la barbería"
+        android:hint="@string/barbershop_name"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tvSubtitle3">
@@ -123,7 +123,7 @@
         android:id="@+id/tilDireccion"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
-        android:hint="Dirección"
+        android:hint="@string/address"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tilNameBarberia">
@@ -140,7 +140,7 @@
         style="@style/Widget.Material3.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
-        android:hint="Distrito"
+        android:hint="@string/district"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tilDireccion">
@@ -158,7 +158,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="4dp"
-        android:text="Elegir foto de perfil"
+        android:text="@string/choose_profile"
         app:cornerRadius="8dp"
         app:icon="@drawable/ic_upload_file"
         app:layout_constraintStart_toStartOf="@+id/tilDistrito"
@@ -169,7 +169,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="5dp"
-        android:text="Actualizar"
+        android:text="@string/update"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/btnChooseImage" />

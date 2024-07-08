@@ -46,4 +46,26 @@
     <string name="address">Address</string>
     <string name="district">District</string>
     <string name="must_select_option">You must select an option</string>
+    <string name="settings">Settings</string>
+    <string name="edit_information">Edit information</string>
+    <string name="logout">Log out</string>
+    <string name="edit_barber">Edit Barber</string>
+    <string name="update">Update</string>
+    <string name="comments">Comments</string>
+    <string name="bookings">Bookings</string>
+    <string name="proposed_bookings">Proposed Bookings</string>
+    <string name="accepted_bookings">Accepted bookings</string>
+    <string name="cancelled_bookings">Cancelled bookings</string>
+    <string name="finished_bookings">Finished bookings</string>
+    <string name="you">You</string>
+    <string name="reviews">Reviews</string>
+    <string name="appointments">Bookings</string>
+    <string name="orders">Orders</string>
+    <string name="requested_orders">Requested orders</string>
+    <string name="accepted_orders">Accepted orders</string>
+    <string name="cancelled_orders">Cancelled orders</string>
+    <string name="orders_ready">Orders ready for delivery</string>
+    <string name="delivered_orders">Delivered orders</string>
+
+
 </resources>

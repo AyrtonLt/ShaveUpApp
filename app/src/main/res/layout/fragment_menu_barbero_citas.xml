@@ -18,7 +18,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="28dp"
             android:layout_marginTop="24dp"
-            android:text="Reservas"
+            android:text="@string/bookings"
             android:textColor="@color/md_theme_onPrimaryFixedVariant"
             android:textSize="25dp"
             android:textStyle="bold"
@@ -31,7 +31,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="28dp"
             android:layout_marginTop="15dp"
-            android:text="Reservas propuestas"
+            android:text="@string/proposed_bookings"
             android:textSize="20dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tvTitleReserva" />
@@ -55,7 +55,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="28dp"
             android:layout_marginTop="15dp"
-            android:text="Reservas aceptadas"
+            android:text="@string/accepted_bookings"
             android:textSize="20dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/rvReservasPropuestas" />
@@ -79,7 +79,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="28dp"
             android:layout_marginTop="15dp"
-            android:text="Reservas canceladas"
+            android:text="@string/cancelled_bookings"
             android:textSize="20dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/rvReservasAceptadas" />
@@ -103,7 +103,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="28dp"
             android:layout_marginTop="15dp"
-            android:text="Reservas terminadas"
+            android:text="@string/finished_bookings"
             android:textSize="20dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/rvReservasCanceladas" />
