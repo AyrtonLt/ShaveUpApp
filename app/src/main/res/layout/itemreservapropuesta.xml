@@ -50,14 +50,14 @@
                     android:id="@+id/btnAcceptReserva"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Aceptar" />
+                    android:text="@string/accept" />
 
                 <Button
                     android:id="@+id/btnCancelReserva"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="40dp"
-                    android:text="Cancelar" />
+                    android:text="@string/cancel" />
 
             </LinearLayout>
 

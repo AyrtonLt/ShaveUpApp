@@ -11,7 +11,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="50dp"
-        android:text="Nuevo Producto"
+        android:text="@string/new_product"
         android:textColor="@color/md_theme_onPrimaryFixedVariant"
         android:textSize="27dp"
         android:textStyle="bold"
@@ -32,7 +32,7 @@
             android:id="@+id/tietProductoName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Nombre del producto"
+            android:hint="@string/product_name"
             android:inputType="text" />
 
     </com.google.android.material.textfield.TextInputLayout>
@@ -50,7 +50,7 @@
             android:id="@+id/tietProductoDesc"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Descripción del producto"
+            android:hint="@string/product_description"
             android:inputType="text" />
 
     </com.google.android.material.textfield.TextInputLayout>
@@ -68,7 +68,7 @@
             android:id="@+id/tietProductoPrice"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Precio del producto"
+            android:hint="@string/product_price"
             android:inputType="numberDecimal" />
 
     </com.google.android.material.textfield.TextInputLayout>
@@ -86,7 +86,7 @@
             android:id="@+id/tietProductoMaxQuantity"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Máxima cantidad pedida"
+            android:hint="@string/max_order_quantity"
             android:inputType="numberDecimal" />
 
     </com.google.android.material.textfield.TextInputLayout>
@@ -96,7 +96,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
-        android:text="Elegir foto del producto"
+        android:text="@string/choose_product_photo"
         app:cornerRadius="10dp"
         app:icon="@drawable/ic_upload_file"
         app:layout_constraintStart_toStartOf="@+id/tilProductoPrice"
@@ -107,7 +107,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="25dp"
-        android:text="Agregar producto"
+        android:text="@string/add_product"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/btnChooseImage" />

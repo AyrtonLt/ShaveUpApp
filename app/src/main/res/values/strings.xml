@@ -66,6 +66,31 @@
     <string name="cancelled_orders">Pedidos cancelados</string>
     <string name="orders_ready">Pedidos listos para entrega</string>
     <string name="delivered_orders">Pedidos entregados</string>
+    <string name="accept">Aceptar</string>
+    <string name="cancel">Cancelar</string>
+    <string name="my_profile">Mi perfil</string>
+    <string name="contact_information">Información de contacto</string>
+    <string name="services">Servicios</string>
+    <string name="add_service">Agregar servicio</string>
+    <string name="photos">Fotos</string>
+    <string name="add_photo">Agregar foto</string>
+    <string name="products">Productos</string>
+    <string name="new_service">Nuevo Servicio</string>
+    <string name="service_name">Nombre del servicio</string>
+    <string name="service_description">Descripción del servicio</string>
+    <string name="service_price">Precio del servicio</string>
+    <string name="register_service">Registrar servicio</string>
+    <string name="invalid_price_format">Formato de precio no válido</string>
+    <string name="something_went_wrong">Algo salió mal :(</string>
+    <string name="service_created">Servicio Creado</string>
+    <string name="new_product">Nuevo Producto</string>
+    <string name="product_name">Nombre del producto</string>
+    <string name="product_description">Descripción del producto</string>
+    <string name="product_price">Precio del producto</string>
+    <string name="max_order_quantity">Máxima cantidad pedida</string>
+    <string name="choose_product_photo">Elegir foto del producto</string>
+    <string name="add_product">Agregar producto</string>
+    <string name="upload_photo_required">Es obligatorio subir una foto.</string>
 
 
 

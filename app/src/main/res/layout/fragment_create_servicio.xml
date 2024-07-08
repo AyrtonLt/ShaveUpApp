@@ -11,7 +11,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="50dp"
-        android:text="Nuevo Servicio"
+        android:text="@string/new_service"
         android:textColor="@color/md_theme_onPrimaryFixedVariant"
         android:textSize="27dp"
         android:textStyle="bold"
@@ -32,7 +32,7 @@
             android:id="@+id/tietServicioName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Nombre del servicio"
+            android:hint="@string/service_name"
             android:inputType="textPersonName" />
 
     </com.google.android.material.textfield.TextInputLayout>
@@ -50,7 +50,7 @@
             android:id="@+id/tietServicioDesc"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Descripción del servicio"
+            android:hint="@string/service_description"
             android:inputType="text" />
 
     </com.google.android.material.textfield.TextInputLayout>
@@ -68,7 +68,7 @@
             android:id="@+id/tietServicioPrice"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Precio del servicio"
+            android:hint="@string/service_price"
             android:inputType="numberDecimal" />
 
     </com.google.android.material.textfield.TextInputLayout>
@@ -78,7 +78,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="25dp"
-        android:text="Registrar servicio"
+        android:text="@string/register_service"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tilServicioPrice" />

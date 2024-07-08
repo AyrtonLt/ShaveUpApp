@@ -66,6 +66,31 @@
     <string name="cancelled_orders">Cancelled orders</string>
     <string name="orders_ready">Orders ready for delivery</string>
     <string name="delivered_orders">Delivered orders</string>
+    <string name="accept">Accept</string>
+    <string name="cancel">Cancel</string>
+    <string name="my_profile">My profile</string>
+    <string name="contact_information">Contact information</string>
+    <string name="services">Services</string>
+    <string name="add_service">Add service</string>
+    <string name="photos">Photos</string>
+    <string name="add_photo">Add photo</string>
+    <string name="products">Products</string>
+    <string name="new_service">New Service</string>
+    <string name="service_name">Service name</string>
+    <string name="service_description">Service description</string>
+    <string name="service_price">Service price</string>
+    <string name="register_service">Register service</string>
+    <string name="invalid_price_format">Invalid price format</string>
+    <string name="something_went_wrong">Something went wrong :(</string>
+    <string name="service_created">Service Created</string>
+    <string name="new_product">New Product</string>
+    <string name="product_name">Product name</string>
+    <string name="product_description">Product description</string>
+    <string name="product_price">Product price</string>
+    <string name="max_order_quantity">Maximum order quantity</string>
+    <string name="choose_product_photo">Choose product photo</string>
+    <string name="add_product">Add product</string>
+    <string name="upload_photo_required">A photo upload is required.</string>
 
 
 </resources>

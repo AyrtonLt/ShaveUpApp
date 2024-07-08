@@ -101,7 +101,7 @@ class CreateProductoFragment : Fragment() {
                     }
                 }
                     .addOnFailureListener { e ->
-                        Toast.makeText(requireContext(), "Failed " + e.message, Toast.LENGTH_SHORT)
+                        Toast.makeText(requireContext(), getString(R.string.failed) + e.message, Toast.LENGTH_SHORT)
                             .show()
                     }
 
@@ -141,61 +141,53 @@ class CreateProductoFragment : Fragment() {
     private fun validateInputs(): Boolean {
         var isValid = true
 
-        //Validación Nombre
-        val nameInput = binding.tietProductoName.text.toString()
-        val regex = Regex("^[a-zA-ZáéíóúÁÉÍÓÚñÑüÜ ]+$")
+        // Validación Nombre
+        val nameInput = binding.tietProductoName.text.toString().trim()
+        val nameRegex = Regex("^[a-zA-ZáéíóúÁÉÍÓÚñÑüÜ ]+$")
         if (nameInput.isEmpty()) {
-            binding.tilProductoName.error = "Este campo es obligatorio"
+            binding.tilProductoName.error = getString(R.string.field_required)
             isValid = false
-            return isValid
-        } else if (!nameInput.matches(regex)) {
-            binding.tilProductoName.error = "Hay caracteres no permitidos"
+        } else if (!nameInput.matches(nameRegex)) {
+            binding.tilProductoName.error = getString(R.string.invalid_characters)
             isValid = false
-            return isValid
         } else {
             binding.tilProductoName.error = null
         }
 
-        //Validación Desc
-        val descInput = binding.tietProductoDesc.text.toString()
+        // Validación Descripción
+        val descInput = binding.tietProductoDesc.text.toString().trim()
         val descRegex = Regex("^[a-zA-ZáéíóúÁÉÍÓÚñÑüÜ ]+$")
         if (descInput.isEmpty()) {
-            binding.tilProductoDesc.error = "Este campo es obligatorio"
+            binding.tilProductoDesc.error = getString(R.string.field_required)
             isValid = false
-            return isValid
         } else if (!descInput.matches(descRegex)) {
-            binding.tilProductoDesc.error = "Hay caracteres no permitidos"
+            binding.tilProductoDesc.error = getString(R.string.invalid_characters)
             isValid = false
-            return isValid
         } else {
             binding.tilProductoDesc.error = null
         }
 
         // Validación Precio
-        val priceInput = binding.tietProductoPrice.text.toString()
+        val priceInput = binding.tietProductoPrice.text.toString().trim()
         val priceRegex = Regex("^\\d+(\\.\\d{1,2})?$")
         if (priceInput.isEmpty()) {
-            binding.tilProductoPrice.error = "Este campo es obligatorio"
+            binding.tilProductoPrice.error = getString(R.string.field_required)
             isValid = false
-            return isValid
         } else if (!priceInput.matches(priceRegex)) {
-            binding.tilProductoPrice.error = "Formato de precio no válido"
+            binding.tilProductoPrice.error = getString(R.string.invalid_price_format)
             isValid = false
-            return isValid
         } else {
             binding.tilProductoPrice.error = null
         }
 
+        // Validación de la imagen seleccionada
         if (filePath == null) {
-            Toast.makeText(requireContext(), "Es obligatorio subir una foto. ", Toast.LENGTH_SHORT)
-                .show()
+            Toast.makeText(requireContext(), getString(R.string.upload_photo_required), Toast.LENGTH_SHORT).show()
             isValid = false
-            return isValid
-        } else {
-            isValid = true
         }
 
         return isValid
     }
+
 
 }

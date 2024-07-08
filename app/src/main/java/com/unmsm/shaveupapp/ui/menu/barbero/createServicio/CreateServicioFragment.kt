@@ -61,7 +61,7 @@ class CreateServicioFragment : Fragment() {
                         // Exito
                         Toast.makeText(
                             requireContext(),
-                            "Servicio Creado",
+                            getString(R.string.service_created),
                             Toast.LENGTH_LONG
                         ).show()
                         dismissProgressDialog()
@@ -72,7 +72,7 @@ class CreateServicioFragment : Fragment() {
                         println("Error al escribir el documento: $e")
                     }
             } else {
-                Toast.makeText(requireContext(), "Algo salió mal :(", Toast.LENGTH_SHORT).show()
+                Toast.makeText(requireContext(), getString(R.string.something_went_wrong), Toast.LENGTH_SHORT).show()
                 dismissProgressDialog()
             }
         }
@@ -104,10 +104,10 @@ class CreateServicioFragment : Fragment() {
         val nameInput = binding.tietServicioName.text.toString()
         val regex = Regex("^[a-zA-ZáéíóúÁÉÍÓÚñÑüÜ ]+$")
         if (nameInput.isEmpty()) {
-            binding.tilServicioName.error = "Este campo es obligatorio"
+            binding.tilServicioName.error = getString(R.string.field_required)
             isValid = false
         } else if (!nameInput.matches(regex)) {
-            binding.tilServicioName.error = "Hay caracteres no permitidos"
+            binding.tilServicioName.error = getString(R.string.invalid_characters)
             isValid = false
         } else {
             binding.tilServicioName.error = null
@@ -117,10 +117,10 @@ class CreateServicioFragment : Fragment() {
         val descInput = binding.tietServicioDesc.text.toString()
         val descRegex = Regex("^[a-zA-ZáéíóúÁÉÍÓÚñÑüÜ ]+$")
         if (descInput.isEmpty()) {
-            binding.tilServicioDesc.error = "Este campo es obligatorio"
+            binding.tilServicioDesc.error = getString(R.string.field_required)
             isValid = false
         } else if (!descInput.matches(descRegex)) {
-            binding.tilServicioDesc.error = "Hay caracteres no permitidos"
+            binding.tilServicioDesc.error = getString(R.string.invalid_characters)
             isValid = false
         } else {
             binding.tilServicioDesc.error = null
@@ -130,10 +130,10 @@ class CreateServicioFragment : Fragment() {
         val priceInput = binding.tietServicioPrice.text.toString()
         val priceRegex = Regex("^\\d+(\\.\\d{1,2})?$")
         if (priceInput.isEmpty()) {
-            binding.tilServicioPrice.error = "Este campo es obligatorio"
+            binding.tilServicioPrice.error = getString(R.string.field_required)
             isValid = false
         } else if (!priceInput.matches(priceRegex)) {
-            binding.tilServicioPrice.error = "Formato de precio no válido"
+            binding.tilServicioPrice.error = getString(R.string.invalid_price_format)
             isValid = false
         } else {
             binding.tilServicioPrice.error = null
