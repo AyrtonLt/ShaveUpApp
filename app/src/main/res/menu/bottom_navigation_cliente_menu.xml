@@ -4,25 +4,25 @@
         android:id="@+id/menuClienteProfileFragment"
         android:enabled="true"
         android:icon="@drawable/iconuser"
-        android:title="Tú" />
+        android:title="@string/nav_you" />
     <item
         android:id="@+id/menuClientePedidosFragment"
         android:enabled="true"
         android:icon="@drawable/iconbag"
-        android:title="Pedidos" />
+        android:title="@string/nav_orders" />
     <item
         android:id="@+id/menuClienteBusquedaFragment"
         android:enabled="true"
         android:icon="@drawable/iconsearch"
-        android:title="Búsqueda" />
+        android:title="@string/nav_search" />
     <item
         android:id="@+id/menuClienteCitasFragment"
         android:enabled="true"
         android:icon="@drawable/iconcita"
-        android:title="Citas" />
+        android:title="@string/nav_quotes" />
     <item
         android:id="@+id/menuClienteConfigFragment"
         android:enabled="true"
         android:icon="@drawable/iconconfig"
-        android:title="Config" />
+        android:title="@string/nav_settings" />
 </menu>

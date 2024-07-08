@@ -10,7 +10,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Producto:" />
+            android:text="@string/order_name" />
         <TextView
             android:id="@+id/pedidoProducto"
             android:layout_width="wrap_content"
@@ -24,7 +24,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Cantidad:" />
+            android:text="@string/order_amount" />
         <TextView
             android:id="@+id/pedidoCantidad"
             android:layout_width="wrap_content"
@@ -38,7 +38,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Total:" />
+            android:text="@string/order_total" />
         <TextView
             android:id="@+id/pedidoPrecio"
             android:layout_width="wrap_content"
@@ -52,7 +52,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Fecha:" />
+            android:text="@string/order_date" />
         <TextView
             android:id="@+id/pedidoFecha"
             android:layout_width="wrap_content"

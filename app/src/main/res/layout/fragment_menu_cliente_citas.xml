@@ -9,8 +9,7 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:paddingBottom="150dp">
+        android:layout_height="wrap_content">
 
         <TextView
             android:id="@+id/tvTitleReserva2"
@@ -18,7 +17,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="28dp"
             android:layout_marginTop="24dp"
-            android:text="Reservas"
+            android:text="@string/reservations"
             android:textColor="@color/md_theme_onPrimaryFixedVariant"
             android:textSize="25dp"
             android:textStyle="bold"
@@ -31,7 +30,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="28dp"
             android:layout_marginTop="15dp"
-            android:text="Reservas propuestas"
+            android:text="@string/proposed_reservations"
             android:textSize="20dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tvTitleReserva2" />
@@ -55,7 +54,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="28dp"
             android:layout_marginTop="15dp"
-            android:text="Reservas aceptadas"
+            android:text="@string/reservations_accepted"
             android:textSize="20dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/rvReservasPropuestas" />
@@ -79,7 +78,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="28dp"
             android:layout_marginTop="15dp"
-            android:text="Reservas canceladas"
+            android:text="@string/canceled_reservations"
             android:textSize="20dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/rvReservasAceptadas" />
@@ -103,7 +102,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="28dp"
             android:layout_marginTop="15dp"
-            android:text="Reservas terminadas"
+            android:text="@string/reservations_ended"
             android:textSize="20dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/rvReservasCanceladas" />
@@ -111,10 +110,11 @@
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rvReservasTerminadas"
             android:layout_width="match_parent"
-            android:layout_height="140dp"
+            android:layout_height="200dp"
             android:layout_marginStart="30dp"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="30dp"
+            android:paddingBottom="50dp"
             app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
