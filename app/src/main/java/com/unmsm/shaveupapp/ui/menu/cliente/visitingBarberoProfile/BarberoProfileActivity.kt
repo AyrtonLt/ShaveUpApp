@@ -99,7 +99,7 @@ class BarberoProfileActivity : AppCompatActivity() {
             val userId = auth.currentUser?.uid.toString()
 
 
-            if (textBtn == "Me gusta") {
+            if (textBtn == "Me gusta" || textBtn == "Like") {
 
                 // Crear una referencia a la colección a usar
                 val collectionRef = db.collection("like")
@@ -136,7 +136,7 @@ class BarberoProfileActivity : AppCompatActivity() {
                     }
 
 
-            } else if (textBtn == "No me gusta") {
+            } else if (textBtn == "No me gusta" || textBtn == "Dislike") {
                 // Crear una referencia a la colección a usar
                 val collectionRef = db.collection("like")
 

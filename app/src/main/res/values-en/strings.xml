@@ -133,7 +133,7 @@
     <string name="location">Location</string>
     <!--Cliente-->
     <string name="like">Like</string>
-    <string name="no_like">No like</string>
+    <string name="no_like">Dislike</string>
     <string name="reserve">Reserve</string>
     <string name="contact_info">Contact information</string>
     <string name="selected_product">Selected product</string>
