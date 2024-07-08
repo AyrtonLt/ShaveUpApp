@@ -214,9 +214,9 @@ class MenuBarberoProfileFragment : Fragment() {
 
     private fun onClickServicio(servicioItem: ServicioItem) {
         val builder = AlertDialog.Builder(requireContext())
-        builder.setTitle("Atención")
-        builder.setMessage("Selecciona la acción que desear realizar")
-        builder.setPositiveButton("Editar servicio") { _, _ ->
+        builder.setTitle(getString(R.string.attention))
+        builder.setMessage(getString(R.string.select_action))
+        builder.setPositiveButton(getString(R.string.edit_service)) { _, _ ->
             val intent = Intent(requireContext(), EditServicioActivity::class.java).apply {
                 putExtra(
                     "servicioId",
@@ -226,7 +226,7 @@ class MenuBarberoProfileFragment : Fragment() {
             startActivity(intent)
 
         }
-        builder.setNegativeButton("Eliminar") { dialog, which ->
+        builder.setNegativeButton(getString(R.string.delete)) { dialog, which ->
 
             db = FirebaseFirestore.getInstance()
             db.collection("servicio").document(servicioItem.servicioId).delete()
@@ -234,7 +234,7 @@ class MenuBarberoProfileFragment : Fragment() {
                     // Acción del botón 2
                     Toast.makeText(
                         requireContext(),
-                        "El servicio ha sido borrada con éxito",
+                        getString(R.string.service_deleted_success),
                         Toast.LENGTH_SHORT
                     )
                         .show()
@@ -244,7 +244,7 @@ class MenuBarberoProfileFragment : Fragment() {
                 }.addOnFailureListener { e ->
                     Toast.makeText(
                         requireContext(),
-                        "Error deleting servicio: ${e.message}",
+                        getString(R.string.error_delete_service)+ "${e.message}",
                         Toast.LENGTH_SHORT
                     ).show()
 
@@ -253,7 +253,7 @@ class MenuBarberoProfileFragment : Fragment() {
 
         }
 
-        builder.setNeutralButton("Cancelar") { dialog, which ->
+        builder.setNeutralButton(getString(R.string.cancel)) { dialog, which ->
             dialog.dismiss()
         }
 
@@ -263,9 +263,9 @@ class MenuBarberoProfileFragment : Fragment() {
 
     private fun onClickPhoto(photoItem: PhotoItem) {
         val builder = AlertDialog.Builder(requireContext())
-        builder.setTitle("Atención")
-        builder.setMessage("Selecciona la acción que desear realizar")
-        builder.setPositiveButton("Ver foto") { _, _ ->
+        builder.setTitle(getString(R.string.attention))
+        builder.setMessage(getString(R.string.select_action))
+        builder.setPositiveButton(getString(R.string.view_photo)) { _, _ ->
             val intent = Intent(requireContext(), FullPhotoActivity::class.java).apply {
                 putExtra(
                     "urlPhoto",
@@ -275,14 +275,14 @@ class MenuBarberoProfileFragment : Fragment() {
             startActivity(intent)
 
         }
-        builder.setNegativeButton("Eliminar") { dialog, which ->
+        builder.setNegativeButton(getString(R.string.delete)) { dialog, which ->
 
             db = FirebaseFirestore.getInstance()
             db.collection("photos").document(photoItem.photoId).delete().addOnSuccessListener {
                 // Acción del botón 2
                 Toast.makeText(
                     requireContext(),
-                    "La foto ha sido borrada con éxito",
+                    getString(R.string.photo_deleted_success),
                     Toast.LENGTH_SHORT
                 )
                     .show()
@@ -292,7 +292,7 @@ class MenuBarberoProfileFragment : Fragment() {
             }.addOnFailureListener { e ->
                 Toast.makeText(
                     requireContext(),
-                    "Error deleting photo: ${e.message}",
+                    "Error: ${e.message}",
                     Toast.LENGTH_SHORT
                 ).show()
 
@@ -301,7 +301,7 @@ class MenuBarberoProfileFragment : Fragment() {
 
         }
 
-        builder.setNeutralButton("Cancelar") { dialog, which ->
+        builder.setNeutralButton(getString(R.string.cancel)) { dialog, which ->
             dialog.dismiss()
         }
 
@@ -311,9 +311,9 @@ class MenuBarberoProfileFragment : Fragment() {
 
     private fun onClickProducto(productoItem: ProductoItem) {
         val builder = AlertDialog.Builder(requireContext())
-        builder.setTitle("Atención")
-        builder.setMessage("Selecciona la acción que desear realizar")
-        builder.setPositiveButton("Editar información del producto") { _, _ ->
+        builder.setTitle(getString(R.string.attention))
+        builder.setMessage(getString(R.string.select_action))
+        builder.setPositiveButton(getString(R.string.edit_product_info)) { _, _ ->
             val intent = Intent(requireContext(), EditProductoActivity::class.java).apply {
                 putExtra(
                     "productoId",
@@ -323,7 +323,7 @@ class MenuBarberoProfileFragment : Fragment() {
             startActivity(intent)
 
         }
-        builder.setNegativeButton("Eliminar") { dialog, which ->
+        builder.setNegativeButton(getString(R.string.delete)) { dialog, which ->
 
             db = FirebaseFirestore.getInstance()
             db.collection("productos").document(productoItem.productoId).delete()
@@ -331,7 +331,7 @@ class MenuBarberoProfileFragment : Fragment() {
                     // Acción del botón 2
                     Toast.makeText(
                         requireContext(),
-                        "El producto ha sido borrada con éxito",
+                        getString(R.string.product_deleted_success),
                         Toast.LENGTH_SHORT
                     )
                         .show()
@@ -341,7 +341,7 @@ class MenuBarberoProfileFragment : Fragment() {
                 }.addOnFailureListener { e ->
                     Toast.makeText(
                         requireContext(),
-                        "Error deleting producto: ${e.message}",
+                        "Error: ${e.message}",
                         Toast.LENGTH_SHORT
                     ).show()
 
@@ -350,7 +350,7 @@ class MenuBarberoProfileFragment : Fragment() {
 
         }
 
-        builder.setNeutralButton("Cancelar") { dialog, which ->
+        builder.setNeutralButton(getString(R.string.cancel)) { dialog, which ->
             dialog.dismiss()
         }
 
@@ -383,7 +383,7 @@ class MenuBarberoProfileFragment : Fragment() {
                     savePhototoFirestore(userId, photoUrl)
                 }
             }.addOnFailureListener { e ->
-                Toast.makeText(requireContext(), "Failed " + e.message, Toast.LENGTH_SHORT).show()
+                Toast.makeText(requireContext(), getString(R.string.failed) + e.message, Toast.LENGTH_SHORT).show()
             }
         }
     }
@@ -407,14 +407,14 @@ class MenuBarberoProfileFragment : Fragment() {
             // Exito
             Toast.makeText(
                 requireContext(),
-                "Foto subida",
+                getString(R.string.photo_uploaded),
                 Toast.LENGTH_LONG
             ).show()
             getPhotos()
             dismissProgressDialog()
         }.addOnFailureListener { e ->
             // Fallo
-            println("Error al escribir el documento: $e")
+            println(getString(R.string.error_writing_document)+ "$e")
         }
     }
 

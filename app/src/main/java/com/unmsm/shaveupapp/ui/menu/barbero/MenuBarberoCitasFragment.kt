@@ -12,6 +12,7 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
+import com.unmsm.shaveupapp.R
 
 import com.unmsm.shaveupapp.adapterReservas.ReservaItem
 import com.unmsm.shaveupapp.adapterReservas.ReservaItemAdapter
@@ -102,14 +103,14 @@ class MenuBarberoCitasFragment : Fragment() {
                 // Exito
                 Toast.makeText(
                     requireContext(),
-                    "Estado de la reserva actualizado",
+                    getString(R.string.reservation_status_updated),
                     Toast.LENGTH_LONG
                 ).show()
                 reloadData()
             }
             .addOnFailureListener { e ->
                 // Fallo
-                println("Error al actualizar el estado: $e")
+                println(getString(R.string.error_update_status) +" $e")
             }
     }
 
@@ -124,14 +125,14 @@ class MenuBarberoCitasFragment : Fragment() {
                 // Exito
                 Toast.makeText(
                     requireContext(),
-                    "Estado de la reserva actualizado",
+                    getString(R.string.reservation_status_updated),
                     Toast.LENGTH_LONG
                 ).show()
                 reloadData()
             }
             .addOnFailureListener { e ->
                 // Fallo
-                println("Error al actualizar el estado: $e")
+                println(getString(R.string.error_update_status) +" $e")
             }
     }
 
@@ -146,14 +147,14 @@ class MenuBarberoCitasFragment : Fragment() {
                 // Exito
                 Toast.makeText(
                     requireContext(),
-                    "Estado de la reserva actualizado",
+                    getString(R.string.reservation_status_updated),
                     Toast.LENGTH_LONG
                 ).show()
                 reloadData()
             }
             .addOnFailureListener { e ->
                 // Fallo
-                println("Error al actualizar el estado: $e")
+                println(getString(R.string.error_update_status)+" $e")
             }
     }
 

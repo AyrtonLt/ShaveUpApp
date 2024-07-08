@@ -248,9 +248,9 @@ class PedidosFragment : Fragment() {
 
     private fun onClickPedidoItemSelected(pedidoCreado: PedidoItem) {
         val builder = AlertDialog.Builder(requireContext())
-        builder.setTitle("Atención")
-        builder.setMessage("Selecciona la acción que desear realizar")
-        builder.setPositiveButton("Aceptar") { dialog, which ->
+        builder.setTitle(getString(R.string.attention))
+        builder.setMessage(getString(R.string.select_action))
+        builder.setPositiveButton(getString(R.string.accept)) { dialog, which ->
             db = FirebaseFirestore.getInstance()
             val documentRef = db.collection("pedidos").document(pedidoCreado.pedidoId)
 
@@ -268,15 +268,15 @@ class PedidosFragment : Fragment() {
             documentRef.update(updates)
                 .addOnSuccessListener {
                     // La actualización fue exitosa
-                    println("Documento actualizado y campo nuevo agregado con éxito")
+                    println(getString(R.string.document_updated_success))
                     reloadData()
                 }
                 .addOnFailureListener { e ->
                     // Ocurrió un error
-                    println("Error actualizando el documento: $e")
+                    println(getString(R.string.error_update_document)+"$e")
                 }
         }
-        builder.setNegativeButton("Cancelar") { dialog, which ->
+        builder.setNegativeButton(getString(R.string.cancel)) { dialog, which ->
             db = FirebaseFirestore.getInstance()
             val documentRef = db.collection("pedidos").document(pedidoCreado.pedidoId)
 
@@ -294,12 +294,12 @@ class PedidosFragment : Fragment() {
             documentRef.update(updates)
                 .addOnSuccessListener {
                     // La actualización fue exitosa
-                    println("Documento actualizado y campo nuevo agregado con éxito")
+                    println(getString(R.string.document_updated_success))
                     reloadData()
                 }
                 .addOnFailureListener { e ->
                     // Ocurrió un error
-                    println("Error actualizando el documento: $e")
+                    println(getString(R.string.error_update_document)+"$e")
                 }
         }
         val dialog = builder.create()
@@ -309,9 +309,9 @@ class PedidosFragment : Fragment() {
 
     private fun onClickPedidoItemAceptadoSelected(pedidoCreado: PedidoItem) {
         val builder = AlertDialog.Builder(requireContext())
-        builder.setTitle("Atención")
-        builder.setMessage("Selecciona la acción que desear realizar")
-        builder.setPositiveButton("Listo para recoger") { dialog, which ->
+        builder.setTitle(getString(R.string.attention))
+        builder.setMessage(getString(R.string.select_action))
+        builder.setPositiveButton(getString(R.string.ready_for_pickup)) { dialog, which ->
             db = FirebaseFirestore.getInstance()
             val documentRef = db.collection("pedidos").document(pedidoCreado.pedidoId)
 
@@ -329,16 +329,16 @@ class PedidosFragment : Fragment() {
             documentRef.update(updates)
                 .addOnSuccessListener {
                     // La actualización fue exitosa
-                    println("Documento actualizado y campo nuevo agregado con éxito")
+                    println(getString(R.string.document_updated_success))
                     reloadData()
                 }
                 .addOnFailureListener { e ->
                     // Ocurrió un error
-                    println("Error actualizando el documento: $e")
+                    println(getString(R.string.error_update_document)+"$e")
                 }
 
         }
-        builder.setNegativeButton("Cancelar") { dialog, which ->
+        builder.setNegativeButton(getString(R.string.cancel)) { dialog, which ->
             dialog.dismiss()
         }
         val dialog = builder.create()

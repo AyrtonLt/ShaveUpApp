@@ -46,7 +46,7 @@ class EditServicioActivity : AppCompatActivity() {
 
                 saveServiceToFirestore(idServ, nameServ, descSev, priceServ)
             } else {
-                Toast.makeText(this, "existen errores", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, getString(R.string.errors_exist), Toast.LENGTH_SHORT).show()
                 dismissProgressDialog()
             }
         }
@@ -77,10 +77,10 @@ class EditServicioActivity : AppCompatActivity() {
         val nameInput = binding.tietServicioName.text.toString()
         val regex = Regex("^[a-zA-ZáéíóúÁÉÍÓÚñÑüÜ ]+$")
         if (nameInput.isEmpty()) {
-            binding.tilServicioName.error = "Este campo es obligatorio"
+            binding.tilServicioName.error = getString(R.string.field_required)
             isValid = false
         } else if (!nameInput.matches(regex)) {
-            binding.tilServicioName.error = "Hay caracteres no permitidos"
+            binding.tilServicioName.error = getString(R.string.invalid_characters)
             isValid = false
         } else {
             binding.tilServicioName.error = null
@@ -90,10 +90,10 @@ class EditServicioActivity : AppCompatActivity() {
         val descInput = binding.tietServicioDesc.text.toString()
         val descRegex = Regex("^[a-zA-ZáéíóúÁÉÍÓÚñÑüÜ ]+$")
         if (descInput.isEmpty()) {
-            binding.tilServicioDesc.error = "Este campo es obligatorio"
+            binding.tilServicioDesc.error = getString(R.string.field_required)
             isValid = false
         } else if (!descInput.matches(descRegex)) {
-            binding.tilServicioDesc.error = "Hay caracteres no permitidos"
+            binding.tilServicioDesc.error = getString(R.string.invalid_characters)
             isValid = false
         } else {
             binding.tilServicioDesc.error = null
@@ -103,10 +103,10 @@ class EditServicioActivity : AppCompatActivity() {
         val priceInput = binding.tietServicioPrice.text.toString()
         val priceRegex = Regex("^\\d+(\\.\\d{1,2})?$")
         if (priceInput.isEmpty()) {
-            binding.tilServicioPrice.error = "Este campo es obligatorio"
+            binding.tilServicioPrice.error = getString(R.string.field_required)
             isValid = false
         } else if (!priceInput.matches(priceRegex)) {
-            binding.tilServicioPrice.error = "Formato de precio no válido"
+            binding.tilServicioPrice.error = getString(R.string.invalid_price_format)
             isValid = false
         } else {
             binding.tilServicioPrice.error = null
@@ -134,7 +134,7 @@ class EditServicioActivity : AppCompatActivity() {
         userRef.update(updates)
             .addOnSuccessListener {
                 // Éxito al actualizar los datos
-                Toast.makeText(this, "Datos actualizados correctamente", Toast.LENGTH_SHORT)
+                Toast.makeText(this, getString(R.string.data_updated_success), Toast.LENGTH_SHORT)
                     .show()
                 dismissProgressDialog()
                 finish()
@@ -143,7 +143,7 @@ class EditServicioActivity : AppCompatActivity() {
                 // Error al actualizar los datos
                 Toast.makeText(
                     this,
-                    "Error al actualizar los datos: ${e.message}",
+                    getString(R.string.error_update_data)+ "${e.message}",
                     Toast.LENGTH_SHORT
                 ).show()
             }

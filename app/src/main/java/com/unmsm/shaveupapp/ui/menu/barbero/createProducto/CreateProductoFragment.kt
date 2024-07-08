@@ -92,7 +92,7 @@ class CreateProductoFragment : Fragment() {
                             // Exito
                             Toast.makeText(
                                 requireContext(),
-                                "Producto Creado",
+                                getString(R.string.product_created),
                                 Toast.LENGTH_LONG
                             ).show()
                             dismissProgressDialog()

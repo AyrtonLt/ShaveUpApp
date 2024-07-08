@@ -91,6 +91,45 @@
     <string name="choose_product_photo">Elegir foto del producto</string>
     <string name="add_product">Agregar producto</string>
     <string name="upload_photo_required">Es obligatorio subir una foto.</string>
+    <string name="data_updated_success">Datos actualizados correctamente</string>
+    <string name="error_update_data">Error al actualizar los datos:</string>
+    <string name="select_option">Tiene que seleccionar una opción</string>
+    <string name="product_label">Producto: </string>
+    <string name="quantity_label">Cantidad: </string>
+    <string name="total_label">Total: </string>
+    <string name="date_label">Fecha: </string>
+    <string name="comment_no_photo">Este comentario no posee foto</string>
+    <string name="reservation_status_updated">Estado de la reserva actualizado</string>
+    <string name="error_update_status">Error al actualizar el estado</string>
+    <string name="attention">Atención</string>
+    <string name="select_action">Selecciona la acción que desear realizar</string>
+    <string name="document_updated_success">Documento actualizado y campo nuevo agregado con éxito</string>
+    <string name="error_update_document">Error actualizando el documento</string>
+    <string name="ready_for_pickup">Listo para recoger</string>
+    <string name="finish_service">Terminar servicio</string>
+    <string name="make_comment">Hacer Comentario</string>
+    <string name="product_created">Producto Creado</string>
+    <string name="only_positive_integers">Solo se permiten números enteros mayores a 0</string>
+    <string name="edit_service">Editar servicio</string>
+    <string name="delete">Eliminar</string>
+    <string name="service_deleted_success">El servicio ha sido borrado con éxito</string>
+    <string name="error_delete_service">Error eliminar servicio</string>
+    <string name="view_photo">Ver foto</string>
+    <string name="photo_deleted_success">La foto ha sido borrada con éxito</string>
+    <string name="edit_product_info">Editar información del producto</string>
+    <string name="product_deleted_success">El producto ha sido borrado con éxito</string>
+    <string name="photo_uploaded">Foto subida</string>
+    <string name="error_writing_document">Error al escribir el documento</string>
+    <string name="register_new_service_info">Registrar nueva información del servicio</string>
+    <string name="modify_product">Modificar producto</string>
+
+
+
+
+
+
+
+
 
 
 

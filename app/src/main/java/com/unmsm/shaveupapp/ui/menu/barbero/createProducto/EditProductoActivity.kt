@@ -86,7 +86,7 @@ class EditProductoActivity : AppCompatActivity() {
                         // Éxito al actualizar los datos
                         Toast.makeText(
                             this,
-                            "Datos actualizados correctamente",
+                            getString(R.string.data_updated_success),
                             Toast.LENGTH_SHORT
                         )
                             .show()
@@ -97,7 +97,7 @@ class EditProductoActivity : AppCompatActivity() {
                             // Error al actualizar los datos
                             Toast.makeText(
                                 this,
-                                "Error al actualizar los datos: ${e.message}",
+                                getString(R.string.error_update_data)+"${e.message}",
                                 Toast.LENGTH_SHORT
                             ).show()
                         }
@@ -123,7 +123,7 @@ class EditProductoActivity : AppCompatActivity() {
                                 // Éxito al actualizar los datos
                                 Toast.makeText(
                                     this,
-                                    "Datos actualizados correctamente",
+                                    getString(R.string.data_updated_success),
                                     Toast.LENGTH_SHORT
                                 )
                                     .show()
@@ -134,7 +134,7 @@ class EditProductoActivity : AppCompatActivity() {
                                     // Error al actualizar los datos
                                     Toast.makeText(
                                         this,
-                                        "Error al actualizar los datos: ${e.message}",
+                                        getString(R.string.error_update_data)+"${e.message}",
                                         Toast.LENGTH_SHORT
                                     ).show()
                                 }
@@ -160,11 +160,11 @@ class EditProductoActivity : AppCompatActivity() {
         val nameInput = binding.tietProductoName.text.toString()
         val regex = Regex("^[a-zA-ZáéíóúÁÉÍÓÚñÑüÜ ]+$")
         if (nameInput.isEmpty()) {
-            binding.tilProductoName.error = "Este campo es obligatorio"
+            binding.tilProductoName.error = getString(R.string.field_required)
             isValid = false
             return isValid
         } else if (!nameInput.matches(regex)) {
-            binding.tilProductoName.error = "Hay caracteres no permitidos"
+            binding.tilProductoName.error = getString(R.string.invalid_characters)
             isValid = false
             return isValid
         } else {
@@ -175,11 +175,11 @@ class EditProductoActivity : AppCompatActivity() {
         val descInput = binding.tietProductoDesc.text.toString()
         val descRegex = Regex("^[a-zA-ZáéíóúÁÉÍÓÚñÑüÜ ]+$")
         if (descInput.isEmpty()) {
-            binding.tilProductoDesc.error = "Este campo es obligatorio"
+            binding.tilProductoDesc.error = getString(R.string.field_required)
             isValid = false
             return isValid
         } else if (!descInput.matches(descRegex)) {
-            binding.tilProductoDesc.error = "Hay caracteres no permitidos"
+            binding.tilProductoDesc.error = getString(R.string.invalid_characters)
             isValid = false
             return isValid
         } else {
@@ -190,11 +190,11 @@ class EditProductoActivity : AppCompatActivity() {
         val priceInput = binding.tietProductoPrice.text.toString()
         val priceRegex = Regex("^\\d+(\\.\\d{1,2})?$")
         if (priceInput.isEmpty()) {
-            binding.tilProductoPrice.error = "Este campo es obligatorio"
+            binding.tilProductoPrice.error = getString(R.string.field_required)
             isValid = false
             return isValid
         } else if (!priceInput.matches(priceRegex)) {
-            binding.tilProductoPrice.error = "Formato de precio no válido"
+            binding.tilProductoPrice.error = getString(R.string.invalid_price_format)
             isValid = false
             return isValid
         } else {
@@ -205,11 +205,11 @@ class EditProductoActivity : AppCompatActivity() {
         val quantityInput = binding.tietProductoMaxQuantity.text.toString()
         val quantityRegex = Regex("^[1-9]\\d*$")
         if (quantityInput.isEmpty()) {
-            binding.tilProductoMaxQuantity.error = "Este campo es obligatorio"
+            binding.tilProductoMaxQuantity.error = getString(R.string.field_required)
             isValid = false
             return isValid
         } else if (!quantityInput.matches(quantityRegex)) {
-            binding.tilProductoMaxQuantity.error = "Solo se permiten números enteros mayores a 0"
+            binding.tilProductoMaxQuantity.error = getString(R.string.only_positive_integers)
             isValid = false
             return isValid
         } else {

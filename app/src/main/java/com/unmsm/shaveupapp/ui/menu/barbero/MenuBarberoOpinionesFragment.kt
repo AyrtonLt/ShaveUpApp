@@ -82,7 +82,7 @@ class MenuBarberoOpinionesFragment : Fragment() {
         if (comentarioItem.photoUrl.isEmpty()) {
             Toast.makeText(
                 requireContext(),
-                "Este comentario no posee foto",
+                getString(R.string.comment_no_photo),
                 Toast.LENGTH_LONG
             ).show()
         } else {

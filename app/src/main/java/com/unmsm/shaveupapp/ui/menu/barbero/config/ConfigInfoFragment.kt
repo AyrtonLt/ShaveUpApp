@@ -176,7 +176,7 @@ class ConfigInfoFragment : Fragment() {
         //Validación Distrito
         val districtInput = binding.actvDistrito.text.toString().trim()
         if (districtInput.isEmpty()) {
-            binding.tilDistrito.error = "Tiene que seleccionar una opción"
+            binding.tilDistrito.error = getString(R.string.select_option)
             isValid = false
         } else {
             binding.tilDistrito.error = null
@@ -304,7 +304,7 @@ class ConfigInfoFragment : Fragment() {
             userRef.update(updates)
                 .addOnSuccessListener {
                     // Éxito al actualizar los datos
-                    Toast.makeText(context, "Datos actualizados correctamente", Toast.LENGTH_SHORT)
+                    Toast.makeText(context, getString(R.string.data_updated_success), Toast.LENGTH_SHORT)
                         .show()
                     dismissProgressDialog()
                 }
@@ -312,7 +312,7 @@ class ConfigInfoFragment : Fragment() {
                     // Error al actualizar los datos
                     Toast.makeText(
                         context,
-                        "Error al actualizar los datos: ${e.message}",
+                        getString(R.string.error_update_data) +"${e.message}",
                         Toast.LENGTH_SHORT
                     ).show()
                 }
@@ -333,7 +333,7 @@ class ConfigInfoFragment : Fragment() {
             userRef.update(updates)
                 .addOnSuccessListener {
                     // Éxito al actualizar los datos
-                    Toast.makeText(context, "Datos actualizados correctamente", Toast.LENGTH_SHORT)
+                    Toast.makeText(context, getString(R.string.data_updated_success), Toast.LENGTH_SHORT)
                         .show()
                     dismissProgressDialog()
                 }
@@ -342,7 +342,7 @@ class ConfigInfoFragment : Fragment() {
                     // Error al actualizar los datos
                     Toast.makeText(
                         context,
-                        "Error al actualizar los datos: ${e.message}",
+                        getString(R.string.error_update_data) + "${e.message}",
                         Toast.LENGTH_SHORT
                     ).show()
                 }
