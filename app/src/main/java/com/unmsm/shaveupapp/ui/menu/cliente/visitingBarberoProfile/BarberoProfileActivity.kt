@@ -125,14 +125,14 @@ class BarberoProfileActivity : AppCompatActivity() {
                         // Exito
                         Toast.makeText(
                             this,
-                            "Barbero agregado a Favoritos",
+                            getString(R.string.barber_added_to_favorites),
                             Toast.LENGTH_LONG
                         ).show()
-                        binding.btnLike.setText("No me gusta")
+                        binding.btnLike.setText(getString(R.string.no_like))
                     }
                     .addOnFailureListener { e ->
                         // Fallo
-                        println("Error al escribir el documento: $e")
+                        println(getString(R.string.error_writing_document) +" $e")
                     }
 
 
@@ -148,18 +148,18 @@ class BarberoProfileActivity : AppCompatActivity() {
                                 .addOnSuccessListener {
                                     Toast.makeText(
                                         this,
-                                        "Barbero eliminado de Favoritos",
+                                        getString(R.string.barber_removed_from_favorites),
                                         Toast.LENGTH_LONG
                                     ).show()
-                                    binding.btnLike.setText("Me gusta")
+                                    binding.btnLike.setText(getString(R.string.like))
                                 }
                                 .addOnFailureListener { e ->
-                                    println("Error al eliminar el documento: $e")
+                                    println(getString(R.string.error_delete_document)+ "$e")
                                 }
                         }
                     }
                     .addOnFailureListener { e ->
-                        println("Error al buscar documentos: $e")
+                        println(getString(R.string.error_search_document) +"$e")
                     }
             }
 
@@ -216,9 +216,9 @@ class BarberoProfileActivity : AppCompatActivity() {
                     }
                 }
                 if (existeLike) {
-                    binding.btnLike.setText("No me gusta")
+                    binding.btnLike.setText(getString(R.string.no_like))
                 } else {
-                    binding.btnLike.setText("Me gusta")
+                    binding.btnLike.setText(getString(R.string.like))
                 }
             }
         }

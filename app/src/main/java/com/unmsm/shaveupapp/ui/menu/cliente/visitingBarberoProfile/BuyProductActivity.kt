@@ -107,7 +107,7 @@ class BuyProductActivity : AppCompatActivity() {
                     // Exito
                     Toast.makeText(
                         this,
-                        "Pedido Creado",
+                        getString(R.string.order_created),
                         Toast.LENGTH_LONG
                     ).show()
                     dismissProgressDialog()
@@ -138,19 +138,19 @@ class BuyProductActivity : AppCompatActivity() {
                 } else {
                     // El valor excede el máximo permitido
                     binding.tietProductoQuantity.error =
-                        "El valor no puede ser mayor que $productMaxQuantity"
+                        getString(R.string.value_cannot_be_greater_than) +" $productMaxQuantity"
                     isValid = false
                     return isValid
                 }
             } else {
                 // El valor no es válido
-                binding.tietProductoQuantity.error = "Ingrese un valor natural mayor a 0"
+                binding.tietProductoQuantity.error = getString(R.string.enter_positive_integer)
                 isValid = false
                 return isValid
             }
         } else {
             // El valor de productMaxQuantity no es un número válido
-            binding.tietProductoQuantity.error = "El valor máximo permitido no es válido"
+            binding.tietProductoQuantity.error = getString(R.string.invalid_max_value)
             isValid = false
             return isValid
         }

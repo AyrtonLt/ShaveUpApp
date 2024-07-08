@@ -175,9 +175,9 @@ class MenuClienteProfileFragment : Fragment() {
 
     private fun onClickPhoto(photoItem: PhotoItem) {
         val builder = AlertDialog.Builder(requireContext())
-        builder.setTitle("Atención")
-        builder.setMessage("Selecciona la acción que desear realizar")
-        builder.setPositiveButton("Ver foto") { _, _ ->
+        builder.setTitle(getString(R.string.attention))
+        builder.setMessage(getString(R.string.select_action))
+        builder.setPositiveButton(getString(R.string.view_photo)) { _, _ ->
             val intent = Intent(requireContext(), FullPhotoActivity::class.java).apply {
                 putExtra(
                     "urlPhoto",
@@ -194,7 +194,7 @@ class MenuClienteProfileFragment : Fragment() {
                 // Acción del botón 2
                 Toast.makeText(
                     requireContext(),
-                    "La foto ha sido borrada con éxito",
+                    getString(R.string.photo_deleted_success),
                     Toast.LENGTH_SHORT
                 )
                     .show()
@@ -204,7 +204,7 @@ class MenuClienteProfileFragment : Fragment() {
             }.addOnFailureListener { e ->
                 Toast.makeText(
                     requireContext(),
-                    "Error deleting photo: ${e.message}",
+                    getString(R.string.error_delete_photo)+ " ${e.message}",
                     Toast.LENGTH_SHORT
                 ).show()
 
@@ -213,7 +213,7 @@ class MenuClienteProfileFragment : Fragment() {
 
         }
 
-        builder.setNeutralButton("Cancelar") { dialog, which ->
+        builder.setNeutralButton(getString(R.string.cancel)) { dialog, which ->
             dialog.dismiss()
         }
 
@@ -238,7 +238,7 @@ class MenuClienteProfileFragment : Fragment() {
                     savePhototoFirestore(userId, photoUrl)
                 }
             }.addOnFailureListener { e ->
-                Toast.makeText(requireContext(), "Failed " + e.message, Toast.LENGTH_SHORT).show()
+                Toast.makeText(requireContext(), getString(R.string.failed) + e.message, Toast.LENGTH_SHORT).show()
             }
         }
     }
@@ -262,14 +262,14 @@ class MenuClienteProfileFragment : Fragment() {
             // Exito
             Toast.makeText(
                 requireContext(),
-                "Foto subida",
+                getString(R.string.photo_uploaded),
                 Toast.LENGTH_LONG
             ).show()
             getPhotos()
             dismissProgressDialog()
         }.addOnFailureListener { e ->
             // Fallo
-            println("Error al escribir el documento: $e")
+            println(getString(R.string.error_writing_document) +"$e")
         }
     }
 

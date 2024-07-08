@@ -12,7 +12,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="50dp"
-        android:text="Producto seleccionado"
+        android:text="@string/selected_product"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -58,7 +58,7 @@
             android:id="@+id/tietProductoQuantity"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Cantidad a comprar"
+            android:hint="@string/quantity_buy"
             android:inputType="number" />
 
     </com.google.android.material.textfield.TextInputLayout>
@@ -68,7 +68,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="30dp"
-        android:text="Comprar producto"
+        android:text="@string/buy_product"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tilProductoQuantity" />

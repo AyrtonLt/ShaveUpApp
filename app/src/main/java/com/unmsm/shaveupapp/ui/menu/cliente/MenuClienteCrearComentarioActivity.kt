@@ -72,7 +72,7 @@ class MenuClienteCrearComentarioActivity : AppCompatActivity() {
                 if (comentarioText.isEmpty() || !validRating) {
                     Toast.makeText(
                         this,
-                        "Existen campos vacíos",
+                        getString(R.string.fields_empty),
                         Toast.LENGTH_LONG
                     ).show()
                 } else {
@@ -123,14 +123,14 @@ class MenuClienteCrearComentarioActivity : AppCompatActivity() {
                                             // Exito
                                             Toast.makeText(
                                                 this,
-                                                "Comentario Creado",
+                                                getString(R.string.comment_created),
                                                 Toast.LENGTH_LONG
                                             ).show()
                                             finish()
                                         }
                                         .addOnFailureListener { e ->
                                             // Fallo
-                                            println("Error al escribir el documento: $e")
+                                            println(getString(R.string.error_writing_document)+"$e")
                                         }
                                     servicioComentado(reservaId)
 
@@ -140,7 +140,7 @@ class MenuClienteCrearComentarioActivity : AppCompatActivity() {
                                 }
                             }
                             .addOnFailureListener { e ->
-                                Toast.makeText(this, "Failed " + e.message, Toast.LENGTH_SHORT)
+                                Toast.makeText(this, getString(R.string.failed) + e.message, Toast.LENGTH_SHORT)
                                     .show()
                             }
                     } else {
@@ -163,14 +163,14 @@ class MenuClienteCrearComentarioActivity : AppCompatActivity() {
                                 // Exito
                                 Toast.makeText(
                                     this,
-                                    "Comentario Creado",
+                                    getString(R.string.comment_created),
                                     Toast.LENGTH_LONG
                                 ).show()
                                 finish()
                             }
                             .addOnFailureListener { e ->
                                 // Fallo
-                                println("Error al escribir el documento: $e")
+                                println(getString(R.string.error_writing_document)+"$e")
                             }
                         servicioComentado(reservaId)
                     }
@@ -188,7 +188,7 @@ class MenuClienteCrearComentarioActivity : AppCompatActivity() {
                 }
             } else {
                 MaterialAlertDialogBuilder(this).setTitle("Error")
-                    .setMessage("Existen errores").show()
+                    .setMessage(getString(R.string.errors_exist)).show()
             }
 
         }
@@ -207,7 +207,7 @@ class MenuClienteCrearComentarioActivity : AppCompatActivity() {
     private fun validComent(): String? {
         val comentario = binding.tietComentario.text.toString()
         if (comentario.length < 1) {
-            return "Escriba un comentario"
+            return getString(R.string.write_comment_hint)
         }
         return null
     }
@@ -222,13 +222,14 @@ class MenuClienteCrearComentarioActivity : AppCompatActivity() {
                 // Exito
                 Toast.makeText(
                     this,
-                    "Estado de la reserva actualizado",
+                    getString(R.string.reservation_status_updated)
+                    ,
                     Toast.LENGTH_LONG
                 ).show()
             }
             .addOnFailureListener { e ->
                 // Fallo
-                println("Error al actualizar el estado: $e")
+                println(getString(R.string.error_update_status)+ " $e")
             }
     }
 

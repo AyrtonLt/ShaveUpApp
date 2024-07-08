@@ -99,13 +99,13 @@ class MakeReservationActivity : AppCompatActivity() {
                     if(!horabien) {
                         Toast.makeText(
                             this,
-                            "Esta hora no está permitida",
+                            getString(R.string.invalid_time),
                             Toast.LENGTH_LONG
                         ).show()
                     } else {
                         Toast.makeText(
                             this,
-                            "Existen campos vacíos",
+                            getString(R.string.fields_empty),
                             Toast.LENGTH_LONG
                         ).show()
                     }
@@ -139,19 +139,19 @@ class MakeReservationActivity : AppCompatActivity() {
                             // Exito
                             Toast.makeText(
                                 this,
-                                "Reserva creada",
+                                getString(R.string.write_comment_hint),
                                 Toast.LENGTH_LONG
                             ).show()
                             finish()
                         }
                         .addOnFailureListener { e ->
                             // Fallo
-                            println("Error al escribir el documento: $e")
+                            println(getString(R.string.write_comment_hint) + "$e")
                         }
                 }
             } else {
                 MaterialAlertDialogBuilder(this).setTitle("Error")
-                    .setMessage("Existen errores").show()
+                    .setMessage(getString(R.string.errors_exist)).show()
             }
         }
 
@@ -235,7 +235,7 @@ class MakeReservationActivity : AppCompatActivity() {
     private fun validfecha(): String? {
         val passwordText = binding.tietDate.text.toString()
         if (passwordText.length < 1) {
-            return "Seleccione Fecha"
+            return getString(R.string.select_date)
         }
 
         return null
@@ -252,7 +252,7 @@ class MakeReservationActivity : AppCompatActivity() {
     private fun validhora(): String? {
         val passwordText = binding.tietDate.text.toString()
         if (passwordText.length < 1) {
-            return "Seleccione hora"
+            return getString(R.string.select_time)
         }
         return null
     }
@@ -274,7 +274,7 @@ class MakeReservationActivity : AppCompatActivity() {
             return !calendarioDado.before(calendarioActual)
         } catch (e: Exception) {
             // Manejar cualquier error de formato de fecha o hora
-            println("Error al procesar la fecha y hora: ${e.message}")
+            println(getString(R.string.error_process_date_time) +  "${e.message}")
             return false
         }
     }

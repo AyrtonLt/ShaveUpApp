@@ -24,7 +24,7 @@
     <string name="email_sent_error">Ocurrió un error :(</string>
     <string name="invalid_email">Correo Invalido</string>
     <string name="email_password_empty">El email y la contraseña no pueden estar vacíos</string>
-    <string name="no_type_user">Error retrieving user data.</string>
+    <string name="no_type_user">Tipo de usuario no definido</string>
     <string name="no_user_data">Error al obtener datos del usuario</string>
     <string name="no_registered">Usuario no registrado :c</string>
     <string name="error_retrieve_user_id">Error al obtener el ID del usuario</string>
@@ -119,7 +119,7 @@
     <string name="edit_product_info">Editar información del producto</string>
     <string name="product_deleted_success">El producto ha sido borrado con éxito</string>
     <string name="photo_uploaded">Foto subida</string>
-    <string name="error_writing_document">Error al escribir el documento</string>
+    <string name="error_writing_document">Error al escribir el documento: </string>
     <string name="register_new_service_info">Registrar nueva información del servicio</string>
     <string name="modify_product">Modificar producto</string>
     <string name="search">Búsqueda</string>
@@ -131,6 +131,72 @@
     <string name="search_hint">Buscar...</string>
     <string name="barbershop">Barbería</string>
     <string name="location">Locación</string>
+    <!--Cliente-->
+    <string name="like">Me gusta</string>
+    <string name="no_like">No me gusta</string>
+    <string name="reserve">Reservar</string>
+    <string name="contact_info">Información de contacto</string>
+    <string name="selected_product">Producto seleccionado</string>
+    <string name="quantity_buy">Cantidad a comprar</string>
+    <string name="buy_product">Comprar producto</string>
+    <string name="max_quantity_order">Máxima cantidad pedida</string>
+    <string name="product_photo">Elegir foto del producto</string>
+    <string name="select_date">Seleccionar fecha</string>
+    <string name="date">Fecha</string>
+    <string name="select_time">Seleccionar hora</string>
+    <string name="hour">Hora</string>
+    <string name="nav_you">Tú</string>
+    <string name="nav_orders">Pedidos</string>
+    <string name="nav_search">Búsqueda</string>
+    <string name="nav_quotes">Citas</string>
+    <string name="nav_settings">Config</string>
+    <string name="choose_review">Elegir foto de reseña</string>
+    <string name="login_info">Información de inicio de sesión</string>
+    <string name="update_info">Actualizar</string>
+    <string name="search_bar">Buscar...</string>
+    <string name="location_filter">Locación</string>
+    <string name="service_filter">Servicio</string>
+    <string name="reservations">Reservas</string>
+    <string name="proposed_reservations">Reservas propuestas</string>
+    <string name="reservations_accepted">Reservas aceptadas</string>
+    <string name="canceled_reservations">Reservas canceladas</string>
+    <string name="reservations_ended">Reservas terminadas</string>
+    <string name="setting">Configuración</string>
+    <string name="edit_info">Editar información</string>
+    <string name="log_out">Cerrar sesión</string>
+    <string name="orders_accepted">Pedidos aceptados</string>
+    <string name="canceled_orders">Pedidos cancelados</string>
+    <string name="orders_delivered">Pedidos entregados</string>
+    <string name="profile_client">Mi perfil</string>
+    <string name="favorite_barber">Favorito(s)</string>
+    <string name="order_name">Producto:</string>
+    <string name="order_amount">Cantidad:</string>
+    <string name="order_total">Total:</string>
+    <string name="order_date">Fecha:</string>
+    <string name="fields_empty">Existen campos vacíos</string>
+    <string name="comment_created">Comentario creado</string>
+    <string name="write_comment_hint">Escriba un comentario</string>
+    <string name="error_delete_photo">Error eliminar foto</string>
+    <string name="barber_removed_from_favorites">Barbero eliminado de Favoritos</string>
+    <string name="barber_added_to_favorites">Barbero agregado a Favoritos</string>
+    <string name="error_delete_document">Error al eliminar el documento</string>
+    <string name="error_search_document">Error al buscar documento</string>
+    <string name="enter_positive_integer">Ingrese un valor natural mayor a 0</string>
+    <string name="invalid_max_value">El valor máximo permitido no es válido</string>
+    <string name="value_cannot_be_greater_than">El valor no puede ser mayor que</string>
+    <string name="order_created">Pedido creado</string>
+    <string name="invalid_time">Esta hora no está permitida</string>
+    <string name="reservation_created">Reserva creada</string>
+    <string name="error_process_date_time">Error al procesar la fecha y hora:</string>
+
+
+
+
+
+
+
+
+
 
 
 

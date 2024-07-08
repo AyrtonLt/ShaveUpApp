@@ -12,7 +12,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="30dp"
         android:layout_marginTop="24dp"
-        android:text="Reservar"
+        android:text="@string/reserve"
         android:textColor="@color/md_theme_onPrimaryFixedVariant"
         android:textSize="25dp"
         android:textStyle="bold"
@@ -34,7 +34,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="30dp"
         android:layout_marginTop="20dp"
-        android:text="Seleccionar fecha"
+        android:text="@string/select_date"
         android:textSize="20dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/rvServicios" />
@@ -55,7 +55,7 @@
             android:layout_height="wrap_content"
             android:clickable="true"
             android:focusable="false"
-            android:hint="Fecha"
+            android:hint="@string/date"
             android:inputType="date" />
 
     </com.google.android.material.textfield.TextInputLayout>
@@ -66,7 +66,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="30dp"
         android:layout_marginTop="20dp"
-        android:text="Seleccionar Hora"
+        android:text="@string/select_time"
         android:textSize="20dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tilDate" />
@@ -87,7 +87,7 @@
             android:layout_height="wrap_content"
             android:clickable="true"
             android:focusable="false"
-            android:hint="Hora"
+            android:hint="@string/hour"
             android:inputType="time" />
 
     </com.google.android.material.textfield.TextInputLayout>
@@ -97,7 +97,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
-        android:text="Reservar"
+        android:text="@string/reserve"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tilTime" />
